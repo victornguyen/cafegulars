@@ -4,11 +4,12 @@ var React   = require('react'),
 var RegularList = React.createClass({
 
     render() {
-        var _addCup = this.props.addCup;
+        var _addCup     = this.props.addCup,
+            _removeCup  = this.props.removeCup;
 
         var list = this.props.peeps.map(function (person) {
             return (
-                <Regular key={person.id} person={person} addCup={_addCup} />
+                <Regular key={person.id} person={person} addCup={_addCup} removeCup={_removeCup} />
             )
         })
 

@@ -5,6 +5,10 @@ var Regular = React.createClass({
         this.props.addCup(this.props.person.id);
     },
 
+    handleRemoveCup() {
+        this.props.removeCup(this.props.person.id);
+    },
+
     render() {
         var person = this.props.person;
 
@@ -20,9 +24,12 @@ var Regular = React.createClass({
                     </h3>
                 </div>
                 <div className="panel-body">
+                    <div className="btn-group-vertical pull-right" role="group">
+                        <button className="btn btn-default center-block" onClick={this.handleAddCup}>+</button>
+                        <button className="btn btn-default center-block" onClick={this.handleRemoveCup}>-</button>
+                    </div>
                     {person.order.type}<br/>
                     <span className="text-muted">{person.order.notes}</span>
-                    <button className="btn btn-primary pull-right" onClick={this.handleAddCup}>+</button>
                 </div>
             </div>
         )

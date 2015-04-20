@@ -41,22 +41,34 @@ var App = React.createClass({
         }
     },
 
-    addCupToId(id) {
+    updatePerson(id, fn) {
         var newPeeps = this.state.peeps.map(function (person) {
             if (person.id === id) {
-                person.count++;
+                fn.call(null, person);
             }
             return person;
-        })
+        });
 
         this.setState({peeps:newPeeps});
+    },
+
+    addCupToId(id) {
+        this.updatePerson(id, person => person.count++);
+    },
+
+    removeCupFromId(id) {
+        this.updatePerson(id, person => {
+            if (person.count > 0) {
+                person.count--
+            }
+        })
     },
 
     render() {
         return (
             <div className="container">
                 <Header />
-                <RegularList peeps={ this.state.peeps } addCup={ this.addCupToId } />
+                <RegularList peeps={ this.state.peeps } addCup={ this.addCupToId } removeCup={ this.removeCupFromId } />
             </div>
         );
     }
