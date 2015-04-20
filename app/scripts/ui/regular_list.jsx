@@ -1,3 +1,5 @@
+'use strict';
+
 var React   = require('react'),
     Regular = require('./regular.jsx');
 
