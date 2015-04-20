@@ -1,0 +1,28 @@
+[
+    {
+        id: 1,
+        name: "Vic",
+        count: 1,
+        order: {
+            type: "Long Black",
+            sugar: 0,
+            strength: "Normal",
+            notes: "With a hint of morning mist. What."
+        },
+        time: null,
+        lastVisited: null
+    },
+    {
+        id: 2,
+        name: "Lars",
+        count: 6,
+        order: {
+            type: "Espresso Martini",
+            sugar: 3,
+            strength: "Strong",
+            notes: ""
+        },
+        time: null,
+        lastVisited: null
+    }
+]
