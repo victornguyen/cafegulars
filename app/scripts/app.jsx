@@ -9,30 +9,42 @@ var React       = window.React = require('react'),
 var App = React.createClass({
     getInitialState() {
         return {
-            peeps: PEEPS
+            peeps: PEEPS,
+            freeCount: 8
         }
     },
 
     updatePerson(id, fn) {
-        var newPeeps = this.state.peeps.map(function (person) {
+        var newPeeps = this.state.peeps.map(person => {
             if (person.id === id) {
                 fn.call(null, person);
             }
             return person;
         });
 
-        this.setState({peeps:newPeeps});
+        this.setState({ peeps: newPeeps });
     },
 
-    addCupToId(id) {
-        this.updatePerson(id, person => person.count++);
-    },
-
-    removeCupFromId(id) {
+    addCup(id) {
         this.updatePerson(id, person => {
-            if (person.count > 0) {
-                person.count--
+            person.coffees.count++;
+            person.coffees.purchased++;
+        });
+    },
+
+    removeCup(id) {
+        this.updatePerson(id, person => {
+            if (person.coffees.count > 0) {
+                person.coffees.count--;
+                person.coffees.purchased--;
             }
+        })
+    },
+
+    addFreeCup(id) {
+        this.updatePerson(id, person => {
+            person.coffees.count = 0;
+            person.coffees.free++;
         })
     },
 
@@ -40,7 +52,7 @@ var App = React.createClass({
         return (
             <div className="container">
                 <Header />
-                <RegularList peeps={ this.state.peeps } addCup={ this.addCupToId } removeCup={ this.removeCupFromId } />
+                <RegularList peeps={this.state.peeps} addCup={this.addCup} removeCup={this.removeCup} addFreeCup={this.addFreeCup} freeCount={ this.state.freeCount } />
             </div>
         );
     }

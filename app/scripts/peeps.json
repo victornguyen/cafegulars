@@ -1,28 +1,36 @@
 [
     {
-        id: 1,
-        name: "Vic",
-        count: 1,
-        order: {
-            type: "Long Black",
-            sugar: 0,
-            strength: "Normal",
-            notes: "With a hint of morning mist. What."
+        "id": 1,
+        "name": "Vic",
+        "time": null,
+        "lastVisited": null,
+        "coffees": {
+            "count": 7,
+            "purchased": 7,
+            "free": 0,
         },
-        time: null,
-        lastVisited: null
+        "order": {
+            "type": "Long Black",
+            "sugar": 0,
+            "strength": "Normal",
+            "notes": "With 3/4 water. So medium black?"
+        }
     },
     {
-        id: 2,
-        name: "Lars",
-        count: 6,
-        order: {
-            type: "Espresso Martini",
-            sugar: 3,
-            strength: "Strong",
-            notes: ""
+        "id": 2,
+        "name": "Lars",
+        "coffees": {
+            "count": 0,
+            "purchased": 0,
+            "free": 0,
         },
-        time: null,
-        lastVisited: null
+        "order": {
+            "type": "Espresso Martini",
+            "sugar": 3,
+            "strength": "Strong",
+            "notes": ""
+        },
+        "time": null,
+        "lastVisited": null
     }
 ]
