@@ -32,6 +32,8 @@ var Regular = React.createClass({
     },
 
     render() {
+        var remainingCups = this.props.freeCount - this.props.person.coffees.count;
+
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
@@ -40,11 +42,11 @@ var Regular = React.createClass({
                         {
                             !this.state.hasFreeCoffee &&
                             <span className="badge pull-right">
-                                {this.props.freeCount - this.props.person.coffees.count} more coffees to go!
+                                {remainingCups} more { remainingCups < 2 ? 'coffee' : 'coffees' } to go!
                             </span>
                         }
                         <span className="badge pull-right">
-                            {this.props.person.coffees.purchased} total coffees purchased
+                            {this.props.person.coffees.purchased} total { this.props.person.coffees.purchased < 2 ? 'coffee' : 'coffees' } purchased
                         </span>
                     </h3>
 
