@@ -34,7 +34,7 @@ var Regular = React.createClass({
                             </span>
                         }
                         <span className="badge pull-right">
-                            {this.props.person.coffees.purchased} total { this.props.person.coffees.purchased < 2 ? 'coffee' : 'coffees' } purchased
+                            {this.props.person.coffees.purchased} total { this.props.person.coffees.purchased === 1 ? 'coffee' : 'coffees' } purchased
                         </span>
                     </h3>
 
