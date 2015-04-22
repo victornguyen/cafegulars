@@ -3,6 +3,18 @@
 var React = require('react');
 
 var Regular = React.createClass({
+    getInitialState() {
+        return {
+            hasFreeCoffee: this.getsFreeCoffee()
+        }
+    },
+
+    componentWillReceiveProps() {
+        this.setState({
+            hasFreeCoffee: this.getsFreeCoffee()
+        })
+    },
+
     handleAddCup() {
         this.props.addCup(this.props.person.id);
     },
@@ -20,18 +32,48 @@ var Regular = React.createClass({
     },
 
     render() {
-        var person = this.props.person;
+        return (
+            <div className="panel panel-default">
+                <div className="panel-heading">
+                    <h3 className="panel-title">
+                        {this.props.person.name}
+                        {
+                            !this.state.hasFreeCoffee &&
+                            <span className="badge pull-right">
+                                {this.props.freeCount - this.props.person.coffees.count} more coffees to go!
+                            </span>
+                        }
+                        <span className="badge pull-right">
+                            {this.props.person.coffees.purchased} total coffees purchased
+                        </span>
+                    </h3>
 
-        var buttons;
-        if (this.getsFreeCoffee()) {
-            buttons = (
+                </div>
+                <div className="panel-body">
+                    <div className="btn-group-vertical pull-right" role="group">
+                        { this.renderActions() }
+                    </div>
+                    {this.props.person.order.type}<br/>
+                    <span className="text-muted">{this.props.person.order.notes}</span>
+                </div>
+            </div>
+        )
+    },
+
+    renderActions() {
+        var actions;
+
+        if (this.state.hasFreeCoffee) {
+            actions = (
                 <div>
-                    <button className="btn btn-primary btn-lge" onClick={this.handleFreeCoffee}>FREE COFFEE!</button>
+                    <button className="btn btn-primary btn-lge" onClick={this.handleFreeCoffee}>
+                        FREE COFFEE!
+                    </button>
                 </div>
             )
         }
         else {
-            buttons = (
+            actions = (
                 <div>
                     <button className="btn btn-default center-block" onClick={this.handleAddCup}>+</button>
                     <button className="btn btn-default center-block" onClick={this.handleRemoveCup}>-</button>
@@ -39,30 +81,7 @@ var Regular = React.createClass({
             )
         }
 
-        return (
-            <div className="panel panel-default">
-                <div className="panel-heading">
-                    <h3 className="panel-title">
-                        {person.name}
-                        &nbsp;
-                            <span className="badge pull-right">
-                                {this.props.freeCount - person.coffees.count} more coffees to go!
-                            </span>
-                        &nbsp;
-                            <span className="badge pull-right">
-                                {person.coffees.purchased} total coffees purchased
-                            </span>
-                    </h3>
-                </div>
-                <div className="panel-body">
-                    <div className="btn-group-vertical pull-right" role="group">
-                        {buttons}
-                    </div>
-                    {person.order.type}<br/>
-                    <span className="text-muted">{person.order.notes}</span>
-                </div>
-            </div>
-        )
+        return actions;
     }
 });
 
