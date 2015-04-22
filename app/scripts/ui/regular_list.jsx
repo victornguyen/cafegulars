@@ -6,27 +6,25 @@ var React   = require('react'),
 var RegularList = React.createClass({
 
     render() {
-        var _addCup     = this.props.addCup,
-            _removeCup  = this.props.removeCup,
-            _addFreeCup = this.props.addFreeCup,
-            _freeCount  = this.props.freeCount;
-
-        var list = this.props.peeps.map(function (person) {
-            return (
-                <Regular key={person.id} person={person} addCup={_addCup} removeCup={_removeCup} addFreeCup={_addFreeCup} freeCount={_freeCount} />
-            )
-        })
-
         return (
             <div>
                 <h3>Regulars</h3>
                 <div className="regulars_list">
-                    {list}
+                    { this.renderList() }
                 </div>
             </div>
         )
-    }
+    },
 
+    renderList() {
+        var props = this.props;
+
+        return this.props.peeps.map(function (person) {
+            return (
+                <Regular key={person.id} person={person} {...props} />
+            )
+        });
+    }
 });
 
 module.exports = RegularList;

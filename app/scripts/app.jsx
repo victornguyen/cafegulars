@@ -49,10 +49,18 @@ var App = React.createClass({
     },
 
     render() {
+        var props = {
+            peeps:      this.state.peeps,
+            freeCount:  this.state.freeCount,
+            addCup:     this.addCup,
+            removeCup:  this.removeCup,
+            addFreeCup: this.addFreeCup
+        };
+
         return (
             <div className="container">
                 <Header />
-                <RegularList peeps={this.state.peeps} addCup={this.addCup} removeCup={this.removeCup} addFreeCup={this.addFreeCup} freeCount={ this.state.freeCount } />
+                <RegularList {...props} />
             </div>
         );
     }
