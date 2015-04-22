@@ -15,18 +15,6 @@ var Regular = React.createClass({
         })
     },
 
-    handleAddCup() {
-        this.props.addCup(this.props.person.id);
-    },
-
-    handleRemoveCup() {
-        this.props.removeCup(this.props.person.id);
-    },
-
-    handleFreeCoffee() {
-        this.props.addFreeCup(this.props.person.id);
-    },
-
     getsFreeCoffee() {
         return this.props.person.coffees.count === this.props.freeCount;
     },
@@ -68,8 +56,10 @@ var Regular = React.createClass({
         if (this.state.hasFreeCoffee) {
             actions = (
                 <div>
-                    <button className="btn btn-primary btn-lge" onClick={this.handleFreeCoffee}>
-                        FREE COFFEE!
+                    <button
+                        className="btn btn-primary btn-lge"
+                        onClick={this.props.addFreeCup.bind(null, this.props.person.id)}>
+                        FREE COFFEE!!!!!
                     </button>
                 </div>
             )
@@ -77,8 +67,18 @@ var Regular = React.createClass({
         else {
             actions = (
                 <div>
-                    <button className="btn btn-default center-block" onClick={this.handleAddCup}>+</button>
-                    <button className="btn btn-default center-block" onClick={this.handleRemoveCup}>-</button>
+                    <button
+                        className="btn btn-default center-block"
+                        onClick={this.props.addCup.bind(null, this.props.person.id)}
+                        >
+                        ++
+                    </button>
+                    <button
+                        className="btn btn-default center-block"
+                        onClick={this.props.removeCup.bind(null, this.props.person.id)}
+                        >
+                        --
+                    </button>
                 </div>
             )
         }
