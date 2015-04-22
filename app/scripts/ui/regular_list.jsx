@@ -17,11 +17,9 @@ var RegularList = React.createClass({
     },
 
     renderList() {
-        var props = this.props;
-
-        return this.props.peeps.map(function (person) {
+        return this.props.peeps.map(person => {
             return (
-                <Regular key={person.id} person={person} {...props} />
+                <Regular key={person.id} person={person} {...this.props} />
             )
         });
     }
