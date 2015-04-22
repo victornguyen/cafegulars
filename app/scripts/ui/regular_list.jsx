@@ -4,6 +4,13 @@ var React   = require('react'),
     Regular = require('./regular.jsx');
 
 var RegularList = React.createClass({
+    propTypes: {
+        peeps:      React.PropTypes.array.isRequired,
+        freeCount:  React.PropTypes.number.isRequired,
+        addCup:     React.PropTypes.func.isRequired,
+        removeCup:  React.PropTypes.func.isRequired,
+        addFreeCup: React.PropTypes.func.isRequired
+    },
 
     render() {
         return (

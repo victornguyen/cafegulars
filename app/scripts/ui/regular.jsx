@@ -3,6 +3,15 @@
 var React = require('react');
 
 var Regular = React.createClass({
+    propTypes: {
+        person:     React.PropTypes.object.isRequired,
+        peeps:      React.PropTypes.array.isRequired,
+        freeCount:  React.PropTypes.number.isRequired,
+        addCup:     React.PropTypes.func.isRequired,
+        removeCup:  React.PropTypes.func.isRequired,
+        addFreeCup: React.PropTypes.func.isRequired
+    },
+
     getInitialState() {
         return {
             hasFreeCoffee: this.getsFreeCoffee()
