@@ -2,16 +2,22 @@
 
 var React       = window.React = require('react'),
     Header      = require('./ui/header.jsx'),
+    AddRegular  = require('./ui/add_regular.jsx'),
     RegularList = require('./ui/regular_list.jsx'),
-    PEEPS       = require('./peeps');
+    MOCK_DATA   = require('./peeps');
 
 
 var App = React.createClass({
     getInitialState() {
         return {
-            peeps: PEEPS,
-            freeCount: 8
+            peeps:              this.props.data,
+            freeCount:          8,
+            addPersonIsVisible: false
         }
+    },
+
+    addPerson(person) {
+        // push to array and setState
     },
 
     updatePerson(id, fn) {
@@ -48,8 +54,12 @@ var App = React.createClass({
         })
     },
 
+    setAddPersonVisibility(value) {
+        this.setState({ addPersonIsVisible: value });
+    },
+
     render() {
-        var props = {
+        var listProps = {
             peeps:      this.state.peeps,
             freeCount:  this.state.freeCount,
             addCup:     this.addCup,
@@ -59,12 +69,13 @@ var App = React.createClass({
 
         return (
             <div className="container">
-                <Header />
-                <RegularList {...props} />
+                <Header addPersonIsVisible={this.state.addPersonIsVisible} setAddPersonVisibility={this.setAddPersonVisibility} />
+                { this.state.addPersonIsVisible &&  <AddRegular addPerson={this.addPerson} /> }
+                <RegularList {...listProps} />
             </div>
         );
     }
 });
 
 
-React.render(<App />, document.getElementById("app"));
+React.render(<App data={MOCK_DATA} />, document.getElementById("app"));
