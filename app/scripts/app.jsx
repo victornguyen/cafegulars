@@ -18,7 +18,9 @@ let App = React.createClass({
     },
 
     addPerson(person) {
-        // push to array and setState
+        this.setState({
+            peeps: this.state.peeps.concat(person)
+        });
     },
 
     updatePerson(id, fn) {
@@ -71,7 +73,7 @@ let App = React.createClass({
         return (
             <div className="container">
                 <Header addPersonIsVisible={this.state.addPersonIsVisible} setAddPersonVisibility={this.setAddPersonVisibility} />
-                { this.state.addPersonIsVisible &&  <AddRegular addPerson={this.addPerson} /> }
+                { this.state.addPersonIsVisible && <AddRegular addPerson={this.addPerson} /> }
                 <RegularList {...listProps} />
             </div>
         );

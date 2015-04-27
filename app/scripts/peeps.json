@@ -14,7 +14,8 @@
             "sugar": 0,
             "strength": "Normal",
             "notes": "With 3/4 water. So medium black?"
-        }
+        },
+        "lastVisited": null
     },
     {
         "id": 2,
@@ -30,7 +31,6 @@
             "strength": "Strong",
             "notes": ""
         },
-        "time": null,
         "lastVisited": null
     }
 ]
