@@ -1,9 +1,9 @@
 'use strict';
 
-var React   = require('react'),
+let React   = require('react'),
     Regular = require('./regular.jsx');
 
-var RegularList = React.createClass({
+let RegularList = React.createClass({
     propTypes: {
         peeps:      React.PropTypes.array.isRequired,
         freeCount:  React.PropTypes.number.isRequired,

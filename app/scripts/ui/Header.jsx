@@ -1,17 +1,17 @@
 'use strict';
 
-var React       = require('react'),
+let React       = require('react'),
     classNames  = require('classnames'),
     Timer       = require('./timer.jsx');
 
-var Header = React.createClass({
+let Header = React.createClass({
     propTypes: {
         addPersonIsVisible:     React.PropTypes.bool.isRequired,
         setAddPersonVisibility: React.PropTypes.func.isRequired
     },
 
     render() {
-        var settingsClasses = classNames({
+        let settingsClasses = classNames({
             'btn btn-default': true,
             'active': this.props.addPersonIsVisible
         });

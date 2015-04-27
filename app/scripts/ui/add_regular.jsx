@@ -1,6 +1,8 @@
-var React = require('react');
+'use strict';
 
-var AddRegular = React.createClass({
+let React = require('react');
+
+let AddRegular = React.createClass({
     render() {
         return (
             <div>

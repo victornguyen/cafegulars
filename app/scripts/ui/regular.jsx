@@ -1,8 +1,8 @@
 'use strict';
 
-var React = require('react');
+let React = require('react');
 
-var Regular = React.createClass({
+let Regular = React.createClass({
     propTypes: {
         person:     React.PropTypes.object.isRequired,
         peeps:      React.PropTypes.array.isRequired,
@@ -29,7 +29,7 @@ var Regular = React.createClass({
     },
 
     render() {
-        var remainingCups = this.props.freeCount - this.props.person.coffees.count;
+        let remainingCups = this.props.freeCount - this.props.person.coffees.count;
 
         return (
             <div className="panel panel-default">
@@ -60,7 +60,7 @@ var Regular = React.createClass({
     },
 
     renderActions() {
-        var actions;
+        let actions;
 
         if (this.state.hasFreeCoffee) {
             actions = (

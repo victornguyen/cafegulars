@@ -3,11 +3,12 @@
 var React       = window.React = require('react'),
     Header      = require('./ui/header.jsx'),
     AddRegular  = require('./ui/add_regular.jsx'),
-    RegularList = require('./ui/regular_list.jsx'),
-    MOCK_DATA   = require('./peeps');
+    RegularList = require('./ui/regular_list.jsx');
+
+const MOCK_DATA = require('./peeps');
 
 
-var App = React.createClass({
+let App = React.createClass({
     getInitialState() {
         return {
             peeps:              this.props.data,
@@ -21,7 +22,7 @@ var App = React.createClass({
     },
 
     updatePerson(id, fn) {
-        var newPeeps = this.state.peeps.map(person => {
+        let newPeeps = this.state.peeps.map(person => {
             if (person.id === id) {
                 fn.call(null, person);
             }
@@ -59,7 +60,7 @@ var App = React.createClass({
     },
 
     render() {
-        var listProps = {
+        let listProps = {
             peeps:      this.state.peeps,
             freeCount:  this.state.freeCount,
             addCup:     this.addCup,
