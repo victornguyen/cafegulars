@@ -4,7 +4,8 @@ let React = require('react/addons');
 
 let AddRegular = React.createClass({
     propTypes: {
-        addPerson: React.PropTypes.func.isRequired
+        addPerson: React.PropTypes.func.isRequired,
+        setAddPersonVisibility: React.PropTypes.func.isRequired
     },
 
     getInitialState() {
