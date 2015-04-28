@@ -26,6 +26,7 @@ let App = React.createClass({
         person.id = _generateId();
 
         this.setState({
+            // TODO: prepend for now in lieu of list sorting?
             peeps: this.state.peeps.concat(person)
         });
     },

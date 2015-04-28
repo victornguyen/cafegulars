@@ -34,27 +34,32 @@ let AddRegular = React.createClass({
     handleSubmit(e) {
         e.preventDefault();
 
-        // TODO clean this up
-        var name = React.findDOMNode(this.refs.name).value.trim();
-        var type = React.findDOMNode(this.refs['order.type']).value.trim();
-        var count = React.findDOMNode(this.refs['coffees.count']).value.trim();
+        // TODO: make this better yea
+        var name    = this._getValue('name'),
+            order   = this._getValue('order'),
+            count   = this._getValue('count');
 
-        var newPerson = React.addons.update(this.state,
-            {
-                name: { $set:name },
-                order: { $merge:{type:type} },
-                coffees: { $merge:{count:count, purchased:count} }
-            }
-        );
-
-        // if valid close form and addPerson
-        console.log('handleSubmit()!', newPerson);
-        this.props.addPerson(newPerson);
-        this.close();
+        // if valid add person and close form
+        if ( this._formIsValid([name,order,count]) ) {
+            this.props.addPerson( this._composeNewPerson(name,order,count) );
+            this.close();
+        }
     },
 
-    validateForm() {
+    _getValue(ref) {
+        return React.findDOMNode(this.refs[ref]).value.trim();
+    },
 
+    _composeNewPerson(name, order, count) {
+        return React.addons.update(this.state, {
+            name: { $set:name },
+            order: { $merge:{type:order} },
+            coffees: { $merge:{count:count, purchased:count} }
+        });
+    },
+
+    _formIsValid(values) {
+        return values.every(value => value.length > 0);
     },
 
     close() {
@@ -74,8 +79,8 @@ let AddRegular = React.createClass({
                     <div className="panel-body">
                         <form onSubmit={this.handleSubmit}>
                             <input type="text" placeholder="Name" ref="name" defaultValue={this.state.name} />
-                            <input type="text" placeholder="Order" ref="order.type" defaultValue={this.state.order.type} />
-                            <input type="number" placeholder="Count" ref="coffees.count" defaultValue={this.state.coffees.count} />
+                            <input type="text" placeholder="Order" ref="order" defaultValue={this.state.order.type} />
+                            <input type="number" placeholder="Count" ref="count" defaultValue={this.state.coffees.count} />
                             <input type="submit" value="Add meeeee" />
                         </form>
                     </div>
