@@ -30,7 +30,9 @@ let AddRegular = React.createClass({
         React.findDOMNode(this.refs.name).focus();
     },
 
-    handleSubmit() {
+    handleSubmit(e) {
+        e.preventDefault();
+
         // TODO clean this up
         var name = React.findDOMNode(this.refs.name).value.trim();
         var type = React.findDOMNode(this.refs['order.type']).value.trim();
