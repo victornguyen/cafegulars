@@ -19,8 +19,8 @@ let Header = React.createClass({
         return (
             <div className="header">
                 <ul className="nav nav-pills pull-right">
-                    <li><a href="#" className={settingsClasses} onClick={this.props.setAddPersonVisibility.bind(null, !this.props.addPersonIsVisible)}>Add Person</a></li>
-                    <li><a href="#" className="btn btn-default">Settings</a></li>
+                    <li><button className={settingsClasses} onClick={this.props.setAddPersonVisibility.bind(null, !this.props.addPersonIsVisible)}>Add Person</button></li>
+                    <li><button className="btn btn-default">Settings</button></li>
                 </ul>
 
                 <h1 className="text-muted">
