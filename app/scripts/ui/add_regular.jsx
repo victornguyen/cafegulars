@@ -42,10 +42,15 @@ let AddRegular = React.createClass({
         // if valid close form and addPerson
         console.log('handleSubmit()!', newPerson);
         this.props.addPerson(newPerson);
+        this.close();
     },
 
     validateForm() {
 
+    },
+
+    close() {
+        this.props.setAddPersonVisibility(false);
     },
 
     render() {
