@@ -26,7 +26,12 @@ let AddRegular = React.createClass({
         }
     },
 
+    componentDidMount() {
+        React.findDOMNode(this.refs.name).focus();
+    },
+
     handleSubmit() {
+        // TODO clean this up
         var name = React.findDOMNode(this.refs.name).value.trim();
         var type = React.findDOMNode(this.refs['order.type']).value.trim();
         var count = React.findDOMNode(this.refs['coffees.count']).value.trim();
