@@ -67,6 +67,10 @@ let AddRegular = React.createClass({
     },
 
     render() {
+        var groupStyle = {
+            marginRight: '10px'
+        };
+
         return (
             <div>
                 <div className="panel panel-primary">
@@ -77,11 +81,20 @@ let AddRegular = React.createClass({
 
                     </div>
                     <div className="panel-body">
-                        <form onSubmit={this.handleSubmit}>
-                            <input type="text" placeholder="Name" ref="name" defaultValue={this.state.name} />
-                            <input type="text" placeholder="Order" ref="order" defaultValue={this.state.order.type} />
-                            <input type="number" min="0" placeholder="Count" ref="count" defaultValue={this.state.coffees.count} />
-                            <input type="submit" value="Add meeeee" />
+                        <form className="form-inline" onSubmit={this.handleSubmit}>
+                            <div className="form-group" style={groupStyle}>
+                                <label className="sr-only">Name</label>
+                                <input className="form-control" type="text" placeholder="Name" ref="name" defaultValue={this.state.name} />
+                            </div>
+                            <div className="form-group" style={groupStyle}>
+                                <label className="sr-only">Order</label>
+                                <input className="form-control" type="text" placeholder="Order" ref="order" defaultValue={this.state.order.type} />
+                            </div>
+                            <div className="form-group" style={groupStyle}>
+                                <label className="sr-only">Count</label>
+                                <input className="form-control" type="number" min="0" placeholder="Count" ref="count" defaultValue={this.state.coffees.count} />
+                            </div>
+                            <button type="submit" className="btn btn-primary">Add</button>
                         </form>
                     </div>
                 </div>
