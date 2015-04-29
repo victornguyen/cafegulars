@@ -80,7 +80,7 @@ let AddRegular = React.createClass({
                         <form onSubmit={this.handleSubmit}>
                             <input type="text" placeholder="Name" ref="name" defaultValue={this.state.name} />
                             <input type="text" placeholder="Order" ref="order" defaultValue={this.state.order.type} />
-                            <input type="number" placeholder="Count" ref="count" defaultValue={this.state.coffees.count} />
+                            <input type="number" min="0" placeholder="Count" ref="count" defaultValue={this.state.coffees.count} />
                             <input type="submit" value="Add meeeee" />
                         </form>
                     </div>
