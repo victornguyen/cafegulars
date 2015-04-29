@@ -10,11 +10,24 @@ const MOCK_DATA = require('./peeps');
 
 let App = React.createClass({
     getInitialState() {
-        return {
-            peeps:              this.props.data,
-            freeCount:          8,
-            addPersonIsVisible: false
+        let state;
+
+        if ( localStorage[this.props.localStorageKey] ) {
+            state = JSON.parse( localStorage[this.props.localStorageKey] );
         }
+        else {
+            state = {
+                peeps:              MOCK_DATA,
+                freeCount:          8,
+                addPersonIsVisible: false
+            }
+        }
+
+        return state;
+    },
+
+    componentDidUpdate() {
+        localStorage.cafegulars = JSON.stringify(this.state);
     },
 
     addPerson(person) {
@@ -89,4 +102,4 @@ let App = React.createClass({
 });
 
 
-React.render(<App data={MOCK_DATA} />, document.getElementById("app"));
+React.render(<App localStorageKey="cafegulars" />, document.getElementById("app"));
