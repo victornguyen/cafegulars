@@ -44,6 +44,12 @@ let App = React.createClass({
         });
     },
 
+    removePerson(id) {
+        this.setState({
+            peeps: this.state.peeps.filter(person => person.id !== id)
+        });
+    },
+
     updatePerson(id, fn) {
         let newPeeps = this.state.peeps.map(person => {
             if (person.id === id) {
@@ -84,11 +90,12 @@ let App = React.createClass({
 
     render() {
         let listProps = {
-            peeps:      this.state.peeps,
-            freeCount:  this.state.freeCount,
-            addCup:     this.addCup,
-            removeCup:  this.removeCup,
-            addFreeCup: this.addFreeCup
+            peeps:          this.state.peeps,
+            freeCount:      this.state.freeCount,
+            addCup:         this.addCup,
+            removeCup:      this.removeCup,
+            addFreeCup:     this.addFreeCup,
+            removePerson:   this.removePerson
         };
 
         return (

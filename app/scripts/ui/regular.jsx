@@ -4,12 +4,13 @@ let React = require('react');
 
 let Regular = React.createClass({
     propTypes: {
-        person:     React.PropTypes.object.isRequired,
-        peeps:      React.PropTypes.array.isRequired,
-        freeCount:  React.PropTypes.number.isRequired,
-        addCup:     React.PropTypes.func.isRequired,
-        removeCup:  React.PropTypes.func.isRequired,
-        addFreeCup: React.PropTypes.func.isRequired
+        person:         React.PropTypes.object.isRequired,
+        peeps:          React.PropTypes.array.isRequired,
+        freeCount:      React.PropTypes.number.isRequired,
+        addCup:         React.PropTypes.func.isRequired,
+        removeCup:      React.PropTypes.func.isRequired,
+        addFreeCup:     React.PropTypes.func.isRequired,
+        removePerson:   React.PropTypes.func.isRequired
     },
 
     getInitialState() {
@@ -54,6 +55,9 @@ let Regular = React.createClass({
                     </div>
                     {this.props.person.order.type}<br/>
                     <span className="text-muted">{this.props.person.order.notes}</span>
+                </div>
+                <div className="panel-footer">
+                    <button type="button" className="btn btn-primary btn-xs" onClick={ this.props.removePerson.bind(null, this.props.person.id) }>Remove</button>
                 </div>
             </div>
         )

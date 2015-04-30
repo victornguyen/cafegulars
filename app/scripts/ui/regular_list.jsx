@@ -5,11 +5,12 @@ let React   = require('react'),
 
 let RegularList = React.createClass({
     propTypes: {
-        peeps:      React.PropTypes.array.isRequired,
-        freeCount:  React.PropTypes.number.isRequired,
-        addCup:     React.PropTypes.func.isRequired,
-        removeCup:  React.PropTypes.func.isRequired,
-        addFreeCup: React.PropTypes.func.isRequired
+        peeps:          React.PropTypes.array.isRequired,
+        freeCount:      React.PropTypes.number.isRequired,
+        addCup:         React.PropTypes.func.isRequired,
+        removeCup:      React.PropTypes.func.isRequired,
+        addFreeCup:     React.PropTypes.func.isRequired,
+        removePerson:   React.PropTypes.func.isRequired
     },
 
     render() {
