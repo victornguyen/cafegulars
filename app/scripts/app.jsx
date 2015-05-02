@@ -40,9 +40,11 @@ let App = React.createClass({
 
         person.id = _generateId();
 
+        let newPeeps = this.state.peeps.slice();
+        newPeeps.unshift(person);
+
         this.setState({
-            // TODO: prepend for now in lieu of list sorting?
-            peeps: this.state.peeps.concat(person),
+            peeps: newPeeps,
             newPersonId: person.id
         });
     },
