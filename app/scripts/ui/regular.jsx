@@ -1,6 +1,7 @@
 'use strict';
 
-let React = require('react');
+let React       = require('react'),
+    classNames  = require('classnames');
 
 let Regular = React.createClass({
     propTypes: {
@@ -10,7 +11,8 @@ let Regular = React.createClass({
         addCup:         React.PropTypes.func.isRequired,
         removeCup:      React.PropTypes.func.isRequired,
         addFreeCup:     React.PropTypes.func.isRequired,
-        removePerson:   React.PropTypes.func.isRequired
+        removePerson:   React.PropTypes.func.isRequired,
+        newPersonId:    React.PropTypes.string
     },
 
     getInitialState() {
@@ -32,8 +34,16 @@ let Regular = React.createClass({
     render() {
         let remainingCups = this.props.freeCount - this.props.person.coffees.count;
 
+        let panelClasses = classNames({
+            'panel': true,
+            'panel-default': this.props.newPersonId !== this.props.person.id,
+            'panel-success': this.props.newPersonId === this.props.person.id
+        });
+
+        console.log(this.props.newPersonId, this.props.person.id);
+
         return (
-            <div className="panel panel-default">
+            <div className={panelClasses}>
                 <div className="panel-heading">
                     <h3 className="panel-title">
                         {this.props.person.name}
@@ -43,9 +53,7 @@ let Regular = React.createClass({
                                 {remainingCups} more { remainingCups < 2 ? 'coffee' : 'coffees' } to go!
                             </span>
                         }
-                        <span className="badge pull-right">
-                            {this.props.person.coffees.purchased} total { this.props.person.coffees.purchased === 1 ? 'coffee' : 'coffees' } purchased
-                        </span>
+
                     </h3>
 
                 </div>
@@ -58,6 +66,9 @@ let Regular = React.createClass({
                 </div>
                 <div className="panel-footer">
                     <button type="button" className="btn btn-primary btn-xs" onClick={ this.props.removePerson.bind(null, this.props.person.id) }>Remove</button>
+                    <span className="badge pull-right">
+                        {this.props.person.coffees.purchased} total { this.props.person.coffees.purchased === 1 ? 'coffee' : 'coffees' } purchased
+                    </span>
                 </div>
             </div>
         )

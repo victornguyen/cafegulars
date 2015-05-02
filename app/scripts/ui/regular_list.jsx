@@ -10,7 +10,8 @@ let RegularList = React.createClass({
         addCup:         React.PropTypes.func.isRequired,
         removeCup:      React.PropTypes.func.isRequired,
         addFreeCup:     React.PropTypes.func.isRequired,
-        removePerson:   React.PropTypes.func.isRequired
+        removePerson:   React.PropTypes.func.isRequired,
+        newPersonId:    React.PropTypes.string
     },
 
     render() {

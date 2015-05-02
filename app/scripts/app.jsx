@@ -19,7 +19,8 @@ let App = React.createClass({
             state = {
                 peeps:              MOCK_DATA,
                 freeCount:          8,
-                addPersonIsVisible: false
+                addPersonIsVisible: false,
+                newPersonId:        null
             }
         }
 
@@ -27,6 +28,7 @@ let App = React.createClass({
     },
 
     componentDidUpdate() {
+        this.state.newPersonId = null;
         localStorage.cafegulars = JSON.stringify(this.state);
     },
 
@@ -40,7 +42,8 @@ let App = React.createClass({
 
         this.setState({
             // TODO: prepend for now in lieu of list sorting?
-            peeps: this.state.peeps.concat(person)
+            peeps: this.state.peeps.concat(person),
+            newPersonId: person.id
         });
     },
 
@@ -95,7 +98,8 @@ let App = React.createClass({
             addCup:         this.addCup,
             removeCup:      this.removeCup,
             addFreeCup:     this.addFreeCup,
-            removePerson:   this.removePerson
+            removePerson:   this.removePerson,
+            newPersonId:    this.state.newPersonId
         };
 
         return (
