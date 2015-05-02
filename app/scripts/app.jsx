@@ -109,14 +109,14 @@ let App = React.createClass({
                 <Header
                     addPersonIsVisible={this.state.addPersonIsVisible}
                     setAddPersonVisibility={this.setAddPersonVisibility}
-                    />
-                {
-                    this.state.addPersonIsVisible &&
-                    <AddRegular
-                        addPerson={this.addPerson}
-                        setAddPersonVisibility={this.setAddPersonVisibility}
+                />
+                    {
+                        this.state.addPersonIsVisible &&
+                        <AddRegular
+                            addPerson={this.addPerson}
+                            setAddPersonVisibility={this.setAddPersonVisibility}
                         />
-                }
+                    }
                 <RegularList {...listProps} />
             </div>
         );
