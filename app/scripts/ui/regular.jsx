@@ -40,8 +40,6 @@ let Regular = React.createClass({
             'panel-success': this.props.newPersonId === this.props.person.id
         });
 
-        console.log(this.props.newPersonId, this.props.person.id);
-
         return (
             <div className={panelClasses}>
                 <div className="panel-heading">
