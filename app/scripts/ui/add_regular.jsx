@@ -1,6 +1,7 @@
 'use strict';
 
-let React = require('react/addons');
+let React       = require('react/addons'),
+    OrderSelect = require('./OrderSelect.jsx');
 
 let AddRegular = React.createClass({
     propTypes: {
@@ -36,7 +37,7 @@ let AddRegular = React.createClass({
 
         // TODO: make this better yea
         var name    = this._getValue('name'),
-            order   = this._getValue('order'),
+            order   = this.refs.orderSelect.refs.order.getDOMNode(this.refs.order).value.trim(),
             count   = this._getValue('count');
 
         // if valid add person and close form
@@ -87,8 +88,7 @@ let AddRegular = React.createClass({
                                 <input className="form-control" type="text" placeholder="Name" ref="name" defaultValue={this.state.name} />
                             </div>
                             <div className="form-group" style={groupStyle}>
-                                <label className="sr-only">Order</label>
-                                <input className="form-control" type="text" placeholder="Order" ref="order" defaultValue={this.state.order.type} />
+                                <OrderSelect ref="orderSelect" />
                             </div>
                             <div className="form-group" style={groupStyle}>
                                 <label className="sr-only">Count</label>
