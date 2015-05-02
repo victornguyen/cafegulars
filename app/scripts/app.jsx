@@ -106,8 +106,17 @@ let App = React.createClass({
 
         return (
             <div className="container">
-                <Header addPersonIsVisible={this.state.addPersonIsVisible} setAddPersonVisibility={this.setAddPersonVisibility} />
-                { this.state.addPersonIsVisible && <AddRegular addPerson={this.addPerson} setAddPersonVisibility={this.setAddPersonVisibility} /> }
+                <Header
+                    addPersonIsVisible={this.state.addPersonIsVisible}
+                    setAddPersonVisibility={this.setAddPersonVisibility}
+                    />
+                {
+                    this.state.addPersonIsVisible &&
+                    <AddRegular
+                        addPerson={this.addPerson}
+                        setAddPersonVisibility={this.setAddPersonVisibility}
+                        />
+                }
                 <RegularList {...listProps} />
             </div>
         );

@@ -79,7 +79,6 @@ let AddRegular = React.createClass({
                         <h3 className="panel-title">
                             Add a new Regular
                         </h3>
-
                     </div>
                     <div className="panel-body">
                         <form className="form-inline" onSubmit={this.handleSubmit}>
