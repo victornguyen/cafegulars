@@ -4,7 +4,7 @@ let React           = require('react'),
     Formsy          = require('formsy-react'),
     RegularName     = require('./add_regular_name.jsx'),
     RegularCount    = require('./add_regular_count.jsx'),
-    OrderSelect     = require('./OrderSelect.jsx');
+    OrderSelect     = require('./add_regular_order.jsx');
 
 let AddRegular = React.createClass({
     propTypes: {
