@@ -1,7 +1,10 @@
 'use strict';
 
-let React       = require('react/addons'),
-    OrderSelect = require('./OrderSelect.jsx');
+let React           = require('react'),
+    Formsy          = require('formsy-react'),
+    RegularName     = require('./add_regular_name.jsx'),
+    RegularCount    = require('./add_regular_count.jsx'),
+    OrderSelect     = require('./OrderSelect.jsx');
 
 let AddRegular = React.createClass({
     propTypes: {
@@ -11,60 +14,45 @@ let AddRegular = React.createClass({
 
     getInitialState() {
         return {
+            canSubmit: true
+        }
+    },
+
+    handleSubmit(model) {
+        let person = this.composeNewPerson(model);
+        this.props.addPerson(person);
+        this.close();
+    },
+
+    composeNewPerson(model) {
+        return {
             id: null,
-            name: '',
+            name: model.name,
             order: {
-                type: '',
+                type: model.order,
                 sugar: 0,
                 strength: 'Normal',
                 notes: ''
             },
             coffees: {
-                count: 1,
-                purchased: 0,
+                count: model.count,
+                purchased: model.count,
                 free: 0
             },
             lastVisited: null
         }
     },
 
-    componentDidMount() {
-        React.findDOMNode(this.refs.name).focus();
-    },
-
-    handleSubmit(e) {
-        e.preventDefault();
-
-        // TODO: make this better yea
-        var name    = this._getValue('name'),
-            order   = this.refs.orderSelect.refs.order.getDOMNode(this.refs.order).value.trim(),
-            count   = this._getValue('count');
-
-        // if valid add person and close form
-        if ( this._formIsValid([name,order,count]) ) {
-            this.props.addPerson( this._composeNewPerson(name,order,count) );
-            this.close();
-        }
-    },
-
-    _getValue(ref) {
-        return React.findDOMNode(this.refs[ref]).value.trim();
-    },
-
-    _composeNewPerson(name, order, count) {
-        return React.addons.update(this.state, {
-            name: { $set:name },
-            order: { $merge:{type:order} },
-            coffees: { $merge:{count:count, purchased:count} }
-        });
-    },
-
-    _formIsValid(values) {
-        return values.every(value => value.length > 0);
-    },
-
     close() {
         this.props.setAddPersonVisibility(false);
+    },
+
+    enableButton() {
+        this.setState({ canSubmit: true });
+    },
+
+    disableButton() {
+        this.setState({ canSubmit: false });
     },
 
     render() {
@@ -81,20 +69,17 @@ let AddRegular = React.createClass({
                         </h3>
                     </div>
                     <div className="panel-body">
-                        <form className="form-inline" onSubmit={this.handleSubmit}>
-                            <div className="form-group" style={groupStyle}>
-                                <label className="sr-only">Name</label>
-                                <input className="form-control" type="text" placeholder="Name" ref="name" defaultValue={this.state.name} />
-                            </div>
-                            <div className="form-group" style={groupStyle}>
-                                <OrderSelect ref="orderSelect" />
-                            </div>
-                            <div className="form-group" style={groupStyle}>
-                                <label className="sr-only">Count</label>
-                                <input className="form-control" type="number" min="0" placeholder="Count" ref="count" defaultValue={this.state.coffees.count} />
-                            </div>
-                            <button type="submit" className="btn btn-primary">Add</button>
-                        </form>
+                        <Formsy.Form
+                            className="form-inline"
+                            onValidSubmit={this.handleSubmit}
+                            onValid={this.enableButton}
+                            onInvalid={this.disableButton}
+                        >
+                            <RegularName name="name" required groupStyle={groupStyle} />
+                            <OrderSelect name="order" required groupStyle={groupStyle} />
+                            <RegularCount name="count" required groupStyle={groupStyle} value="1" />
+                            <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Add Regular</button>
+                        </Formsy.Form>
                     </div>
                 </div>
             </div>
