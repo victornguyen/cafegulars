@@ -75,7 +75,7 @@ let AddRegular = React.createClass({
                             onValid={this.enableButton}
                             onInvalid={this.disableButton}
                         >
-                            <RegularName name="name" required groupStyle={groupStyle} />
+                            <RegularName name="name" required groupStyle={groupStyle} focus={true} />
                             <OrderSelect name="order" required groupStyle={groupStyle} />
                             <RegularCount name="count" required groupStyle={groupStyle} value="1" />
                             <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Add Regular</button>

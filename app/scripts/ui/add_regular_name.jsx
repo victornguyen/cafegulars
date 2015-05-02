@@ -6,6 +6,12 @@ var React   = require('react'),
 var AddRegularName = React.createClass({
     mixins: [Formsy.Mixin],
 
+    componentDidMount() {
+        if (this.props.focus) {
+            React.findDOMNode(this.refs.field).focus();
+        }
+    },
+
     changeValue(e) {
         this.setValue(e.currentTarget.value);
     },
@@ -14,7 +20,7 @@ var AddRegularName = React.createClass({
         return (
             <div className="form-group" style={this.props.groupStyle}>
                 <label className="sr-only">Name</label>
-                <input className="form-control" type="text" placeholder="Name" onChange={this.changeValue} value={this.getValue()} />
+                <input className="form-control" ref="field" type="text" placeholder="Name" onChange={this.changeValue} value={this.getValue()} />
             </div>
         )
     }
