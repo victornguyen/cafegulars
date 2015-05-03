@@ -64,8 +64,8 @@ let Regular = React.createClass({
                 </div>
                 <div className="panel-footer">
                     <button type="button" className="btn btn-primary btn-xs" onClick={ this.props.removePerson.bind(null, this.props.person.id) }>Remove</button>
-                    <span className="badge pull-right">
-                        {this.props.person.coffees.purchased} total { this.props.person.coffees.purchased === 1 ? 'coffee' : 'coffees' } purchased
+                    <span className="small pull-right">
+                         { this.props.person.coffees.purchased === 1 ? 'Coffee' : 'Coffees' } purchased: {this.props.person.coffees.purchased}
                     </span>
                 </div>
             </div>
