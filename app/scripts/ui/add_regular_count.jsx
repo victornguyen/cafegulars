@@ -13,8 +13,8 @@ var AddRegularCount = React.createClass({
     render() {
         return (
             <div className="form-group" style={this.props.groupStyle}>
-                <label className="sr-only">Count</label>
-                <input className="form-control" type="number" min="0" placeholder="Count" onChange={this.changeValue} value={this.getValue()} />
+                <label style={this.props.groupStyle}>{this.props.name}: </label>
+                <input className="form-control form-control--number" type="number" min="0" placeholder={this.props.name} onChange={this.changeValue} value={this.getValue()} />
             </div>
         )
     }

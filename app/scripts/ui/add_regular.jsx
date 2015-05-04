@@ -27,16 +27,16 @@ let AddRegular = React.createClass({
     composeNewPerson(model) {
         return {
             id: null,
-            name: model.name,
+            name: model.Name,
             order: {
-                type: model.order,
-                sugar: 0,
+                type: model.Order,
+                sugar: model.Sugar,
                 strength: 'Normal',
                 notes: ''
             },
             coffees: {
-                count: model.count,
-                purchased: model.count,
+                count: model.Coffees,
+                purchased: model.Coffees,
                 free: 0
             },
             lastVisited: null
@@ -75,9 +75,10 @@ let AddRegular = React.createClass({
                             onValid={this.enableButton}
                             onInvalid={this.disableButton}
                         >
-                            <RegularName name="name" required groupStyle={groupStyle} focus={true} />
-                            <OrderSelect name="order" required groupStyle={groupStyle} />
-                            <RegularCount name="count" required groupStyle={groupStyle} value="1" />
+                            <RegularName name="Name" required groupStyle={groupStyle} focus={true} />
+                            <OrderSelect name="Order" required groupStyle={groupStyle} />
+                            <RegularCount name="Coffees" required groupStyle={groupStyle} value="1" />
+                            <RegularCount name="Sugar" required groupStyle={groupStyle} value="0" />
                             <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Add Regular</button>
                         </Formsy.Form>
                     </div>
