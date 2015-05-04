@@ -59,7 +59,10 @@ let Regular = React.createClass({
                     <div className="btn-group-vertical pull-right" role="group">
                         { this.renderActions() }
                     </div>
-                    {this.props.person.order.type}<br/>
+                    <p>{this.props.person.order.type}</p>
+                    <p>
+                        { this.renderSugar() }
+                    </p>
                     <span className="text-muted">{this.props.person.order.notes}</span>
                 </div>
                 <div className="panel-footer">
@@ -106,6 +109,20 @@ let Regular = React.createClass({
         }
 
         return actions;
+    },
+
+    renderSugar() {
+        // TODO: there must be a more terse way of doing this?
+        
+        var sugars = [];
+
+        for (let i = 0; i < this.props.person.order.sugar; i++) {
+            sugars.push(
+                <span className="glyphicon glyphicon-tint" aria-hidden="true"></span>
+            );
+        }
+
+        return sugars;
     }
 });
 
