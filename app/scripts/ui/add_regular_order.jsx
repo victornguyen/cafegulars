@@ -27,7 +27,7 @@ var OrderSelect = React.createClass({
             <div className="form-group" style={this.props.groupStyle}>
                 <label className="sr-only">Order!</label>
                 <select ref="order" className="form-control" onChange={this.changeValue}>
-                    { this.coffeeTypes.map(type => <option value={type}>{type}</option>) }
+                    { this.coffeeTypes.map(type => <option value={type} key={type}>{type}</option>) }
                 </select>
             </div>
         )

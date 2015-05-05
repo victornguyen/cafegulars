@@ -113,12 +113,12 @@ let Regular = React.createClass({
 
     renderSugar() {
         // TODO: there must be a more terse way of doing this?
-        
+
         var sugars = [];
 
         for (let i = 0; i < this.props.person.order.sugar; i++) {
             sugars.push(
-                <span className="glyphicon glyphicon-tint" aria-hidden="true"></span>
+                <span className="glyphicon glyphicon-tint" aria-hidden="true" key={this.props.person.id + '_sugar_' + i}></span>
             );
         }
 
