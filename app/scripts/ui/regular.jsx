@@ -118,7 +118,7 @@ let Regular = React.createClass({
 
         for (let i = 0; i < this.props.person.order.sugar; i++) {
             sugars.push(
-                <span className="glyphicon glyphicon-tint" aria-hidden="true" key={this.props.person.id + '_sugar_' + i}></span>
+                <span className="glyphicon glyphicon-tint" aria-hidden="true" key={i}></span>
             );
         }
 
