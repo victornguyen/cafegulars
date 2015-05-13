@@ -89,6 +89,10 @@ let App = React.createClass({
         })
     },
 
+    updateName(id, name) {
+        this.updatePerson(id, person => person.name = name);
+    },
+
     setAddPersonVisibility(value) {
         this.setState({ addPersonIsVisible: value });
     },
@@ -100,6 +104,7 @@ let App = React.createClass({
             addCup:         this.addCup,
             removeCup:      this.removeCup,
             addFreeCup:     this.addFreeCup,
+            updateName:     this.updateName,
             removePerson:   this.removePerson,
             newPersonId:    this.state.newPersonId
         };

@@ -1,7 +1,8 @@
 'use strict';
 
 let React       = require('react'),
-    classNames  = require('classnames');
+    classNames  = require('classnames'),
+    RegularName = require('./regular_name.jsx');
 
 let Regular = React.createClass({
     propTypes: {
@@ -11,6 +12,7 @@ let Regular = React.createClass({
         addCup:         React.PropTypes.func.isRequired,
         removeCup:      React.PropTypes.func.isRequired,
         addFreeCup:     React.PropTypes.func.isRequired,
+        updateName:     React.PropTypes.func.isRequired,
         removePerson:   React.PropTypes.func.isRequired,
         newPersonId:    React.PropTypes.string
     },
@@ -31,6 +33,10 @@ let Regular = React.createClass({
         return this.props.person.coffees.count === this.props.freeCount;
     },
 
+    _updateName(newName) {
+        this.props.updateName(this.props.person.id, newName);
+    },
+
     render() {
         let remainingCups = this.props.freeCount - this.props.person.coffees.count;
 
@@ -42,20 +48,8 @@ let Regular = React.createClass({
 
         return (
             <div className={panelClasses}>
-                <div className="panel-heading">
-                    <h3 className="panel-title">
-                        {this.props.person.name}
-                        {
-                            !this.state.hasFreeCoffee &&
-                            <span className="badge pull-right">
-                                {remainingCups} more { remainingCups < 2 ? 'coffee' : 'coffees' } to go!
-                            </span>
-                        }
-
-                    </h3>
-
-                </div>
                 <div className="panel-body">
+                    <RegularName name={this.props.person.name} update={this._updateName} />
                     <div className="btn-group-vertical pull-right" role="group">
                         { this.renderActions() }
                     </div>
@@ -64,6 +58,13 @@ let Regular = React.createClass({
                         { this.renderSugar() }
                     </p>
                     <span className="text-muted">{this.props.person.order.notes}</span>
+
+                    {
+                        !this.state.hasFreeCoffee &&
+                        <span className="badge pull-right">
+                                {remainingCups} more { remainingCups < 2 ? 'coffee' : 'coffees' } to go!
+                            </span>
+                    }
                 </div>
                 <div className="panel-footer">
                     <button type="button" className="btn btn-primary btn-xs" onClick={ this.props.removePerson.bind(null, this.props.person.id) }>Remove</button>

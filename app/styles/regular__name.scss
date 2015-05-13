@@ -1,0 +1,12 @@
+.regular-name {
+    margin: 0 0 10px 0;
+}
+
+.regular-name__field {
+    border: 0;
+    border-bottom: 1px solid transparent;
+
+    &:focus {
+        border-bottom-color: #ddd;
+    }
+}
