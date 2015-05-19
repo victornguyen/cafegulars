@@ -93,20 +93,25 @@ let App = React.createClass({
         this.updatePerson(id, person => person.name = name);
     },
 
+    updateOrderType(id, type) {
+        this.updatePerson(id, person => person.order.type = type);
+    },
+
     setAddPersonVisibility(value) {
         this.setState({ addPersonIsVisible: value });
     },
 
     render() {
         let listProps = {
-            peeps:          this.state.peeps,
-            freeCount:      this.state.freeCount,
-            addCup:         this.addCup,
-            removeCup:      this.removeCup,
-            addFreeCup:     this.addFreeCup,
-            updateName:     this.updateName,
-            removePerson:   this.removePerson,
-            newPersonId:    this.state.newPersonId
+            peeps:           this.state.peeps,
+            freeCount:       this.state.freeCount,
+            addCup:          this.addCup,
+            removeCup:       this.removeCup,
+            addFreeCup:      this.addFreeCup,
+            updateName:      this.updateName,
+            updateOrderType: this.updateOrderType,
+            removePerson:    this.removePerson,
+            newPersonId:     this.state.newPersonId
         };
 
         return (

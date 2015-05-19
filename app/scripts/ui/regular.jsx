@@ -1,8 +1,9 @@
 'use strict';
 
-let React       = require('react'),
-    classNames  = require('classnames'),
-    RegularName = require('./regular_name.jsx');
+let React           = require('react'),
+    classNames      = require('classnames'),
+    RegularName     = require('./regular_name.jsx'),
+    RegularOrder    = require('./regular_order.jsx');
 
 let Regular = React.createClass({
     propTypes: {
@@ -37,6 +38,10 @@ let Regular = React.createClass({
         this.props.updateName(this.props.person.id, newName);
     },
 
+    _updateOrderType(newOrder) {
+        this.props.updateOrderType(this.props.person.id, newOrder);
+    },
+
     render() {
         let remainingCups = this.props.freeCount - this.props.person.coffees.count;
 
@@ -49,11 +54,13 @@ let Regular = React.createClass({
         return (
             <div className={panelClasses}>
                 <div className="panel-body">
-                    <RegularName name={this.props.person.name} update={this._updateName} />
                     <div className="btn-group-vertical pull-right" role="group">
                         { this.renderActions() }
                     </div>
-                    <p>{this.props.person.order.type}</p>
+
+                    <RegularName name={this.props.person.name} update={this._updateName} />
+                    <RegularOrder order={this.props.person.order.type} update={this._updateOrderType} />
+
                     <p>
                         { this.renderSugar() }
                     </p>
