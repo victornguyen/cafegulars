@@ -5,8 +5,10 @@
 .regular-name__field {
     border: 0;
     border-bottom: 1px solid transparent;
+    transition: all 0.1s ease;
 
-    &:focus {
+    &:focus,
+    &:hover {
         border-bottom-color: #ddd;
     }
 }
