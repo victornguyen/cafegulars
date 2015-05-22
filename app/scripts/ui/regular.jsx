@@ -3,7 +3,8 @@
 let React           = require('react'),
     classNames      = require('classnames'),
     RegularName     = require('./regular_name.jsx'),
-    RegularOrder    = require('./regular_order.jsx');
+    RegularOrder    = require('./regular_order.jsx'),
+    RegularSugar    = require('./regular_sugar.jsx');
 
 let Regular = React.createClass({
     propTypes: {
@@ -38,6 +39,10 @@ let Regular = React.createClass({
         this.props.updateName(this.props.person.id, newName);
     },
 
+    _updateSugar() {
+        console.log('gimme dat sugaarr');
+    },
+
     _updateOrderType(newOrder) {
         this.props.updateOrderType(this.props.person.id, newOrder);
     },
@@ -60,10 +65,8 @@ let Regular = React.createClass({
 
                     <RegularName name={this.props.person.name} update={this._updateName} />
                     <RegularOrder order={this.props.person.order.type} update={this._updateOrderType} />
+                    <RegularSugar count={this.props.person.order.sugar} update={this._updateSugar} />
 
-                    <p>
-                        { this.renderSugar() }
-                    </p>
                     <span className="text-muted">{this.props.person.order.notes}</span>
 
                     {
@@ -117,20 +120,6 @@ let Regular = React.createClass({
         }
 
         return actions;
-    },
-
-    renderSugar() {
-        // TODO: there must be a more terse way of doing this?
-
-        var sugars = [];
-
-        for (let i = 0; i < this.props.person.order.sugar; i++) {
-            sugars.push(
-                <span className="glyphicon glyphicon-tint" aria-hidden="true" key={i}></span>
-            );
-        }
-
-        return sugars;
     }
 });
 
