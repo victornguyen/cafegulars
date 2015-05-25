@@ -9,12 +9,19 @@ var RegularSugar = React.createClass({
     },
 
     _updateSugarCount() {
-        console.log('update sugar count from', this.props.count, 'to', this.props.count+1)
+        var count = (this.props.count + 1 > 5) ? 0 : this.props.count + 1;
+        this.props.update(count);
     },
 
     render() {
         let i     = this.props.count,
             sugar = [];
+
+        if (i === 0) {
+            sugar.push(
+                "No Sugar"
+            );
+        }
 
         while(i--) {
             sugar.push(
@@ -24,7 +31,12 @@ var RegularSugar = React.createClass({
 
         return (
             <div className="regular-sugar" onClick={this._updateSugarCount}>
-                {sugar}
+                <div className="regular-sugar__count">
+                    {this.props.count}
+                </div>
+                <div className="regular-sugar__icons">
+                    {sugar}
+                </div>
             </div>
         )
     }

@@ -1,0 +1,27 @@
+.regular-sugar {
+    background: #eeeeee;
+    height: 85px;
+    width: 85px;
+    padding: 9px 5px 5px 5px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    user-select: none;
+
+    &:hover {
+        border-color: #ddd;
+    }
+}
+
+.regular-sugar__count {
+    font-size: 24px
+}
+
+.regular-sugar__icons {
+
+}
+
+.regular-sugar__icon {
+
+}

@@ -8,15 +8,17 @@ let React           = require('react'),
 
 let Regular = React.createClass({
     propTypes: {
-        person:         React.PropTypes.object.isRequired,
-        peeps:          React.PropTypes.array.isRequired,
-        freeCount:      React.PropTypes.number.isRequired,
-        addCup:         React.PropTypes.func.isRequired,
-        removeCup:      React.PropTypes.func.isRequired,
-        addFreeCup:     React.PropTypes.func.isRequired,
-        updateName:     React.PropTypes.func.isRequired,
-        removePerson:   React.PropTypes.func.isRequired,
-        newPersonId:    React.PropTypes.string
+        person:             React.PropTypes.object.isRequired,
+        peeps:              React.PropTypes.array.isRequired,
+        freeCount:          React.PropTypes.number.isRequired,
+        addCup:             React.PropTypes.func.isRequired,
+        removeCup:          React.PropTypes.func.isRequired,
+        addFreeCup:         React.PropTypes.func.isRequired,
+        updateName:         React.PropTypes.func.isRequired,
+        updateOrderType:    React.PropTypes.func.isRequired,
+        updateSugar:        React.PropTypes.func.isRequired,
+        removePerson:       React.PropTypes.func.isRequired,
+        newPersonId:        React.PropTypes.string
     },
 
     getInitialState() {
@@ -39,8 +41,8 @@ let Regular = React.createClass({
         this.props.updateName(this.props.person.id, newName);
     },
 
-    _updateSugar() {
-        console.log('gimme dat sugaarr');
+    _updateSugar(newCount) {
+        this.props.updateSugar(this.props.person.id, newCount);
     },
 
     _updateOrderType(newOrder) {
