@@ -22,6 +22,13 @@ var RegularName = React.createClass({
 
     _updateName(e) {
         let newName = e.currentTarget.value;
+
+        // restore previous name if new name is empty
+        if (newName === '') {
+            e.currentTarget.value = this.props.name;
+            return;
+        }
+
         if (newName !== this.props.name) {
             this.props.update(newName);
         }
