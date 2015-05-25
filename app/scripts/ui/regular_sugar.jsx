@@ -18,15 +18,14 @@ var RegularSugar = React.createClass({
             sugar = [];
 
         if (i === 0) {
-            sugar.push(
-                "No Sugar"
-            );
+            sugar.push("No Sugar");
         }
-
-        while(i--) {
-            sugar.push(
-                <span className="regular-sugar__icon glyphicon glyphicon-tint" aria-hidden="true" key={i}></span>
-            );
+        else {
+            while(i--) {
+                sugar.push(
+                    <span className="regular-sugar__icon glyphicon glyphicon-tint" aria-hidden="true" key={i}></span>
+                );
+            }
         }
 
         return (
