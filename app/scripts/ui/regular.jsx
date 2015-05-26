@@ -4,7 +4,8 @@ let React           = require('react'),
     classNames      = require('classnames'),
     RegularName     = require('./regular_name.jsx'),
     RegularOrder    = require('./regular_order.jsx'),
-    RegularSugar    = require('./regular_sugar.jsx');
+    RegularSugar    = require('./regular_sugar.jsx'),
+    RegularCounter  = require('./regular_counter.jsx');
 
 let Regular = React.createClass({
     propTypes: {
@@ -23,17 +24,17 @@ let Regular = React.createClass({
 
     getInitialState() {
         return {
-            hasFreeCoffee: this.getsFreeCoffee()
+            hasFreeCoffee: this._getsFreeCoffee()
         }
     },
 
     componentWillReceiveProps() {
         this.setState({
-            hasFreeCoffee: this.getsFreeCoffee()
+            hasFreeCoffee: this._getsFreeCoffee()
         })
     },
 
-    getsFreeCoffee() {
+    _getsFreeCoffee() {
         return this.props.person.coffees.count === this.props.freeCount;
     },
 
@@ -53,30 +54,29 @@ let Regular = React.createClass({
         let remainingCups = this.props.freeCount - this.props.person.coffees.count;
 
         let panelClasses = classNames({
-            'panel': true,
-            'panel-default': this.props.newPersonId !== this.props.person.id,
-            'panel-success': this.props.newPersonId === this.props.person.id
+            'panel':            true,
+            'panel-default':    this.props.newPersonId !== this.props.person.id,
+            'panel-success':    this.props.newPersonId === this.props.person.id
         });
+
+        // TODO: hmm, is there a better way of doing this
+        let counterProps = {
+            id:                 this.props.person.id,
+            count:              this.props.person.coffees.count,
+            freeCount:          this.props.freeCount,
+            addCup:             this.props.addCup,
+            removeCup:          this.props.removeCup,
+            addFreeCup:         this.props.addFreeCup,
+            hasFreeCoffee:      this.state.hasFreeCoffee
+        };
 
         return (
             <div className={panelClasses}>
                 <div className="panel-body">
-                    <div className="btn-group-vertical pull-right" role="group">
-                        { this.renderActions() }
-                    </div>
-
                     <RegularName name={this.props.person.name} update={this._updateName} />
                     <RegularOrder order={this.props.person.order.type} update={this._updateOrderType} />
                     <RegularSugar count={this.props.person.order.sugar} update={this._updateSugar} />
-
-                    <span className="text-muted">{this.props.person.order.notes}</span>
-
-                    {
-                        !this.state.hasFreeCoffee &&
-                        <span className="badge pull-right">
-                                {remainingCups} more { remainingCups < 2 ? 'coffee' : 'coffees' } to go!
-                            </span>
-                    }
+                    <RegularCounter {...counterProps} />
                 </div>
                 <div className="panel-footer">
                     <button type="button" className="btn btn-primary btn-xs" onClick={ this.props.removePerson.bind(null, this.props.person.id) }>Remove</button>
@@ -86,43 +86,8 @@ let Regular = React.createClass({
                 </div>
             </div>
         )
-    },
-
-    renderActions() {
-        let actions;
-
-        if (this.state.hasFreeCoffee) {
-            actions = (
-                <div>
-                    <button
-                        className="btn btn-primary btn-lge"
-                        onClick={this.props.addFreeCup.bind(null, this.props.person.id)}>
-                        FREE COFFEE!!!!!
-                    </button>
-                </div>
-            )
-        }
-        else {
-            actions = (
-                <div>
-                    <button
-                        className="btn btn-default center-block"
-                        onClick={this.props.addCup.bind(null, this.props.person.id)}
-                        >
-                        ++
-                    </button>
-                    <button
-                        className="btn btn-default center-block"
-                        onClick={this.props.removeCup.bind(null, this.props.person.id)}
-                        >
-                        --
-                    </button>
-                </div>
-            )
-        }
-
-        return actions;
     }
+
 });
 
 module.exports = Regular;

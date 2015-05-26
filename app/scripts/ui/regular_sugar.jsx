@@ -29,7 +29,7 @@ var RegularSugar = React.createClass({
         }
 
         return (
-            <div className="regular-sugar" onClick={this._updateSugarCount}>
+            <div className="regular-sugar pull-left" onClick={this._updateSugarCount}>
                 <div className="regular-sugar__count">
                     {this.props.count}
                 </div>
