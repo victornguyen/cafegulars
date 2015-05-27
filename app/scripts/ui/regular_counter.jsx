@@ -19,19 +19,19 @@ var RegularCounter = React.createClass({
 
         if (this.props.hasFreeCoffee) {
             actions = (
-                <div className="regular-counter" onClick={this.props.addFreeCup.bind(null, this.props.id)}>
+                <button className="regular-counter" onClick={this.props.addFreeCup.bind(null, this.props.id)}>
                     FREE COFFEE!!!!!
-                </div>
+                </button>
             )
         }
         else {
             actions = (
-                <div className="regular-counter" onClick={this.props.addCup.bind(null, this.props.id)}>
+                <button className="regular-counter" onClick={this.props.addCup.bind(null, this.props.id)}>
                     <div className="regular-counter__count">
                         {remainingCups}
                     </div>
                     { remainingCups < 2 ? 'coffee' : 'coffees' } to go!
-                </div>
+                </button>
             )
         }
 
