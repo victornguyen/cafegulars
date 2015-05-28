@@ -9,33 +9,37 @@ let React           = require('react'),
 
 let Regular = React.createClass({
     propTypes: {
+        // person props
         person:             React.PropTypes.object.isRequired,
-        peeps:              React.PropTypes.array.isRequired,
+        removePerson:       React.PropTypes.func.isRequired,
+        newPersonId:        React.PropTypes.string,
+
+        // cup methods
         freeCount:          React.PropTypes.number.isRequired,
         addCup:             React.PropTypes.func.isRequired,
-        removeCup:          React.PropTypes.func.isRequired,
+        removeCup:          React.PropTypes.func,
         addFreeCup:         React.PropTypes.func.isRequired,
+
+        // update methods
         updateName:         React.PropTypes.func.isRequired,
         updateOrderType:    React.PropTypes.func.isRequired,
-        updateSugar:        React.PropTypes.func.isRequired,
-        removePerson:       React.PropTypes.func.isRequired,
-        newPersonId:        React.PropTypes.string
+        updateSugar:        React.PropTypes.func.isRequired
     },
 
     getInitialState() {
         return {
-            hasFreeCoffee: this._getsFreeCoffee()
+            hasFreeCoffee: this._getsFreeCoffee(this.props.person.coffees.count)
         }
     },
 
-    componentWillReceiveProps() {
+    componentWillReceiveProps(newProps) {
         this.setState({
-            hasFreeCoffee: this._getsFreeCoffee()
+            hasFreeCoffee: this._getsFreeCoffee(newProps.person.coffees.count)
         })
     },
 
-    _getsFreeCoffee() {
-        return this.props.person.coffees.count === this.props.freeCount;
+    _getsFreeCoffee(count) {
+        return count === this.props.freeCount;
     },
 
     _updateName(newName) {
@@ -81,7 +85,7 @@ let Regular = React.createClass({
                 <div className="panel-footer">
                     <button type="button" className="btn btn-primary btn-xs" onClick={ this.props.removePerson.bind(null, this.props.person.id) }>Remove</button>
                     <span className="small pull-right">
-                         { this.props.person.coffees.purchased === 1 ? 'Coffee' : 'Coffees' } purchased: {this.props.person.coffees.purchased}
+                         Coffees purchased: {this.props.person.coffees.purchased}
                     </span>
                 </div>
             </div>
