@@ -128,6 +128,7 @@ let App = React.createClass({
                 {
                     this.state.addPersonIsVisible &&
                     <AddRegular
+                        {...listProps}
                         addPerson={this.addPerson}
                         setAddPersonVisibility={this.setAddPersonVisibility}
                     />

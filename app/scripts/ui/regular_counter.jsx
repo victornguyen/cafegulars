@@ -4,11 +4,11 @@ var React = require('react');
 
 var RegularCounter = React.createClass({
     propTypes: {
-        id:             React.PropTypes.string.isRequired,
+        id:             React.PropTypes.string,
         count:          React.PropTypes.number.isRequired,
         freeCount:      React.PropTypes.number.isRequired,
         addCup:         React.PropTypes.func.isRequired,
-        removeCup:      React.PropTypes.func.isRequired,
+        removeCup:      React.PropTypes.func,
         addFreeCup:     React.PropTypes.func.isRequired,
         hasFreeCoffee:  React.PropTypes.bool.isRequired
     },

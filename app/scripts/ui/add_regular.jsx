@@ -1,49 +1,62 @@
 'use strict';
 
-let React           = require('react'),
-    Formsy          = require('formsy-react'),
+let React           = require('react/addons'),
+    _               = require('lodash'),
     RegularName     = require('./add_regular_name.jsx'),
     RegularCount    = require('./add_regular_count.jsx'),
-    OrderSelect     = require('./add_regular_order.jsx');
+    OrderSelect     = require('./add_regular_order.jsx'),
+    Regular         = require('./regular.jsx');
 
 let AddRegular = React.createClass({
     propTypes: {
-        addPerson: React.PropTypes.func.isRequired,
-        setAddPersonVisibility: React.PropTypes.func.isRequired
+        // add/new person specific props
+        setAddPersonVisibility: React.PropTypes.func.isRequired,
+
+        // person props
+        addPerson:              React.PropTypes.func.isRequired,
+        removePerson:           React.PropTypes.func.isRequired,
+
+        // cup methods
+        freeCount:              React.PropTypes.number.isRequired,
+        addCup:                 React.PropTypes.func.isRequired,
+        removeCup:              React.PropTypes.func,
+        addFreeCup:             React.PropTypes.func.isRequired,
+
+        // update methods
+        updateName:             React.PropTypes.func.isRequired,
+        updateOrderType:        React.PropTypes.func.isRequired,
+        updateSugar:            React.PropTypes.func.isRequired
     },
 
     getInitialState() {
         return {
-            canSubmit: true
+            // canSubmit: true,
+            person: {
+                id: null,
+                name: '',
+                order: {
+                    type: null,
+                    sugar: 0,
+                    strength: 'Normal',
+                    notes: ''
+                },
+                coffees: {
+                    count: 0,
+                    purchased: 0,
+                    free: 0
+                },
+                lastVisited: null
+            }
         }
     },
 
-    handleSubmit(model) {
-        let person = this.composeNewPerson(model);
-        this.props.addPerson(person);
-        this.close();
+    _addPerson() {
+        // TODO: ensure name and order type have values
+        this.props.addPerson(this.state.person);
+        this._close();
     },
 
-    composeNewPerson(model) {
-        return {
-            id: null,
-            name: model.Name,
-            order: {
-                type: model.Order,
-                sugar: parseInt(model.Sugar, 10),
-                strength: 'Normal',
-                notes: ''
-            },
-            coffees: {
-                count: parseInt(model.Coffees),
-                purchased: parseInt(model.Coffees),
-                free: 0
-            },
-            lastVisited: null
-        }
-    },
-
-    close() {
+    _close() {
         this.props.setAddPersonVisibility(false);
     },
 
@@ -55,35 +68,78 @@ let AddRegular = React.createClass({
         this.setState({ canSubmit: false });
     },
 
+    _addCup() {
+        let count = this.state.person.coffees.count + 1;
+        this.setState({
+            person: React.addons.update(this.state.person, {
+                coffees: {
+                    count:      { $set: count },
+                    purchased:  { $set: count }
+                }
+            })
+        });
+    },
+
+    _resetCount() {
+        this.setState({
+            person: React.addons.update(this.state.person, {
+                coffees: {
+                    count:      { $set: 0 },
+                    purchased:  { $set: 0 }
+                }
+            })
+        });
+    },
+
+    _updateName(id, name) {
+        this.setState({
+            person: _.assign(this.state.person, { name: name })
+        })
+    },
+
+    _updateOrder(id, type) {
+        this.setState({
+            person: React.addons.update(this.state.person, {
+                order: {
+                    type: { $set: type }
+                }
+            })
+        });
+    },
+
+    _updateSugar(id, sugar) {
+        this.setState({
+            person: React.addons.update(this.state.person, {
+                order: {
+                    sugar: { $set: sugar }
+                }
+            })
+        });
+    },
+
     render() {
-        var groupStyle = {
-            marginRight: '10px'
+        let addRegularProps = {
+            addMode:            true,
+            person:             this.state.person,
+            freeCount:          this.props.freeCount,
+            addCup:             this._addCup,
+            addFreeCup:         this._resetCount,
+            removePerson:       this._close,
+            updateName:         this._updateName,
+            updateSugar:        this._updateSugar,
+            updateOrderType:    this._updateOrder
         };
 
         return (
-            <div>
-                <div className="panel panel-primary">
-                    <div className="panel-heading">
-                        <h3 className="panel-title">
-                            Add a new Regular
-                        </h3>
-                    </div>
-                    <div className="panel-body">
-                        <Formsy.Form
-                            className="form-inline"
-                            onValidSubmit={this.handleSubmit}
-                            onValid={this.enableButton}
-                            onInvalid={this.disableButton}
-                        >
-                            <RegularName name="Name" required groupStyle={groupStyle} focus={true} />
-                            <OrderSelect name="Order" required groupStyle={groupStyle} />
-                            <RegularCount name="Coffees" required groupStyle={groupStyle} value="1" validations="isNumeric" />
-                            <RegularCount name="Sugar" required groupStyle={groupStyle} value="0" validations="isNumeric" />
-                            <button type="submit" className="btn btn-primary" disabled={!this.state.canSubmit}>Add Regular</button>
-                        </Formsy.Form>
-                    </div>
+            <div className="add-regular">
+                <Regular {...addRegularProps} />
+                <div className="add-regular__actions">
+                    <button className="add-regular__save btn btn-primary" onClick={this._addPerson}>
+                        Add Regular
+                    </button>
                 </div>
             </div>
+
         )
     }
 });
