@@ -23,7 +23,10 @@ let Regular = React.createClass({
         // update methods
         updateName:         React.PropTypes.func.isRequired,
         updateOrderType:    React.PropTypes.func.isRequired,
-        updateSugar:        React.PropTypes.func.isRequired
+        updateSugar:        React.PropTypes.func.isRequired,
+
+        // Add Person specific
+        addMode:            React.PropTypes.bool
     },
 
     getInitialState() {
@@ -77,7 +80,7 @@ let Regular = React.createClass({
         return (
             <div className={panelClasses}>
                 <div className="panel-body">
-                    <RegularName name={this.props.person.name} update={this._updateName} />
+                    <RegularName name={this.props.person.name} update={this._updateName} focusOnMount={this.props.addMode} />
                     <RegularOrder order={this.props.person.order.type} update={this._updateOrderType} />
                     <RegularSugar count={this.props.person.order.sugar} update={this._updateSugar} />
                     <RegularCounter {...counterProps} />

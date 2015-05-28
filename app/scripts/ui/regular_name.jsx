@@ -4,8 +4,15 @@ var React = require('react');
 
 var RegularName = React.createClass({
     propTypes: {
-        name:   React.PropTypes.string,
-        update: React.PropTypes.func.isRequired
+        name:           React.PropTypes.string,
+        update:         React.PropTypes.func.isRequired,
+        focusOnMount:   React.PropTypes.bool
+    },
+
+    componentDidMount() {
+        if (this.props.focusOnMount) {
+            React.findDOMNode(this.refs.field).focus();
+        }
     },
 
     _handleKeyDown(e) {
