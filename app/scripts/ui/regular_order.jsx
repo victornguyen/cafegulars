@@ -13,7 +13,7 @@ var RegularOrder = React.createClass({
     },
 
     componentWillMount() {
-        // Coerce types in react-select options structure
+        // Coerce COFFEE_TYPES into react-select options structure
         this.options = COFFEE_TYPES.map(type => {
             return {
                 value: type,
@@ -31,7 +31,7 @@ var RegularOrder = React.createClass({
             <div className="regular-order">
                 <Select
                     className="regular-order__select"
-                    value={this.props.order || null}
+                    value={this.props.order || this.options[0]}
                     clearable={false}
                     options={this.options}
                     onChange={this._handleChange}
