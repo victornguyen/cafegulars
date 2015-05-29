@@ -124,7 +124,6 @@ let AddRegular = React.createClass({
             freeCount:          this.props.freeCount,
             addCup:             this._addCup,
             addFreeCup:         this._resetCount,
-            removePerson:       this._close,
             updateName:         this._updateName,
             updateSugar:        this._updateSugar,
             updateOrderType:    this._updateOrder
@@ -136,6 +135,9 @@ let AddRegular = React.createClass({
                 <div className="add-regular__actions">
                     <button className="add-regular__save btn btn-primary" onClick={this._addPerson}>
                         Add Regular
+                    </button>
+                    <button className="add-regular__cancel btn btn-default" onClick={this._close}>
+                        Cancel
                     </button>
                 </div>
             </div>

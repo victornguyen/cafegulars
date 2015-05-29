@@ -62,6 +62,7 @@ let Regular = React.createClass({
 
         let regularClasses = classNames({
             'regular panel':                true,
+            'regular--add':                 this.props.addMode,
             'regular--free':                this.state.hasFreeCoffee,
             'panel-default':                this.props.newPersonId !== this.props.person.id,
             'regular--new panel-success':   this.props.newPersonId === this.props.person.id
@@ -86,12 +87,15 @@ let Regular = React.createClass({
                     <RegularSugar count={this.props.person.order.sugar} update={this._updateSugar} />
                     <RegularCounter {...counterProps} />
                 </div>
-                <div className="panel-footer">
-                    <button type="button" className="btn btn-primary btn-xs" onClick={ this.props.removePerson.bind(null, this.props.person.id) }>Remove</button>
-                    <span className="small pull-right">
-                         Coffees purchased: {this.props.person.coffees.purchased}
-                    </span>
-                </div>
+                {
+                    !this.props.addMode &&
+                    <div className="panel-footer">
+                        <button type="button" className="btn btn-primary btn-xs" onClick={ this.props.removePerson.bind(null, this.props.person.id) }>Remove</button>
+                        <span className="small pull-right">
+                             Coffees purchased: {this.props.person.coffees.purchased}
+                        </span>
+                    </div>
+                }
             </div>
         )
     }
