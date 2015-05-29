@@ -60,10 +60,11 @@ let Regular = React.createClass({
     render() {
         let remainingCups = this.props.freeCount - this.props.person.coffees.count;
 
-        let panelClasses = classNames({
-            'panel':            true,
-            'panel-default':    this.props.newPersonId !== this.props.person.id,
-            'panel-success':    this.props.newPersonId === this.props.person.id
+        let regularClasses = classNames({
+            'regular panel':                true,
+            'regular--free':                this.state.hasFreeCoffee,
+            'panel-default':                this.props.newPersonId !== this.props.person.id,
+            'regular--new panel-success':   this.props.newPersonId === this.props.person.id
         });
 
         // TODO: hmm, is there a better way of doing this
@@ -78,7 +79,7 @@ let Regular = React.createClass({
         };
 
         return (
-            <div className={panelClasses}>
+            <div className={regularClasses}>
                 <div className="panel-body">
                     <RegularName name={this.props.person.name} update={this._updateName} focusOnMount={this.props.addMode} />
                     <RegularOrder order={this.props.person.order.type} update={this._updateOrderType} />
