@@ -1,6 +1,7 @@
 'use strict';
 
 let React           = require('react'),
+    moment          = require('moment'),
     classNames      = require('classnames'),
     RegularName     = require('./regular_name.jsx'),
     RegularOrder    = require('./regular_order.jsx'),
@@ -92,7 +93,11 @@ let Regular = React.createClass({
                     <div className="panel-footer">
                         <button type="button" className="btn btn-primary btn-xs" onClick={ this.props.removePerson.bind(null, this.props.person.id) }>Remove</button>
                         <span className="small pull-right">
+                             Added { moment(this.props.person.dateAdded).fromNow() }
+                        </span>
+                        <span className="small pull-right">
                              Coffees purchased: {this.props.person.coffees.purchased}
+                             &nbsp;&nbsp;&nbsp;&nbsp;
                         </span>
                     </div>
                 }

@@ -15,7 +15,8 @@
             "strength": "Normal",
             "notes": "With 3/4 water. So medium black?"
         },
-        "lastVisited": null
+        "lastVisited": null,
+        "dateAdded": null
     },
     {
         "id": 2,
@@ -31,6 +32,7 @@
             "strength": "Strong",
             "notes": ""
         },
-        "lastVisited": null
+        "lastVisited": null,
+        "dateAdded": null
     }
 ]

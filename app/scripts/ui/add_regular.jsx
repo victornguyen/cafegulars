@@ -2,6 +2,7 @@
 
 let React           = require('react/addons'),
     _               = require('lodash'),
+    moment          = require('moment'),
     RegularName     = require('./add_regular_name.jsx'),
     RegularCount    = require('./add_regular_count.jsx'),
     OrderSelect     = require('./add_regular_order.jsx'),
@@ -45,14 +46,18 @@ let AddRegular = React.createClass({
                     purchased: 0,
                     free: 0
                 },
-                lastVisited: null
+                lastVisited: null,
+                dateAdded: null
             }
         }
     },
 
     _addPerson() {
         // TODO: ensure name and order type have values
-        this.props.addPerson(this.state.person);
+        var newPerson = React.addons.update(this.state.person, {
+            dateAdded: { $set: new Date().toISOString() }
+        });
+        this.props.addPerson(newPerson);
         this._close();
     },
 
@@ -93,8 +98,10 @@ let AddRegular = React.createClass({
 
     _updateName(id, name) {
         this.setState({
-            person: _.assign(this.state.person, { name: name })
-        })
+            person: React.addons.update(this.state.person, {
+                name: { $set: name }
+            })
+        });
     },
 
     _updateOrder(id, type) {
