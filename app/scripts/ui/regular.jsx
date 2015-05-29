@@ -12,7 +12,7 @@ let Regular = React.createClass({
     propTypes: {
         // person props
         person:             React.PropTypes.object.isRequired,
-        removePerson:       React.PropTypes.func.isRequired,
+        removePerson:       React.PropTypes.func,
         newPersonId:        React.PropTypes.string,
 
         // cup methods
