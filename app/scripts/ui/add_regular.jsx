@@ -3,9 +3,6 @@
 let React           = require('react/addons'),
     _               = require('lodash'),
     moment          = require('moment'),
-    RegularName     = require('./add_regular_name.jsx'),
-    RegularCount    = require('./add_regular_count.jsx'),
-    OrderSelect     = require('./add_regular_order.jsx'),
     Regular         = require('./regular.jsx');
 
 let AddRegular = React.createClass({
@@ -26,7 +23,8 @@ let AddRegular = React.createClass({
         // update methods
         updateName:             React.PropTypes.func.isRequired,
         updateOrderType:        React.PropTypes.func.isRequired,
-        updateSugar:            React.PropTypes.func.isRequired
+        updateSugar:            React.PropTypes.func.isRequired,
+        updateStrength:         React.PropTypes.func.isRequired
     },
 
     getInitialState() {
@@ -120,6 +118,16 @@ let AddRegular = React.createClass({
         });
     },
 
+    _updateStrength(id, strength) {
+        this.setState({
+            person: React.addons.update(this.state.person, {
+                order: {
+                    strength: { $set: strength }
+                }
+            })
+        });
+    },
+
     render() {
         let addRegularProps = {
             addMode:            true,
@@ -129,6 +137,7 @@ let AddRegular = React.createClass({
             addFreeCup:         this._resetCount,
             updateName:         this._updateName,
             updateSugar:        this._updateSugar,
+            updateStrength:     this._updateStrength,
             updateOrderType:    this._updateOrder,
 
             updateSubmitStatus: this._updateSubmitStatus

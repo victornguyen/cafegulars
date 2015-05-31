@@ -101,22 +101,27 @@ let App = React.createClass({
         this.updatePerson(id, person => person.order.sugar = sugar);
     },
 
+    updateStrength(id, strength) {
+        this.updatePerson(id, person => person.order.strength = strength);
+    },
+
     setAddPersonVisibility(value) {
         this.setState({ addPersonIsVisible: value });
     },
 
     render() {
         let listProps = {
-            peeps:           this.state.peeps,
-            freeCount:       this.state.freeCount,
-            addCup:          this.addCup,
-            removeCup:       this.removeCup,
-            addFreeCup:      this.addFreeCup,
-            updateName:      this.updateName,
-            updateOrderType: this.updateOrderType,
-            updateSugar:     this.updateSugar,
-            removePerson:    this.removePerson,
-            newPersonId:     this.state.newPersonId
+            peeps:              this.state.peeps,
+            freeCount:          this.state.freeCount,
+            addCup:             this.addCup,
+            removeCup:          this.removeCup,
+            addFreeCup:         this.addFreeCup,
+            updateName:         this.updateName,
+            updateOrderType:    this.updateOrderType,
+            updateSugar:        this.updateSugar,
+            updateStrength:     this.updateStrength,
+            removePerson:       this.removePerson,
+            newPersonId:        this.state.newPersonId
         };
 
         return (

@@ -1,12 +1,13 @@
 'use strict';
 
-let React           = require('react'),
-    moment          = require('moment'),
-    classNames      = require('classnames'),
-    RegularName     = require('./regular_name.jsx'),
-    RegularOrder    = require('./regular_order.jsx'),
-    RegularSugar    = require('./regular_sugar.jsx'),
-    RegularCounter  = require('./regular_counter.jsx');
+let React               = require('react'),
+    moment              = require('moment'),
+    classNames          = require('classnames'),
+    RegularName         = require('./regular_name.jsx'),
+    RegularOrder        = require('./regular_order.jsx'),
+    RegularSugar        = require('./regular_sugar.jsx'),
+    RegularStrength     = require('./regular_strength.jsx'),
+    RegularCounter      = require('./regular_counter.jsx');
 
 let Regular = React.createClass({
     propTypes: {
@@ -55,6 +56,10 @@ let Regular = React.createClass({
         this.props.updateSugar(this.props.person.id, newCount);
     },
 
+    _updateStrength(strength) {
+        this.props.updateStrength(this.props.person.id, strength);
+    },
+
     _updateOrderType(newOrder) {
         this.props.updateOrderType(this.props.person.id, newOrder);
     },
@@ -87,6 +92,7 @@ let Regular = React.createClass({
                     <RegularName name={this.props.person.name} update={this._updateName} focusOnMount={this.props.addMode} updateSubmitStatus={this.props.updateSubmitStatus} />
                     <RegularOrder order={this.props.person.order.type} update={this._updateOrderType} />
                     <RegularSugar count={this.props.person.order.sugar} update={this._updateSugar} />
+                    <RegularStrength strength={this.props.person.order.strength} updateStrength={this._updateStrength} />
                     <RegularCounter {...counterProps} />
                 </div>
                 {
