@@ -4,9 +4,10 @@ var React = require('react');
 
 var RegularName = React.createClass({
     propTypes: {
-        name:           React.PropTypes.string,
-        update:         React.PropTypes.func.isRequired,
-        focusOnMount:   React.PropTypes.bool
+        name:               React.PropTypes.string,
+        update:             React.PropTypes.func.isRequired,
+        focusOnMount:       React.PropTypes.bool,
+        updateSubmitStatus: React.PropTypes.func
     },
 
     componentDidMount() {
@@ -25,6 +26,11 @@ var RegularName = React.createClass({
             field.value = this.props.name;
             field.blur();
         }
+    },
+
+    _setSubmitStatus(e) {
+        let field = React.findDOMNode(this.refs.field);
+        this.props.updateSubmitStatus( field.value !== '' );
     },
 
     _updateName(e) {
@@ -51,6 +57,7 @@ var RegularName = React.createClass({
                     placeholder="Name"
                     defaultValue={this.props.name}
                     onKeyDown={this._handleKeyDown}
+                    onChange={this._setSubmitStatus}
                     onBlur={this._updateName}
                 />
             </h3>

@@ -31,7 +31,7 @@ let AddRegular = React.createClass({
 
     getInitialState() {
         return {
-            // canSubmit: true,
+            canSubmit: false,
             person: {
                 id: null,
                 name: '',
@@ -65,12 +65,8 @@ let AddRegular = React.createClass({
         this.props.setAddPersonVisibility(false);
     },
 
-    enableButton() {
-        this.setState({ canSubmit: true });
-    },
-
-    disableButton() {
-        this.setState({ canSubmit: false });
+    _updateSubmitStatus(canSubmit) {
+        this.setState({ canSubmit: canSubmit });
     },
 
     _addCup() {
@@ -133,14 +129,16 @@ let AddRegular = React.createClass({
             addFreeCup:         this._resetCount,
             updateName:         this._updateName,
             updateSugar:        this._updateSugar,
-            updateOrderType:    this._updateOrder
+            updateOrderType:    this._updateOrder,
+
+            updateSubmitStatus: this._updateSubmitStatus
         };
 
         return (
             <div className="add-regular">
                 <Regular {...addRegularProps} />
                 <div className="add-regular__actions">
-                    <button className="add-regular__save btn btn-primary" onClick={this._addPerson}>
+                    <button className="add-regular__save btn btn-primary" onClick={this._addPerson} disabled={!this.state.canSubmit}>
                         Add Regular
                     </button>
                     <button className="add-regular__cancel btn btn-default" onClick={this._close}>
