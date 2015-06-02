@@ -2,19 +2,21 @@
 
 var React = require('react');
 
-var RegularName = React.createClass({
-    propTypes: {
-        name:               React.PropTypes.string,
-        update:             React.PropTypes.func.isRequired,
-        focusOnMount:       React.PropTypes.bool,
-        updateSubmitStatus: React.PropTypes.func
-    },
+class RegularName extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this._handleKeyDown     = this._handleKeyDown.bind(this);
+        this._onChange          = this._onChange.bind(this);
+        this._updateName        = this._updateName.bind(this);
+    }
 
     componentDidMount() {
         if (this.props.focusOnMount) {
             React.findDOMNode(this.refs.field).focus();
         }
-    },
+    }
 
     _handleKeyDown(e) {
         let field = React.findDOMNode(this.refs.field);
@@ -26,12 +28,15 @@ var RegularName = React.createClass({
             field.value = this.props.name;
             field.blur();
         }
-    },
+    }
 
-    _setSubmitStatus(e) {
-        let field = React.findDOMNode(this.refs.field);
-        this.props.updateSubmitStatus( field.value !== '' );
-    },
+    _onChange(e) {
+        // TODO: this method only available when in addMode.. make this better
+        if (this.props.updateSubmitStatus) {
+            let field = React.findDOMNode(this.refs.field);
+            this.props.updateSubmitStatus( field.value !== '' );
+        }
+    }
 
     _updateName(e) {
         let newName = e.currentTarget.value;
@@ -45,7 +50,7 @@ var RegularName = React.createClass({
         if (newName !== this.props.name) {
             this.props.update(newName);
         }
-    },
+    }
 
     render() {
         return (
@@ -57,12 +62,19 @@ var RegularName = React.createClass({
                     placeholder="Name"
                     defaultValue={this.props.name}
                     onKeyDown={this._handleKeyDown}
-                    onChange={this._setSubmitStatus}
+                    onChange={this._onChange}
                     onBlur={this._updateName}
                 />
             </h3>
         )
     }
-});
+}
+
+RegularName.propTypes = {
+    name:               React.PropTypes.string,
+    update:             React.PropTypes.func.isRequired,
+    focusOnMount:       React.PropTypes.bool,
+    updateSubmitStatus: React.PropTypes.func
+};
 
 module.exports = RegularName;

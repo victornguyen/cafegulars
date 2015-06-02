@@ -6,11 +6,12 @@ var React = require('react'),
 const COFFEE_TYPES = require('../coffee_types.json');
 
 
-var RegularOrder = React.createClass({
-    propTypes: {
-        order:  React.PropTypes.string,
-        update: React.PropTypes.func.isRequired
-    },
+class RegularOrder extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this._handleChange = this._handleChange.bind(this);
+    }
 
     componentWillMount() {
         // Coerce COFFEE_TYPES into react-select options structure
@@ -20,11 +21,11 @@ var RegularOrder = React.createClass({
                 label: type
             }
         });
-    },
+    }
 
     _handleChange(newOrder) {
         this.props.update(newOrder);
-    },
+    }
 
     render() {
         return (
@@ -40,6 +41,12 @@ var RegularOrder = React.createClass({
             </div>
         )
     }
-});
+
+}
+
+RegularOrder.propTypes = {
+    order:  React.PropTypes.string,
+    update: React.PropTypes.func.isRequired
+};
 
 module.exports = RegularOrder;

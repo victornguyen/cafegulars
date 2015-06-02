@@ -2,22 +2,31 @@
 
 var React = require('react');
 
-var Timer = React.createClass({
-    getInitialState() {
-        return {secondsElapsed: 0};
-    },
+class Timer extends React.Component {
 
-    tick() {
-        this.setState({secondsElapsed: this.state.secondsElapsed + 1});
-    },
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            secondsElapsed: 0
+        };
+
+        this._tick = this._tick.bind(this);
+    }
 
     componentDidMount() {
-        this.interval = setInterval(this.tick, 1000);
-    },
+        this.interval = setInterval(this._tick, 1000);
+    }
 
     componentWillUnmount() {
         clearInterval(this.interval);
-    },
+    }
+
+    _tick() {
+        this.setState({
+            secondsElapsed: this.state.secondsElapsed + 1
+        });
+    }
 
     render() {
         return (
@@ -29,7 +38,6 @@ var Timer = React.createClass({
             </small>
         );
     }
-});
-
+}
 
 module.exports = Timer;

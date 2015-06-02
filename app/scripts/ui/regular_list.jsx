@@ -3,19 +3,11 @@
 let React   = require('react'),
     Regular = require('./regular.jsx');
 
-let RegularList = React.createClass({
-    propTypes: {
-        peeps:              React.PropTypes.array.isRequired,
-        freeCount:          React.PropTypes.number.isRequired,
-        addCup:             React.PropTypes.func.isRequired,
-        removeCup:          React.PropTypes.func.isRequired,
-        addFreeCup:         React.PropTypes.func.isRequired,
-        updateName:         React.PropTypes.func.isRequired,
-        updateSugar:        React.PropTypes.func.isRequired,
-        updateOrderType:    React.PropTypes.func.isRequired,
-        removePerson:       React.PropTypes.func.isRequired,
-        newPersonId:        React.PropTypes.string
-    },
+class RegularList extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     render() {
         return (
@@ -26,7 +18,7 @@ let RegularList = React.createClass({
                 </div>
             </div>
         )
-    },
+    }
 
     renderList() {
         return this.props.peeps.map(person => {
@@ -35,6 +27,19 @@ let RegularList = React.createClass({
             )
         });
     }
-});
+}
+
+RegularList.propTypes = {
+    peeps:              React.PropTypes.array.isRequired,
+    freeCount:          React.PropTypes.number.isRequired,
+    addCup:             React.PropTypes.func.isRequired,
+    removeCup:          React.PropTypes.func.isRequired,
+    addFreeCup:         React.PropTypes.func.isRequired,
+    updateName:         React.PropTypes.func.isRequired,
+    updateSugar:        React.PropTypes.func.isRequired,
+    updateOrderType:    React.PropTypes.func.isRequired,
+    removePerson:       React.PropTypes.func.isRequired,
+    newPersonId:        React.PropTypes.string
+};
 
 module.exports = RegularList;

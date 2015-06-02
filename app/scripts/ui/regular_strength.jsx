@@ -5,17 +5,12 @@ var React   = require('react'),
 
 const STRENGTHS = require('../coffee_strengths');
 
-var RegularStrength = React.createClass({
-    propTypes: {
-        strength:       React.PropTypes.string,
-        updateStrength: React.PropTypes.func.isRequired
-    },
+class RegularStrength extends React.Component {
 
-    getDefaultProps() {
-        return {
-            strength: 'Normal'
-        };
-    },
+    constructor(props) {
+        super(props);
+        this._updateStrength = this._updateStrength.bind(this);
+    }
 
     _updateStrength() {
         var index = _.indexOf(STRENGTHS, this.props.strength) + 1;
@@ -25,7 +20,7 @@ var RegularStrength = React.createClass({
         }
 
         this.props.updateStrength( STRENGTHS[index] );
-    },
+    }
 
     render() {
         return (
@@ -36,6 +31,16 @@ var RegularStrength = React.createClass({
             </button>
         )
     }
-});
+
+}
+
+RegularStrength.propTypes = {
+    strength:       React.PropTypes.string,
+    updateStrength: React.PropTypes.func.isRequired
+};
+
+RegularStrength.defaultProps = {
+    strength:       'Normal'
+};
 
 module.exports = RegularStrength;

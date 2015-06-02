@@ -4,11 +4,11 @@ let React       = require('react'),
     classNames  = require('classnames'),
     Timer       = require('./timer.jsx');
 
-let Header = React.createClass({
-    propTypes: {
-        addPersonIsVisible:     React.PropTypes.bool.isRequired,
-        setAddPersonVisibility: React.PropTypes.func.isRequired
-    },
+class Header extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     render() {
         let settingsClasses = classNames({
@@ -41,6 +41,11 @@ let Header = React.createClass({
             </div>
         )
     }
-});
+}
+
+Header.propTypes = {
+    addPersonIsVisible:     React.PropTypes.bool.isRequired,
+    setAddPersonVisibility: React.PropTypes.func.isRequired
+};
 
 module.exports = Header;

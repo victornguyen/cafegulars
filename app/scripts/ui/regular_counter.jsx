@@ -2,16 +2,11 @@
 
 var React = require('react');
 
-var RegularCounter = React.createClass({
-    propTypes: {
-        id:             React.PropTypes.string,
-        count:          React.PropTypes.number.isRequired,
-        freeCount:      React.PropTypes.number.isRequired,
-        addCup:         React.PropTypes.func.isRequired,
-        removeCup:      React.PropTypes.func,
-        addFreeCup:     React.PropTypes.func.isRequired,
-        hasFreeCoffee:  React.PropTypes.bool.isRequired
-    },
+class RegularCounter extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     render() {
         let remainingCups = this.props.freeCount - this.props.count;
@@ -41,6 +36,16 @@ var RegularCounter = React.createClass({
             </div>
         )
     }
-});
+}
+
+RegularCounter.propTypes = {
+    id:             React.PropTypes.string,
+    count:          React.PropTypes.number.isRequired,
+    freeCount:      React.PropTypes.number.isRequired,
+    addCup:         React.PropTypes.func.isRequired,
+    removeCup:      React.PropTypes.func,
+    addFreeCup:     React.PropTypes.func.isRequired,
+    hasFreeCoffee:  React.PropTypes.bool.isRequired
+};
 
 module.exports = RegularCounter;

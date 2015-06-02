@@ -5,30 +5,12 @@ let React           = require('react/addons'),
     moment          = require('moment'),
     Regular         = require('./regular.jsx');
 
-let AddRegular = React.createClass({
-    propTypes: {
-        // add/new person specific props
-        setAddPersonVisibility: React.PropTypes.func.isRequired,
+class AddRegular extends React.Component {
 
-        // person props
-        addPerson:              React.PropTypes.func.isRequired,
-        removePerson:           React.PropTypes.func.isRequired,
+    constructor(props) {
+        super(props);
 
-        // cup methods
-        freeCount:              React.PropTypes.number.isRequired,
-        addCup:                 React.PropTypes.func.isRequired,
-        removeCup:              React.PropTypes.func,
-        addFreeCup:             React.PropTypes.func.isRequired,
-
-        // update methods
-        updateName:             React.PropTypes.func.isRequired,
-        updateOrderType:        React.PropTypes.func.isRequired,
-        updateSugar:            React.PropTypes.func.isRequired,
-        updateStrength:         React.PropTypes.func.isRequired
-    },
-
-    getInitialState() {
-        return {
+        this.state = {
             canSubmit: false,
             person: {
                 id: null,
@@ -47,8 +29,18 @@ let AddRegular = React.createClass({
                 lastVisited: null,
                 dateAdded: null
             }
-        }
-    },
+        };
+
+        this._addPerson             = this._addPerson.bind(this);
+        this._close                 = this._close.bind(this);
+        this._updateSubmitStatus    = this._updateSubmitStatus.bind(this);
+        this._addCup                = this._addCup.bind(this);
+        this._resetCount            = this._resetCount.bind(this);
+        this._updateName            = this._updateName.bind(this);
+        this._updateOrder           = this._updateOrder.bind(this);
+        this._updateSugar           = this._updateSugar.bind(this);
+        this._updateStrength        = this._updateStrength.bind(this);
+    }
 
     _addPerson() {
         // TODO: ensure name and order type have values
@@ -57,15 +49,15 @@ let AddRegular = React.createClass({
         });
         this.props.addPerson(newPerson);
         this._close();
-    },
+    }
 
     _close() {
         this.props.setAddPersonVisibility(false);
-    },
+    }
 
     _updateSubmitStatus(canSubmit) {
         this.setState({ canSubmit: canSubmit });
-    },
+    }
 
     _addCup() {
         let count = this.state.person.coffees.count + 1;
@@ -77,7 +69,7 @@ let AddRegular = React.createClass({
                 }
             })
         });
-    },
+    }
 
     _resetCount() {
         this.setState({
@@ -88,7 +80,7 @@ let AddRegular = React.createClass({
                 }
             })
         });
-    },
+    }
 
     _updateName(id, name) {
         this.setState({
@@ -96,7 +88,7 @@ let AddRegular = React.createClass({
                 name: { $set: name }
             })
         });
-    },
+    }
 
     _updateOrder(id, type) {
         this.setState({
@@ -106,7 +98,7 @@ let AddRegular = React.createClass({
                 }
             })
         });
-    },
+    }
 
     _updateSugar(id, sugar) {
         this.setState({
@@ -116,7 +108,7 @@ let AddRegular = React.createClass({
                 }
             })
         });
-    },
+    }
 
     _updateStrength(id, strength) {
         this.setState({
@@ -126,7 +118,7 @@ let AddRegular = React.createClass({
                 }
             })
         });
-    },
+    }
 
     render() {
         let addRegularProps = {
@@ -158,6 +150,28 @@ let AddRegular = React.createClass({
 
         )
     }
-});
+
+}
+
+AddRegular.propTypes = {
+    // add/new person specific props
+    setAddPersonVisibility: React.PropTypes.func.isRequired,
+
+    // person props
+    addPerson:              React.PropTypes.func.isRequired,
+    removePerson:           React.PropTypes.func.isRequired,
+
+    // cup methods
+    freeCount:              React.PropTypes.number.isRequired,
+    addCup:                 React.PropTypes.func.isRequired,
+    removeCup:              React.PropTypes.func,
+    addFreeCup:             React.PropTypes.func.isRequired,
+
+    // update methods
+    updateName:             React.PropTypes.func.isRequired,
+    updateOrderType:        React.PropTypes.func.isRequired,
+    updateSugar:            React.PropTypes.func.isRequired,
+    updateStrength:         React.PropTypes.func.isRequired
+};
 
 module.exports = AddRegular;

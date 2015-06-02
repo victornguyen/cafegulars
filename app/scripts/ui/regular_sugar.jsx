@@ -1,17 +1,18 @@
 'use strict';
 
-var React = require('react');
+let React = require('react');
 
-var RegularSugar = React.createClass({
-    propTypes: {
-        count:  React.PropTypes.number.isRequired,
-        update: React.PropTypes.func.isRequired
-    },
+class RegularSugar extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this._updateSugarCount = this._updateSugarCount.bind(this);
+    }
 
     _updateSugarCount() {
         var count = (this.props.count + 1 > 5) ? 0 : this.props.count + 1;
         this.props.update(count);
-    },
+    }
 
     render() {
         let i     = this.props.count,
@@ -39,6 +40,11 @@ var RegularSugar = React.createClass({
             </button>
         )
     }
-});
+}
+
+RegularSugar.propTypes = {
+    count:  React.PropTypes.number.isRequired,
+    update: React.PropTypes.func.isRequired
+};
 
 module.exports = RegularSugar;

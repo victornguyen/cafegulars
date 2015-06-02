@@ -9,60 +9,47 @@ let React               = require('react'),
     RegularStrength     = require('./regular_strength.jsx'),
     RegularCounter      = require('./regular_counter.jsx');
 
-let Regular = React.createClass({
-    propTypes: {
-        // person props
-        person:             React.PropTypes.object.isRequired,
-        removePerson:       React.PropTypes.func,
-        newPersonId:        React.PropTypes.string,
+class Regular extends React.Component {
 
-        // cup methods
-        freeCount:          React.PropTypes.number.isRequired,
-        addCup:             React.PropTypes.func.isRequired,
-        removeCup:          React.PropTypes.func,
-        addFreeCup:         React.PropTypes.func.isRequired,
+    constructor(props) {
+        super(props);
 
-        // update methods
-        updateName:         React.PropTypes.func.isRequired,
-        updateOrderType:    React.PropTypes.func.isRequired,
-        updateSugar:        React.PropTypes.func.isRequired,
-
-        // Add Person specific
-        addMode:            React.PropTypes.bool,
-        updateSubmitStatus: React.PropTypes.func
-    },
-
-    getInitialState() {
-        return {
+        this.state = {
             hasFreeCoffee: this._getsFreeCoffee(this.props.person.coffees.count)
-        }
-    },
+        };
+
+        this._getsFreeCoffee    = this._getsFreeCoffee.bind(this);
+        this._updateName        = this._updateName.bind(this);
+        this._updateSugar       = this._updateSugar.bind(this);
+        this._updateStrength    = this._updateStrength.bind(this);
+        this._updateOrderType   = this._updateOrderType.bind(this);
+    }
 
     componentWillReceiveProps(newProps) {
         this.setState({
             hasFreeCoffee: this._getsFreeCoffee(newProps.person.coffees.count)
         })
-    },
+    }
 
     _getsFreeCoffee(count) {
         return count === this.props.freeCount;
-    },
+    }
 
     _updateName(newName) {
         this.props.updateName(this.props.person.id, newName);
-    },
+    }
 
     _updateSugar(newCount) {
         this.props.updateSugar(this.props.person.id, newCount);
-    },
+    }
 
     _updateStrength(strength) {
         this.props.updateStrength(this.props.person.id, strength);
-    },
+    }
 
     _updateOrderType(newOrder) {
         this.props.updateOrderType(this.props.person.id, newOrder);
-    },
+    }
 
     render() {
         let remainingCups = this.props.freeCount - this.props.person.coffees.count;
@@ -112,6 +99,28 @@ let Regular = React.createClass({
         )
     }
 
-});
+}
+
+Regular.propTypes = {
+    // person props
+    person:             React.PropTypes.object.isRequired,
+    removePerson:       React.PropTypes.func,
+    newPersonId:        React.PropTypes.string,
+
+    // cup methods
+    freeCount:          React.PropTypes.number.isRequired,
+    addCup:             React.PropTypes.func.isRequired,
+    removeCup:          React.PropTypes.func,
+    addFreeCup:         React.PropTypes.func.isRequired,
+
+    // update methods
+    updateName:         React.PropTypes.func.isRequired,
+    updateOrderType:    React.PropTypes.func.isRequired,
+    updateSugar:        React.PropTypes.func.isRequired,
+
+    // Add Person specific
+    addMode:            React.PropTypes.bool,
+    updateSubmitStatus: React.PropTypes.func
+};
 
 module.exports = Regular;
