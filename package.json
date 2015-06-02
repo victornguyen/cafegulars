@@ -32,7 +32,6 @@
     "main-bower-files": "~2.6.2",
     "gulp-filter": "~2.0.2",
     "classnames": "~1.2.1",
-    "formsy-react": "~0.13.1",
     "react-select": "~0.4.9"
   },
   "engines": {
