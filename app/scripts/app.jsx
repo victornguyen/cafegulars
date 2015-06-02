@@ -1,6 +1,6 @@
 'use strict';
 
-var React       = window.React = require('react'),
+let React       = window.React = require('react'),
     Header      = require('./ui/header.jsx'),
     AddRegular  = require('./ui/add_regular.jsx'),
     RegularList = require('./ui/regular_list.jsx');
@@ -8,15 +8,16 @@ var React       = window.React = require('react'),
 const MOCK_DATA = require('./peeps');
 
 
-let App = React.createClass({
-    getInitialState() {
-        let state;
+class App extends React.Component {
+
+    constructor(props) {
+        super(props);
 
         if ( localStorage[this.props.localStorageKey] ) {
-            state = JSON.parse( localStorage[this.props.localStorageKey] );
+            this.state = JSON.parse( localStorage[this.props.localStorageKey] );
         }
         else {
-            state = {
+            this.state = {
                 peeps:              MOCK_DATA,
                 freeCount:          8,
                 addPersonIsVisible: false,
@@ -24,15 +25,25 @@ let App = React.createClass({
             }
         }
 
-        return state;
-    },
+        this._addPerson                  = this._addPerson.bind(this);
+        this._removePerson               = this._removePerson.bind(this);
+        this._updatePerson               = this._updatePerson.bind(this);
+        this._addCup                     = this._addCup.bind(this);
+        this._removeCup                  = this._removeCup.bind(this);
+        this._addFreeCup                 = this._addFreeCup.bind(this);
+        this._updateName                 = this._updateName.bind(this);
+        this._updateOrderType            = this._updateOrderType.bind(this);
+        this._updateSugar                = this._updateSugar.bind(this);
+        this._updateStrength             = this._updateStrength.bind(this);
+        this._setAddPersonVisibility     = this._setAddPersonVisibility.bind(this);
+    }
 
     componentDidUpdate() {
         this.state.newPersonId = null;
         localStorage.cafegulars = JSON.stringify(this.state);
-    },
+    }
 
-    addPerson(person) {
+    _addPerson(person) {
         var _generateId = function () {
             // https://gist.github.com/gordonbrander/2230317
             return '_' + Math.random().toString(36).substr(2, 9);
@@ -47,15 +58,15 @@ let App = React.createClass({
             peeps: newPeeps,
             newPersonId: person.id
         });
-    },
+    }
 
-    removePerson(id) {
+    _removePerson(id) {
         this.setState({
             peeps: this.state.peeps.filter(person => person.id !== id)
         });
-    },
+    }
 
-    updatePerson(id, fn) {
+    _updatePerson(id, fn) {
         let newPeeps = this.state.peeps.map(person => {
             if (person.id === id) {
                 fn.call(null, person);
@@ -64,63 +75,63 @@ let App = React.createClass({
         });
 
         this.setState({ peeps: newPeeps });
-    },
+    }
 
-    addCup(id) {
-        this.updatePerson(id, person => {
+    _addCup(id) {
+        this._updatePerson(id, person => {
             person.coffees.count++;
             person.coffees.purchased++;
         });
-    },
+    }
 
-    removeCup(id) {
-        this.updatePerson(id, person => {
+    _removeCup(id) {
+        this._updatePerson(id, person => {
             if (person.coffees.count > 0) {
                 person.coffees.count--;
                 person.coffees.purchased--;
             }
         })
-    },
+    }
 
-    addFreeCup(id) {
-        this.updatePerson(id, person => {
+    _addFreeCup(id) {
+        this._updatePerson(id, person => {
             person.coffees.count = 0;
             person.coffees.free++;
         })
-    },
+    }
 
-    updateName(id, name) {
-        this.updatePerson(id, person => person.name = name);
-    },
+    _updateName(id, name) {
+        this._updatePerson(id, person => person.name = name);
+    }
 
-    updateOrderType(id, type) {
-        this.updatePerson(id, person => person.order.type = type);
-    },
+    _updateOrderType(id, type) {
+        this._updatePerson(id, person => person.order.type = type);
+    }
 
-    updateSugar(id, sugar) {
-        this.updatePerson(id, person => person.order.sugar = sugar);
-    },
+    _updateSugar(id, sugar) {
+        this._updatePerson(id, person => person.order.sugar = sugar);
+    }
 
-    updateStrength(id, strength) {
-        this.updatePerson(id, person => person.order.strength = strength);
-    },
+    _updateStrength(id, strength) {
+        this._updatePerson(id, person => person.order.strength = strength);
+    }
 
-    setAddPersonVisibility(value) {
+    _setAddPersonVisibility(value) {
         this.setState({ addPersonIsVisible: value });
-    },
+    }
 
     render() {
         let listProps = {
             peeps:              this.state.peeps,
             freeCount:          this.state.freeCount,
-            addCup:             this.addCup,
-            removeCup:          this.removeCup,
-            addFreeCup:         this.addFreeCup,
-            updateName:         this.updateName,
-            updateOrderType:    this.updateOrderType,
-            updateSugar:        this.updateSugar,
-            updateStrength:     this.updateStrength,
-            removePerson:       this.removePerson,
+            addCup:             this._addCup,
+            removeCup:          this._removeCup,
+            addFreeCup:         this._addFreeCup,
+            updateName:         this._updateName,
+            updateOrderType:    this._updateOrderType,
+            updateSugar:        this._updateSugar,
+            updateStrength:     this._updateStrength,
+            removePerson:       this._removePerson,
             newPersonId:        this.state.newPersonId
         };
 
@@ -128,21 +139,21 @@ let App = React.createClass({
             <div className="container">
                 <Header
                     addPersonIsVisible={this.state.addPersonIsVisible}
-                    setAddPersonVisibility={this.setAddPersonVisibility}
+                    setAddPersonVisibility={this._setAddPersonVisibility}
                 />
                 {
                     this.state.addPersonIsVisible &&
                     <AddRegular
                         {...listProps}
-                        addPerson={this.addPerson}
-                        setAddPersonVisibility={this.setAddPersonVisibility}
+                        addPerson={this._addPerson}
+                        setAddPersonVisibility={this._setAddPersonVisibility}
                     />
                 }
                 <RegularList {...listProps} />
             </div>
         );
     }
-});
+}
 
 
 React.render(<App localStorageKey="cafegulars" />, document.getElementById("app"));
