@@ -1,11 +1,10 @@
 'use strict';
 
-let React       = window.React = require('react'),
-    Header      = require('./ui/header.jsx'),
-    AddRegular  = require('./ui/add_regular.jsx'),
-    RegularList = require('./ui/regular_list.jsx');
-
-const MOCK_DATA = require('./peeps');
+let React           = window.React = require('react'),
+    Header          = require('./ui/header.jsx'),
+    AddRegular      = require('./ui/add_regular.jsx'),
+    RegularList     = require('./ui/regular_list.jsx'),
+    RegularStore    = require('./stores/regular_store');
 
 
 class App extends React.Component {
@@ -13,20 +12,19 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        if ( localStorage[this.props.localStorageKey] ) {
-            this.state = JSON.parse( localStorage[this.props.localStorageKey] );
-        }
-        else {
-            this.state = {
-                peeps:              MOCK_DATA,
-                freeCount:          8,
-                addPersonIsVisible: false,
-                newPersonId:        null
-            }
-        }
+        this.state = {
+            peeps:              RegularStore.getPeeps(),
 
+            // TODO: to settings store
+            freeCount:          8,
+
+            // doesn't need to be in a store...
+            addPersonIsVisible: false,
+            newPersonId:        null
+        };
+
+        this._onChange                   = this._onChange.bind(this);
         this._addPerson                  = this._addPerson.bind(this);
-        this._removePerson               = this._removePerson.bind(this);
         this._updatePerson               = this._updatePerson.bind(this);
         this._addCup                     = this._addCup.bind(this);
         this._removeCup                  = this._removeCup.bind(this);
@@ -38,9 +36,23 @@ class App extends React.Component {
         this._setAddPersonVisibility     = this._setAddPersonVisibility.bind(this);
     }
 
+    componentDidMount() {
+        RegularStore.addChangeListener(this._onChange);
+    }
+
     componentDidUpdate() {
         this.state.newPersonId = null;
-        localStorage.cafegulars = JSON.stringify(this.state);
+        // localStorage.cafegulars = JSON.stringify(this.state);
+    }
+
+    componentWillUnmount() {
+        RegularStore.removeChangeListener(this._onChange);
+    }
+
+    _onChange() {
+        this.setState({
+            peeps: RegularStore.getPeeps()
+        });
     }
 
     _addPerson(person) {
@@ -57,12 +69,6 @@ class App extends React.Component {
         this.setState({
             peeps: newPeeps,
             newPersonId: person.id
-        });
-    }
-
-    _removePerson(id) {
-        this.setState({
-            peeps: this.state.peeps.filter(person => person.id !== id)
         });
     }
 
@@ -131,7 +137,6 @@ class App extends React.Component {
             updateOrderType:    this._updateOrderType,
             updateSugar:        this._updateSugar,
             updateStrength:     this._updateStrength,
-            removePerson:       this._removePerson,
             newPersonId:        this.state.newPersonId
         };
 

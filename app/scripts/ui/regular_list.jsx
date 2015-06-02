@@ -38,7 +38,6 @@ RegularList.propTypes = {
     updateName:         React.PropTypes.func.isRequired,
     updateSugar:        React.PropTypes.func.isRequired,
     updateOrderType:    React.PropTypes.func.isRequired,
-    removePerson:       React.PropTypes.func.isRequired,
     newPersonId:        React.PropTypes.string
 };
 

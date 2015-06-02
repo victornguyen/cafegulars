@@ -7,7 +7,8 @@ let React               = require('react'),
     RegularOrder        = require('./regular_order.jsx'),
     RegularSugar        = require('./regular_sugar.jsx'),
     RegularStrength     = require('./regular_strength.jsx'),
-    RegularCounter      = require('./regular_counter.jsx');
+    RegularCounter      = require('./regular_counter.jsx'),
+    RegularActions      = require('../actions/regular_actions');
 
 class Regular extends React.Component {
 
@@ -18,11 +19,12 @@ class Regular extends React.Component {
             hasFreeCoffee: this._getsFreeCoffee(this.props.person.coffees.count)
         };
 
-        this._getsFreeCoffee    = this._getsFreeCoffee.bind(this);
-        this._updateName        = this._updateName.bind(this);
-        this._updateSugar       = this._updateSugar.bind(this);
-        this._updateStrength    = this._updateStrength.bind(this);
-        this._updateOrderType   = this._updateOrderType.bind(this);
+        this._getsFreeCoffee        = this._getsFreeCoffee.bind(this);
+        this._updateName            = this._updateName.bind(this);
+        this._updateSugar           = this._updateSugar.bind(this);
+        this._updateStrength        = this._updateStrength.bind(this);
+        this._updateOrderType       = this._updateOrderType.bind(this);
+        this._handleRemovePerson    = this._handleRemovePerson.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -49,6 +51,10 @@ class Regular extends React.Component {
 
     _updateOrderType(newOrder) {
         this.props.updateOrderType(this.props.person.id, newOrder);
+    }
+
+    _handleRemovePerson() {
+        RegularActions.removePerson(this.props.person.id);
     }
 
     render() {
@@ -85,7 +91,7 @@ class Regular extends React.Component {
                 {
                     !this.props.addMode &&
                     <div className="panel-footer">
-                        <button type="button" className="btn btn-primary btn-xs" onClick={ this.props.removePerson.bind(null, this.props.person.id) }>Remove</button>
+                        <button type="button" className="btn btn-primary btn-xs" onClick={this._handleRemovePerson}>Remove</button>
                         <span className="small pull-right">
                              Added { moment(this.props.person.dateAdded).fromNow() }
                         </span>
@@ -104,7 +110,6 @@ class Regular extends React.Component {
 Regular.propTypes = {
     // person props
     person:             React.PropTypes.object.isRequired,
-    removePerson:       React.PropTypes.func,
     newPersonId:        React.PropTypes.string,
 
     // cup methods

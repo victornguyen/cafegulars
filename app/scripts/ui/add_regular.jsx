@@ -159,7 +159,6 @@ AddRegular.propTypes = {
 
     // person props
     addPerson:              React.PropTypes.func.isRequired,
-    removePerson:           React.PropTypes.func.isRequired,
 
     // cup methods
     freeCount:              React.PropTypes.number.isRequired,

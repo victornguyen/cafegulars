@@ -1,6 +1,6 @@
 [
     {
-        "id": 1,
+        "id": "1",
         "name": "Vic",
         "time": null,
         "lastVisited": null,
@@ -19,7 +19,7 @@
         "dateAdded": null
     },
     {
-        "id": 2,
+        "id": "2",
         "name": "New Customer Lars",
         "coffees": {
             "count": 0,
