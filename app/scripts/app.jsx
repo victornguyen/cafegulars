@@ -17,6 +17,7 @@ class App extends React.Component {
 
             // TODO: to settings store
             freeCount:          8,
+            maxSugar:           5,
 
             // doesn't need to be in a store...
             addPersonIsVisible: false,
@@ -30,7 +31,6 @@ class App extends React.Component {
         this._addFreeCup                 = this._addFreeCup.bind(this);
         this._updateName                 = this._updateName.bind(this);
         this._updateOrderType            = this._updateOrderType.bind(this);
-        this._updateSugar                = this._updateSugar.bind(this);
         this._updateStrength             = this._updateStrength.bind(this);
         this._setAddPersonVisibility     = this._setAddPersonVisibility.bind(this);
     }
@@ -95,10 +95,6 @@ class App extends React.Component {
         this._updatePerson(id, person => person.order.type = type);
     }
 
-    _updateSugar(id, sugar) {
-        this._updatePerson(id, person => person.order.sugar = sugar);
-    }
-
     _updateStrength(id, strength) {
         this._updatePerson(id, person => person.order.strength = strength);
     }
@@ -116,7 +112,6 @@ class App extends React.Component {
             addFreeCup:         this._addFreeCup,
             updateName:         this._updateName,
             updateOrderType:    this._updateOrderType,
-            updateSugar:        this._updateSugar,
             updateStrength:     this._updateStrength,
             newPersonId:        this.state.newPersonId
         };

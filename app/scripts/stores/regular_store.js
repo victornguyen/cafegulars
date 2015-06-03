@@ -28,15 +28,21 @@ var _addPerson = function(person) {
     person.dateAdded    = new Date().toISOString();
     person.id           = _generateId();
     _store.peeps.unshift(person);
-    _saveStoreToLocalStorage();
+    _saveStore();
 };
 
 var _removePerson = function(id) {
     _.remove(_store.peeps, person => person.id === id);
-    _saveStoreToLocalStorage();
+    _saveStore();
 };
 
-var _saveStoreToLocalStorage = function() {
+var _updateSugar = function(data) {
+    var personIndex = _.findIndex(_store.peeps, { id: data.id });
+    _store.peeps[personIndex].order.sugar = data.sugarCount;
+    _saveStore();
+};
+
+var _saveStore = function() {
     localStorage[LOCALSTORAGE_KEY] = JSON.stringify(_store.peeps);
 };
 
@@ -67,6 +73,11 @@ AppDispatcher.register(payload => {
 
         case 'REMOVE_PERSON':
             _removePerson(action.data);
+            RegularStore.emit('change');
+            break;
+
+        case 'UPDATE_SUGAR':
+            _updateSugar(action.data)
             RegularStore.emit('change');
             break;
 

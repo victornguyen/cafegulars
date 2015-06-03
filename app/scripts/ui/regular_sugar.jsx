@@ -1,17 +1,18 @@
 'use strict';
 
-let React = require('react');
+let React           = require('react');
+let RegularActions  = require('../actions/regular_actions');
 
 class RegularSugar extends React.Component {
 
     constructor(props) {
         super(props);
-        this._updateSugarCount = this._updateSugarCount.bind(this);
+        this._handleSugarUpdate = this._handleSugarUpdate.bind(this);
     }
 
-    _updateSugarCount() {
+    _handleSugarUpdate() {
         var count = (this.props.count + 1 > 5) ? 0 : this.props.count + 1;
-        this.props.update(count);
+        this.props.updateSugar(count);
     }
 
     render() {
@@ -30,7 +31,7 @@ class RegularSugar extends React.Component {
         }
 
         return (
-            <button className="regular-sugar pull-left" onClick={this._updateSugarCount}>
+            <button className="regular-sugar pull-left" onClick={this._handleSugarUpdate}>
                 <div className="regular-sugar__count">
                     {this.props.count}
                 </div>
@@ -43,8 +44,8 @@ class RegularSugar extends React.Component {
 }
 
 RegularSugar.propTypes = {
-    count:  React.PropTypes.number.isRequired,
-    update: React.PropTypes.func.isRequired
+    count:          React.PropTypes.number.isRequired,
+    updateSugar:    React.PropTypes.func.isRequired
 };
 
 module.exports = RegularSugar;

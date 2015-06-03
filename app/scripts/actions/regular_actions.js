@@ -14,6 +14,13 @@ var RegularActions = {
             actionType: 'REMOVE_PERSON',
             data: id
         });
+    },
+
+    updateSugar(id, sugarCount) {
+        AppDispatcher.handleAction({
+            actionType: 'UPDATE_SUGAR',
+            data: { id: id, sugarCount: sugarCount }
+        });
     }
 
 }

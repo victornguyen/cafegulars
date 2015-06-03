@@ -42,7 +42,9 @@ class Regular extends React.Component {
     }
 
     _updateSugar(newCount) {
-        this.props.updateSugar(this.props.person.id, newCount);
+        // TOOD: update AddRegular component to define new _updateSugar()
+        // that doesn't hit up the Store, but updates its own internal state
+        RegularActions.updateSugar(this.props.person.id, newCount);
     }
 
     _updateStrength(strength) {
@@ -84,7 +86,7 @@ class Regular extends React.Component {
                 <div className="panel-body">
                     <RegularName name={this.props.person.name} update={this._updateName} focusOnMount={this.props.addMode} updateSubmitStatus={this.props.updateSubmitStatus} />
                     <RegularOrder order={this.props.person.order.type} update={this._updateOrderType} />
-                    <RegularSugar count={this.props.person.order.sugar} update={this._updateSugar} />
+                    <RegularSugar count={this.props.person.order.sugar} updateSugar={this._updateSugar} />
                     <RegularStrength strength={this.props.person.order.strength} updateStrength={this._updateStrength} />
                     <RegularCounter {...counterProps} />
                 </div>
@@ -121,7 +123,6 @@ Regular.propTypes = {
     // update methods
     updateName:         React.PropTypes.func.isRequired,
     updateOrderType:    React.PropTypes.func.isRequired,
-    updateSugar:        React.PropTypes.func.isRequired,
 
     // Add Person specific
     addMode:            React.PropTypes.bool,
