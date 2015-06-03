@@ -24,13 +24,13 @@ class App extends React.Component {
             newPersonId:        null
         };
 
-        this._onChange                   = this._onChange.bind(this);
+        this._onStoreChange                   = this._onStoreChange.bind(this);
         this._updatePerson               = this._updatePerson.bind(this);
         this._setAddPersonVisibility     = this._setAddPersonVisibility.bind(this);
     }
 
     componentWillMount() {
-        RegularStore.addChangeListener(this._onChange);
+        RegularStore.addChangeListener(this._onStoreChange);
     }
 
     componentDidUpdate() {
@@ -38,10 +38,10 @@ class App extends React.Component {
     }
 
     componentWillUnmount() {
-        RegularStore.removeChangeListener(this._onChange);
+        RegularStore.removeChangeListener(this._onStoreChange);
     }
 
-    _onChange() {
+    _onStoreChange() {
         this.setState({
             peeps: RegularStore.getPeeps()
         });
