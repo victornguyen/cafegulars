@@ -118,4 +118,4 @@ class App extends React.Component {
 }
 
 
-React.render(<App localStorageKey="cafegulars" />, document.getElementById("app"));
+React.render(<App />, document.getElementById("app"));
