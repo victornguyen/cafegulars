@@ -16,6 +16,20 @@ var RegularActions = {
         });
     },
 
+    addCup(id) {
+        AppDispatcher.handleAction({
+            actionType: 'ADD_CUP',
+            data: id
+        });
+    },
+
+    addFreeCup(id) {
+        AppDispatcher.handleAction({
+            actionType: 'ADD_FREECUP',
+            data: id
+        });
+    },
+
     updateName(id, name) {
         AppDispatcher.handleAction({
             actionType: 'UPDATE_NAME',

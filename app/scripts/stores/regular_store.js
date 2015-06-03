@@ -36,6 +36,20 @@ var _removePerson = function(id) {
     _saveStore();
 };
 
+var _addCup = function(id) {
+    var personIndex = _.findIndex(_store.peeps, { id: id });
+    _store.peeps[personIndex].coffees.count++;
+    _store.peeps[personIndex].coffees.purchased++;
+    _saveStore();
+};
+
+var _addFreeCup = function(id) {
+    var personIndex = _.findIndex(_store.peeps, { id: id });
+    _store.peeps[personIndex].coffees.count = 0;
+    _store.peeps[personIndex].coffees.free++;
+    _saveStore();
+};
+
 var _updateName = function(data) {
     var personIndex = _.findIndex(_store.peeps, { id: data.id });
     _store.peeps[personIndex].name = data.name;
@@ -91,6 +105,16 @@ AppDispatcher.register(payload => {
 
         case 'REMOVE_PERSON':
             _removePerson(action.data);
+            RegularStore.emit('change');
+            break;
+
+        case 'ADD_CUP':
+            _addCup(action.data)
+            RegularStore.emit('change');
+            break;
+
+        case 'ADD_FREECUP':
+            _addFreeCup(action.data)
             RegularStore.emit('change');
             break;
 

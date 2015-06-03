@@ -46,13 +46,8 @@ class AddRegular extends React.Component {
         this._updateSugar           = this._updateSugar.bind(this);
         this._updateStrength        = this._updateStrength.bind(this);
         this._handleAddPerson       = this._handleAddPerson.bind(this);
+        this._getsFreeCoffee        = this._getsFreeCoffee.bind(this);
     }
-
-    // componentWillUpdate() {
-    //     this.setState({
-    //         hasFreeCoffee: this._getsFreeCoffee(this.state.person.coffees.count)
-    //     })
-    // }
 
     // TODO: this needs to live somewhere where AddRegular and Regular can access, Container component?
     _getsFreeCoffee(count) {
@@ -68,14 +63,15 @@ class AddRegular extends React.Component {
     }
 
     _addCup() {
-        let count = this.state.person.coffees.count + 1;
+        let count       = this.state.person.coffees.count + 1;
         this.setState({
             person: update(this.state.person, {
                 coffees: {
                     count:      { $set: count },
                     purchased:  { $set: count }
                 }
-            })
+            }),
+            hasFreeCoffee: this._getsFreeCoffee(count)
         });
     }
 
@@ -86,7 +82,8 @@ class AddRegular extends React.Component {
                     count:      { $set: 0 },
                     purchased:  { $set: 0 }
                 }
-            })
+            }),
+            hasFreeCoffee: false
         });
     }
 
@@ -134,27 +131,13 @@ class AddRegular extends React.Component {
     }
 
     render() {
-        let addRegularProps = {
-            addMode:            true,
-            person:             this.state.person,
-            freeCount:          this.props.freeCount,
-            addCup:             this._addCup,
-            addFreeCup:         this._resetCount,
-            updateName:         this._updateName,
-            updateSugar:        this._updateSugar,
-            updateStrength:     this._updateStrength,
-            updateOrderType:    this._updateOrder,
-
-            updateSubmitStatus: this._updateSubmitStatus
-        };
-
         let counterProps = {
             id:                 this.state.person.id,
             count:              this.state.person.coffees.count,
             freeCount:          this.props.freeCount,
-            addCup:             this.props.addCup,
+            addCup:             this._addCup,
             removeCup:          this.props.removeCup,
-            addFreeCup:         this.props.addFreeCup,
+            addFreeCup:         this._resetCount,
             hasFreeCoffee:      this.state.hasFreeCoffee
         };
 
@@ -193,9 +176,7 @@ AddRegular.propTypes = {
 
     // cup methods
     freeCount:              React.PropTypes.number.isRequired,
-    addCup:                 React.PropTypes.func.isRequired,
-    removeCup:              React.PropTypes.func,
-    addFreeCup:             React.PropTypes.func.isRequired
+    removeCup:              React.PropTypes.func
 };
 
 module.exports = AddRegular;

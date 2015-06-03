@@ -25,6 +25,8 @@ class Regular extends React.Component {
         this._updateStrength        = this._updateStrength.bind(this);
         this._updateOrderType       = this._updateOrderType.bind(this);
         this._handleRemovePerson    = this._handleRemovePerson.bind(this);
+        this._addCup                = this._addCup.bind(this);
+        this._addFreeCup            = this._addFreeCup.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -36,6 +38,14 @@ class Regular extends React.Component {
     // TODO: this needs to live somewhere where AddRegular and Regular can access, Container component?
     _getsFreeCoffee(count) {
         return count === this.props.freeCount;
+    }
+
+    _addCup() {
+        RegularActions.addCup(this.props.person.id);
+    }
+
+    _addFreeCup() {
+        RegularActions.addFreeCup(this.props.person.id);
     }
 
     _updateName(name) {
@@ -71,11 +81,13 @@ class Regular extends React.Component {
         // TODO: hmm, is there a better way of doing this
         let counterProps = {
             id:                 this.props.person.id,
-            count:              this.props.person.coffees.count,
             freeCount:          this.props.freeCount,
-            addCup:             this.props.addCup,
+
+            count:              this.props.person.coffees.count,
+            addCup:             this._addCup,
             removeCup:          this.props.removeCup,
-            addFreeCup:         this.props.addFreeCup,
+            addFreeCup:         this._addFreeCup,
+
             hasFreeCoffee:      this.state.hasFreeCoffee
         };
 
@@ -114,9 +126,7 @@ Regular.propTypes = {
 
     // cup methods
     freeCount:          React.PropTypes.number.isRequired,
-    addCup:             React.PropTypes.func.isRequired,
-    removeCup:          React.PropTypes.func,
-    addFreeCup:         React.PropTypes.func.isRequired
+    removeCup:          React.PropTypes.func
 };
 
 module.exports = Regular;

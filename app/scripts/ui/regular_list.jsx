@@ -32,9 +32,7 @@ class RegularList extends React.Component {
 RegularList.propTypes = {
     peeps:              React.PropTypes.array.isRequired,
     freeCount:          React.PropTypes.number.isRequired,
-    addCup:             React.PropTypes.func.isRequired,
     removeCup:          React.PropTypes.func.isRequired,
-    addFreeCup:         React.PropTypes.func.isRequired,
     newPersonId:        React.PropTypes.string
 };
 
