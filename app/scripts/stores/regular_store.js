@@ -1,14 +1,13 @@
 'use strict';
 
-var AppDispatcher   = require('../dispatcher/dispatcher');
-var EventEmitter    = require('events');
-var _               = require('lodash');
+let AppDispatcher   = require('../dispatcher/dispatcher');
+let EventEmitter    = require('events');
+let _               = require('lodash');
 
-const MOCK_DATA     = require('../peeps.json');
+const MOCK_DATA         = require('../peeps.json');
+const LOCALSTORAGE_KEY  = 'cafegulars';
 
-const LOCALSTORAGE_KEY = 'cafegulars';
-
-var _store = {
+let _store = {
     peeps: MOCK_DATA
 };
 
@@ -19,66 +18,66 @@ if ( localStorage[LOCALSTORAGE_KEY] ) {
 
 
 // TODO: use module for this?
-var _generateId = function () {
+let _generateId = function () {
     // https://gist.github.com/gordonbrander/2230317
     return '_' + Math.random().toString(36).substr(2, 9);
 };
 
-var _addPerson = function(person) {
+let _addPerson = function(person) {
     person.dateAdded    = new Date().toISOString();
     person.id           = _generateId();
     _store.peeps.unshift(person);
     _saveStore();
 };
 
-var _removePerson = function(id) {
+let _removePerson = function(id) {
     _.remove(_store.peeps, person => person.id === id);
     _saveStore();
 };
 
-var _addCup = function(id) {
-    var personIndex = _.findIndex(_store.peeps, { id: id });
+let _addCup = function(id) {
+    let personIndex = _.findIndex(_store.peeps, { id: id });
     _store.peeps[personIndex].coffees.count++;
     _store.peeps[personIndex].coffees.purchased++;
     _saveStore();
 };
 
-var _addFreeCup = function(id) {
-    var personIndex = _.findIndex(_store.peeps, { id: id });
+let _addFreeCup = function(id) {
+    let personIndex = _.findIndex(_store.peeps, { id: id });
     _store.peeps[personIndex].coffees.count = 0;
     _store.peeps[personIndex].coffees.free++;
     _saveStore();
 };
 
-var _updateName = function(data) {
-    var personIndex = _.findIndex(_store.peeps, { id: data.id });
+let _updateName = function(data) {
+    let personIndex = _.findIndex(_store.peeps, { id: data.id });
     _store.peeps[personIndex].name = data.name;
     _saveStore();
 };
 
-var _updateOrder = function(data) {
-    var personIndex = _.findIndex(_store.peeps, { id: data.id });
+let _updateOrder = function(data) {
+    let personIndex = _.findIndex(_store.peeps, { id: data.id });
     _store.peeps[personIndex].order.type = data.order;
     _saveStore();
 };
 
-var _updateSugar = function(data) {
-    var personIndex = _.findIndex(_store.peeps, { id: data.id });
+let _updateSugar = function(data) {
+    let personIndex = _.findIndex(_store.peeps, { id: data.id });
     _store.peeps[personIndex].order.sugar = data.sugarCount;
     _saveStore();
 };
 
-var _updateStrength = function(data) {
-    var personIndex = _.findIndex(_store.peeps, { id: data.id });
+let _updateStrength = function(data) {
+    let personIndex = _.findIndex(_store.peeps, { id: data.id });
     _store.peeps[personIndex].order.strength = data.strength;
     _saveStore();
 };
 
-var _saveStore = function() {
+let _saveStore = function() {
     localStorage[LOCALSTORAGE_KEY] = JSON.stringify(_store.peeps);
 };
 
-var RegularStore = _.assign({}, EventEmitter.prototype, {
+let RegularStore = _.assign({}, EventEmitter.prototype, {
     addChangeListener(fn) {
         this.on('change', fn);
     },
@@ -94,7 +93,7 @@ var RegularStore = _.assign({}, EventEmitter.prototype, {
 
 
 AppDispatcher.register(payload => {
-    var action = payload.action;
+    let action = payload.action;
 
     switch (action.actionType) {
 
