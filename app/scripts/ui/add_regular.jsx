@@ -136,7 +136,6 @@ class AddRegular extends React.Component {
             count:              this.state.person.coffees.count,
             freeCount:          this.props.freeCount,
             addCup:             this._addCup,
-            removeCup:          this.props.removeCup,
             addFreeCup:         this._resetCount,
             hasFreeCoffee:      this.state.hasFreeCoffee
         };
@@ -175,8 +174,7 @@ AddRegular.propTypes = {
     setAddPersonVisibility: React.PropTypes.func.isRequired,
 
     // cup methods
-    freeCount:              React.PropTypes.number.isRequired,
-    removeCup:              React.PropTypes.func
+    freeCount:              React.PropTypes.number.isRequired
 };
 
 module.exports = AddRegular;

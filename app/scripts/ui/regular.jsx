@@ -85,7 +85,6 @@ class Regular extends React.Component {
 
             count:              this.props.person.coffees.count,
             addCup:             this._addCup,
-            removeCup:          this.props.removeCup,
             addFreeCup:         this._addFreeCup,
 
             hasFreeCoffee:      this.state.hasFreeCoffee
@@ -125,8 +124,7 @@ Regular.propTypes = {
     newPersonId:        React.PropTypes.string,
 
     // cup methods
-    freeCount:          React.PropTypes.number.isRequired,
-    removeCup:          React.PropTypes.func
+    freeCount:          React.PropTypes.number.isRequired
 };
 
 module.exports = Regular;

@@ -26,7 +26,6 @@ class App extends React.Component {
 
         this._onChange                   = this._onChange.bind(this);
         this._updatePerson               = this._updatePerson.bind(this);
-        this._removeCup                  = this._removeCup.bind(this);
         this._setAddPersonVisibility     = this._setAddPersonVisibility.bind(this);
     }
 
@@ -59,15 +58,6 @@ class App extends React.Component {
         this.setState({ peeps: newPeeps });
     }
 
-    _removeCup(id) {
-        this._updatePerson(id, person => {
-            if (person.coffees.count > 0) {
-                person.coffees.count--;
-                person.coffees.purchased--;
-            }
-        })
-    }
-
     _setAddPersonVisibility(value) {
         this.setState({ addPersonIsVisible: value });
     }
@@ -76,7 +66,6 @@ class App extends React.Component {
         let listProps = {
             peeps:              this.state.peeps,
             freeCount:          this.state.freeCount,
-            removeCup:          this._removeCup,
             newPersonId:        this.state.newPersonId
         };
 
