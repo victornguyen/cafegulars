@@ -1,9 +1,14 @@
 'use strict';
 
-let React           = require('react/addons'),
-    _               = require('lodash'),
-    Regular         = require('./regular.jsx'),
-    RegularActions  = require('../actions/regular_actions');
+let React               = require('react/addons'),
+    _                   = require('lodash'),
+    RegularName         = require('./regular_name.jsx'),
+    RegularOrder        = require('./regular_order.jsx'),
+    RegularSugar        = require('./regular_sugar.jsx'),
+    RegularStrength     = require('./regular_strength.jsx'),
+    RegularCounter      = require('./regular_counter.jsx'),
+    RegularActions      = require('../actions/regular_actions'),
+    update              = React.addons.update;
 
 class AddRegular extends React.Component {
 
@@ -12,6 +17,7 @@ class AddRegular extends React.Component {
 
         this.state = {
             canSubmit: false,
+            hasFreeCoffee: false,
             person: {
                 id: null,
                 name: '',
@@ -40,6 +46,17 @@ class AddRegular extends React.Component {
         this._updateSugar           = this._updateSugar.bind(this);
         this._updateStrength        = this._updateStrength.bind(this);
         this._handleAddPerson       = this._handleAddPerson.bind(this);
+    }
+
+    // componentWillUpdate() {
+    //     this.setState({
+    //         hasFreeCoffee: this._getsFreeCoffee(this.state.person.coffees.count)
+    //     })
+    // }
+
+    // TODO: this needs to live somewhere where AddRegular and Regular can access, Container component?
+    _getsFreeCoffee(count) {
+        return count === this.props.freeCount;
     }
 
     _close() {
@@ -73,9 +90,9 @@ class AddRegular extends React.Component {
         });
     }
 
-    _updateName(id, name) {
+    _updateName(name) {
         this.setState({
-            person: React.addons.update(this.state.person, {
+            person: update(this.state.person, {
                 name: { $set: name }
             })
         });
@@ -91,11 +108,11 @@ class AddRegular extends React.Component {
         });
     }
 
-    _updateSugar(id, sugar) {
+    _updateSugar(count) {
         this.setState({
-            person: React.addons.update(this.state.person, {
+            person: update(this.state.person, {
                 order: {
-                    sugar: { $set: sugar }
+                    sugar: { $set: count }
                 }
             })
         });
@@ -131,9 +148,29 @@ class AddRegular extends React.Component {
             updateSubmitStatus: this._updateSubmitStatus
         };
 
+        let counterProps = {
+            id:                 this.state.person.id,
+            count:              this.state.person.coffees.count,
+            freeCount:          this.props.freeCount,
+            addCup:             this.props.addCup,
+            removeCup:          this.props.removeCup,
+            addFreeCup:         this.props.addFreeCup,
+            hasFreeCoffee:      this.state.hasFreeCoffee
+        };
+
         return (
             <div className="add-regular">
-                <Regular {...addRegularProps} />
+
+                <div className="regular regular--add panel panel-default">
+                    <div className="panel-body">
+                        <RegularName name={this.state.person.name} updateName={this._updateName} focusOnMount={true} updateSubmitStatus={this._updateSubmitStatus} />
+                        <RegularOrder order={this.state.person.order.type} update={this._updateOrder} />
+                        <RegularSugar count={this.state.person.order.sugar} updateSugar={this._updateSugar} />
+                        <RegularStrength strength={this.state.person.order.strength} updateStrength={this._updateStrength} />
+                        <RegularCounter {...counterProps} />
+                    </div>
+                </div>
+
                 <div className="add-regular__actions">
                     <button className="add-regular__save btn btn-primary" onClick={this._handleAddPerson} disabled={!this.state.canSubmit}>
                         Add Regular
@@ -142,6 +179,7 @@ class AddRegular extends React.Component {
                         Cancel
                     </button>
                 </div>
+
             </div>
 
         )
@@ -160,9 +198,7 @@ AddRegular.propTypes = {
     addFreeCup:             React.PropTypes.func.isRequired,
 
     // update methods
-    updateName:             React.PropTypes.func.isRequired,
     updateOrderType:        React.PropTypes.func.isRequired,
-    updateSugar:            React.PropTypes.func.isRequired,
     updateStrength:         React.PropTypes.func.isRequired
 };
 

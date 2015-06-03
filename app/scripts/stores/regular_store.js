@@ -36,6 +36,12 @@ var _removePerson = function(id) {
     _saveStore();
 };
 
+var _updateName = function(data) {
+    var personIndex = _.findIndex(_store.peeps, { id: data.id });
+    _store.peeps[personIndex].name = data.name;
+    _saveStore();
+};
+
 var _updateSugar = function(data) {
     var personIndex = _.findIndex(_store.peeps, { id: data.id });
     _store.peeps[personIndex].order.sugar = data.sugarCount;
@@ -73,6 +79,11 @@ AppDispatcher.register(payload => {
 
         case 'REMOVE_PERSON':
             _removePerson(action.data);
+            RegularStore.emit('change');
+            break;
+
+        case 'UPDATE_NAME':
+            _updateName(action.data)
             RegularStore.emit('change');
             break;
 

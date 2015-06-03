@@ -16,6 +16,13 @@ var RegularActions = {
         });
     },
 
+    updateName(id, name) {
+        AppDispatcher.handleAction({
+            actionType: 'UPDATE_NAME',
+            data: { id: id, name: name }
+        });
+    },
+
     updateSugar(id, sugarCount) {
         AppDispatcher.handleAction({
             actionType: 'UPDATE_SUGAR',

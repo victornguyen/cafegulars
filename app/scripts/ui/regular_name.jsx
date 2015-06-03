@@ -8,8 +8,8 @@ class RegularName extends React.Component {
         super(props);
 
         this._handleKeyDown     = this._handleKeyDown.bind(this);
-        this._onChange          = this._onChange.bind(this);
-        this._updateName        = this._updateName.bind(this);
+        this._handleChange      = this._handleChange.bind(this);
+        this._handleBlur        = this._handleBlur.bind(this);
     }
 
     componentDidMount() {
@@ -30,7 +30,7 @@ class RegularName extends React.Component {
         }
     }
 
-    _onChange(e) {
+    _handleChange(e) {
         // TODO: this method only available when in addMode.. make this better
         if (this.props.updateSubmitStatus) {
             let field = React.findDOMNode(this.refs.field);
@@ -38,7 +38,7 @@ class RegularName extends React.Component {
         }
     }
 
-    _updateName(e) {
+    _handleBlur(e) {
         let newName = e.currentTarget.value;
 
         // restore previous name if new name is empty
@@ -48,7 +48,7 @@ class RegularName extends React.Component {
         }
 
         if (newName !== this.props.name) {
-            this.props.update(newName);
+            this.props.updateName(newName);
         }
     }
 
@@ -62,8 +62,8 @@ class RegularName extends React.Component {
                     placeholder="Name"
                     defaultValue={this.props.name}
                     onKeyDown={this._handleKeyDown}
-                    onChange={this._onChange}
-                    onBlur={this._updateName}
+                    onChange={this._handleChange}
+                    onBlur={this._handleBlur}
                 />
             </h3>
         )
@@ -71,8 +71,10 @@ class RegularName extends React.Component {
 }
 
 RegularName.propTypes = {
-    name:               React.PropTypes.string,
-    update:             React.PropTypes.func.isRequired,
+    name:               React.PropTypes.string.isRequired,
+    updateName:         React.PropTypes.func.isRequired,
+
+    // AddRegular methods
     focusOnMount:       React.PropTypes.bool,
     updateSubmitStatus: React.PropTypes.func
 };

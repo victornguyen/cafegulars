@@ -33,17 +33,16 @@ class Regular extends React.Component {
         })
     }
 
+    // TODO: this needs to live somewhere where AddRegular and Regular can access, Container component?
     _getsFreeCoffee(count) {
         return count === this.props.freeCount;
     }
 
-    _updateName(newName) {
-        this.props.updateName(this.props.person.id, newName);
+    _updateName(name) {
+        RegularActions.updateName(this.props.person.id, name);
     }
 
     _updateSugar(newCount) {
-        // TOOD: update AddRegular component to define new _updateSugar()
-        // that doesn't hit up the Store, but updates its own internal state
         RegularActions.updateSugar(this.props.person.id, newCount);
     }
 
@@ -64,7 +63,6 @@ class Regular extends React.Component {
 
         let regularClasses = classNames({
             'regular panel':                true,
-            'regular--add':                 this.props.addMode,
             'regular--free':                this.state.hasFreeCoffee,
             'panel-default':                this.props.newPersonId !== this.props.person.id,
             'regular--new panel-success':   this.props.newPersonId === this.props.person.id
@@ -83,26 +81,26 @@ class Regular extends React.Component {
 
         return (
             <div className={regularClasses}>
+
                 <div className="panel-body">
-                    <RegularName name={this.props.person.name} update={this._updateName} focusOnMount={this.props.addMode} updateSubmitStatus={this.props.updateSubmitStatus} />
+                    <RegularName name={this.props.person.name} updateName={this._updateName} />
                     <RegularOrder order={this.props.person.order.type} update={this._updateOrderType} />
                     <RegularSugar count={this.props.person.order.sugar} updateSugar={this._updateSugar} />
                     <RegularStrength strength={this.props.person.order.strength} updateStrength={this._updateStrength} />
                     <RegularCounter {...counterProps} />
                 </div>
-                {
-                    !this.props.addMode &&
-                    <div className="panel-footer">
-                        <button type="button" className="btn btn-primary btn-xs" onClick={this._handleRemovePerson}>Remove</button>
-                        <span className="small pull-right">
-                             Added { moment(this.props.person.dateAdded).fromNow() }
-                        </span>
-                        <span className="small pull-right">
-                             Coffees purchased: {this.props.person.coffees.purchased}
-                             &nbsp;&nbsp;&nbsp;&nbsp;
-                        </span>
-                    </div>
-                }
+
+                <div className="panel-footer">
+                    <button type="button" className="btn btn-primary btn-xs" onClick={this._handleRemovePerson}>Remove</button>
+                    <span className="small pull-right">
+                         Added { moment(this.props.person.dateAdded).fromNow() }
+                    </span>
+                    <span className="small pull-right">
+                         Coffees purchased: {this.props.person.coffees.purchased}
+                         &nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                </div>
+
             </div>
         )
     }
@@ -121,12 +119,7 @@ Regular.propTypes = {
     addFreeCup:         React.PropTypes.func.isRequired,
 
     // update methods
-    updateName:         React.PropTypes.func.isRequired,
-    updateOrderType:    React.PropTypes.func.isRequired,
-
-    // Add Person specific
-    addMode:            React.PropTypes.bool,
-    updateSubmitStatus: React.PropTypes.func
+    updateOrderType:    React.PropTypes.func.isRequired
 };
 
 module.exports = Regular;
