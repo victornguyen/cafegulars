@@ -24,7 +24,6 @@ class App extends React.Component {
         };
 
         this._onChange                   = this._onChange.bind(this);
-        this._addPerson                  = this._addPerson.bind(this);
         this._updatePerson               = this._updatePerson.bind(this);
         this._addCup                     = this._addCup.bind(this);
         this._removeCup                  = this._removeCup.bind(this);
@@ -52,23 +51,6 @@ class App extends React.Component {
     _onChange() {
         this.setState({
             peeps: RegularStore.getPeeps()
-        });
-    }
-
-    _addPerson(person) {
-        var _generateId = function () {
-            // https://gist.github.com/gordonbrander/2230317
-            return '_' + Math.random().toString(36).substr(2, 9);
-        };
-
-        person.id = _generateId();
-
-        let newPeeps = this.state.peeps.slice();
-        newPeeps.unshift(person);
-
-        this.setState({
-            peeps: newPeeps,
-            newPersonId: person.id
         });
     }
 
@@ -150,7 +132,6 @@ class App extends React.Component {
                     this.state.addPersonIsVisible &&
                     <AddRegular
                         {...listProps}
-                        addPerson={this._addPerson}
                         setAddPersonVisibility={this._setAddPersonVisibility}
                     />
                 }

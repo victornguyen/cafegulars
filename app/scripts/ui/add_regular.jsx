@@ -2,8 +2,8 @@
 
 let React           = require('react/addons'),
     _               = require('lodash'),
-    moment          = require('moment'),
-    Regular         = require('./regular.jsx');
+    Regular         = require('./regular.jsx'),
+    RegularActions  = require('../actions/regular_actions');
 
 class AddRegular extends React.Component {
 
@@ -31,7 +31,6 @@ class AddRegular extends React.Component {
             }
         };
 
-        this._addPerson             = this._addPerson.bind(this);
         this._close                 = this._close.bind(this);
         this._updateSubmitStatus    = this._updateSubmitStatus.bind(this);
         this._addCup                = this._addCup.bind(this);
@@ -40,15 +39,7 @@ class AddRegular extends React.Component {
         this._updateOrder           = this._updateOrder.bind(this);
         this._updateSugar           = this._updateSugar.bind(this);
         this._updateStrength        = this._updateStrength.bind(this);
-    }
-
-    _addPerson() {
-        // TODO: ensure name and order type have values
-        var newPerson = React.addons.update(this.state.person, {
-            dateAdded: { $set: new Date().toISOString() }
-        });
-        this.props.addPerson(newPerson);
-        this._close();
+        this._handleAddPerson       = this._handleAddPerson.bind(this);
     }
 
     _close() {
@@ -120,6 +111,11 @@ class AddRegular extends React.Component {
         });
     }
 
+    _handleAddPerson() {
+        RegularActions.addPerson(this.state.person);
+        this._close();
+    }
+
     render() {
         let addRegularProps = {
             addMode:            true,
@@ -139,7 +135,7 @@ class AddRegular extends React.Component {
             <div className="add-regular">
                 <Regular {...addRegularProps} />
                 <div className="add-regular__actions">
-                    <button className="add-regular__save btn btn-primary" onClick={this._addPerson} disabled={!this.state.canSubmit}>
+                    <button className="add-regular__save btn btn-primary" onClick={this._handleAddPerson} disabled={!this.state.canSubmit}>
                         Add Regular
                     </button>
                     <button className="add-regular__cancel btn btn-default" onClick={this._close}>
@@ -156,9 +152,6 @@ class AddRegular extends React.Component {
 AddRegular.propTypes = {
     // add/new person specific props
     setAddPersonVisibility: React.PropTypes.func.isRequired,
-
-    // person props
-    addPerson:              React.PropTypes.func.isRequired,
 
     // cup methods
     freeCount:              React.PropTypes.number.isRequired,

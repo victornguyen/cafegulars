@@ -3,6 +3,7 @@
 var AppDispatcher   = require('../dispatcher/dispatcher');
 var EventEmitter    = require('events');
 var _               = require('lodash');
+
 const MOCK_DATA     = require('../peeps.json');
 
 var _store = {
@@ -22,8 +23,9 @@ var _generateId = function () {
 };
 
 var _addPerson = function(person) {
-    person.id = _generateId();
-    _store.push(person);
+    person.dateAdded    = new Date().toISOString();
+    person.id           = _generateId();
+    _store.peeps.unshift(person);
 };
 
 var _removePerson = function(id) {
@@ -31,15 +33,15 @@ var _removePerson = function(id) {
 };
 
 var RegularStore = _.assign({}, EventEmitter.prototype, {
-    addChangeListener: function(fn) {
+    addChangeListener(fn) {
         this.on('change', fn);
     },
 
-    removeChangeListener: function(fn) {
+    removeChangeListener(fn) {
         this.removeListener('change', fn);
     },
 
-    getPeeps: function() {
+    getPeeps() {
         return _store.peeps;
     }
 });
@@ -47,13 +49,22 @@ var RegularStore = _.assign({}, EventEmitter.prototype, {
 
 AppDispatcher.register(payload => {
     var action = payload.action;
+
     switch (action.actionType) {
+
+        case 'ADD_PERSON':
+            _addPerson(action.data);
+            RegularStore.emit('change');
+            break;
+
         case 'REMOVE_PERSON':
             _removePerson(action.data);
             RegularStore.emit('change');
             break;
+
         default:
             return true;
+
     }
 });
 
