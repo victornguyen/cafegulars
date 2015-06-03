@@ -50,8 +50,8 @@ class Regular extends React.Component {
         RegularActions.updateStrength(this.props.person.id, strength);
     }
 
-    _updateOrderType(newOrder) {
-        this.props.updateOrderType(this.props.person.id, newOrder);
+    _updateOrderType(order) {
+        RegularActions.updateOrder(this.props.person.id, order);
     }
 
     _handleRemovePerson() {
@@ -84,7 +84,7 @@ class Regular extends React.Component {
 
                 <div className="panel-body">
                     <RegularName name={this.props.person.name} updateName={this._updateName} />
-                    <RegularOrder order={this.props.person.order.type} update={this._updateOrderType} />
+                    <RegularOrder order={this.props.person.order.type} updateOrder={this._updateOrderType} />
                     <RegularSugar count={this.props.person.order.sugar} updateSugar={this._updateSugar} />
                     <RegularStrength strength={this.props.person.order.strength} updateStrength={this._updateStrength} />
                     <RegularCounter {...counterProps} />
@@ -116,10 +116,7 @@ Regular.propTypes = {
     freeCount:          React.PropTypes.number.isRequired,
     addCup:             React.PropTypes.func.isRequired,
     removeCup:          React.PropTypes.func,
-    addFreeCup:         React.PropTypes.func.isRequired,
-
-    // update methods
-    updateOrderType:    React.PropTypes.func.isRequired
+    addFreeCup:         React.PropTypes.func.isRequired
 };
 
 module.exports = Regular;

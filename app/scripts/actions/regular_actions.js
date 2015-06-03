@@ -23,6 +23,13 @@ var RegularActions = {
         });
     },
 
+    updateOrder(id, order) {
+        AppDispatcher.handleAction({
+            actionType: 'UPDATE_ORDER',
+            data: { id: id, order: order }
+        });
+    },
+
     updateSugar(id, sugarCount) {
         AppDispatcher.handleAction({
             actionType: 'UPDATE_SUGAR',

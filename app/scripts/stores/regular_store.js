@@ -42,6 +42,12 @@ var _updateName = function(data) {
     _saveStore();
 };
 
+var _updateOrder = function(data) {
+    var personIndex = _.findIndex(_store.peeps, { id: data.id });
+    _store.peeps[personIndex].order.type = data.order;
+    _saveStore();
+};
+
 var _updateSugar = function(data) {
     var personIndex = _.findIndex(_store.peeps, { id: data.id });
     _store.peeps[personIndex].order.sugar = data.sugarCount;
@@ -90,6 +96,11 @@ AppDispatcher.register(payload => {
 
         case 'UPDATE_NAME':
             _updateName(action.data)
+            RegularStore.emit('change');
+            break;
+
+        case 'UPDATE_ORDER':
+            _updateOrder(action.data)
             RegularStore.emit('change');
             break;
 

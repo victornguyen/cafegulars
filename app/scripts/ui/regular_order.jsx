@@ -10,7 +10,7 @@ class RegularOrder extends React.Component {
 
     constructor(props) {
         super(props);
-        this._handleChange = this._handleChange.bind(this);
+        this._handleOrderUpdate = this._handleOrderUpdate.bind(this);
     }
 
     componentWillMount() {
@@ -23,8 +23,8 @@ class RegularOrder extends React.Component {
         });
     }
 
-    _handleChange(newOrder) {
-        this.props.update(newOrder);
+    _handleOrderUpdate(newOrder) {
+        this.props.updateOrder(newOrder);
     }
 
     render() {
@@ -35,7 +35,7 @@ class RegularOrder extends React.Component {
                     value={this.props.order || this.options[0]}
                     clearable={false}
                     options={this.options}
-                    onChange={this._handleChange}
+                    onChange={this._handleOrderUpdate}
                     placeholder="Select a coffee type..."
                 />
             </div>
@@ -45,8 +45,8 @@ class RegularOrder extends React.Component {
 }
 
 RegularOrder.propTypes = {
-    order:  React.PropTypes.string,
-    update: React.PropTypes.func.isRequired
+    order:          React.PropTypes.string,
+    updateOrder:    React.PropTypes.func.isRequired
 };
 
 module.exports = RegularOrder;

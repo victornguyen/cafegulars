@@ -98,11 +98,11 @@ class AddRegular extends React.Component {
         });
     }
 
-    _updateOrder(id, type) {
+    _updateOrder(order) {
         this.setState({
             person: React.addons.update(this.state.person, {
                 order: {
-                    type: { $set: type }
+                    type: { $set: order }
                 }
             })
         });
@@ -164,7 +164,7 @@ class AddRegular extends React.Component {
                 <div className="regular regular--add panel panel-default">
                     <div className="panel-body">
                         <RegularName name={this.state.person.name} updateName={this._updateName} focusOnMount={true} updateSubmitStatus={this._updateSubmitStatus} />
-                        <RegularOrder order={this.state.person.order.type} update={this._updateOrder} />
+                        <RegularOrder order={this.state.person.order.type} updateOrder={this._updateOrder} />
                         <RegularSugar count={this.state.person.order.sugar} updateSugar={this._updateSugar} />
                         <RegularStrength strength={this.state.person.order.strength} updateStrength={this._updateStrength} />
                         <RegularCounter {...counterProps} />
@@ -195,10 +195,7 @@ AddRegular.propTypes = {
     freeCount:              React.PropTypes.number.isRequired,
     addCup:                 React.PropTypes.func.isRequired,
     removeCup:              React.PropTypes.func,
-    addFreeCup:             React.PropTypes.func.isRequired,
-
-    // update methods
-    updateOrderType:        React.PropTypes.func.isRequired
+    addFreeCup:             React.PropTypes.func.isRequired
 };
 
 module.exports = AddRegular;

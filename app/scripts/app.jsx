@@ -29,7 +29,6 @@ class App extends React.Component {
         this._addCup                     = this._addCup.bind(this);
         this._removeCup                  = this._removeCup.bind(this);
         this._addFreeCup                 = this._addFreeCup.bind(this);
-        this._updateOrderType            = this._updateOrderType.bind(this);
         this._setAddPersonVisibility     = this._setAddPersonVisibility.bind(this);
     }
 
@@ -85,10 +84,6 @@ class App extends React.Component {
         })
     }
 
-    _updateOrderType(id, type) {
-        this._updatePerson(id, person => person.order.type = type);
-    }
-
     _setAddPersonVisibility(value) {
         this.setState({ addPersonIsVisible: value });
     }
@@ -100,7 +95,6 @@ class App extends React.Component {
             addCup:             this._addCup,
             removeCup:          this._removeCup,
             addFreeCup:         this._addFreeCup,
-            updateOrderType:    this._updateOrderType,
             newPersonId:        this.state.newPersonId
         };
 
