@@ -5,28 +5,28 @@ var RegularActions = {
     addPerson(person) {
         AppDispatcher.handleAction({
             actionType: 'ADD_PERSON',
-            data: person
+            data: { person: person }
         });
     },
 
     removePerson(id) {
         AppDispatcher.handleAction({
             actionType: 'REMOVE_PERSON',
-            data: id
+            data: { id: id }
         });
     },
 
     addCup(id) {
         AppDispatcher.handleAction({
             actionType: 'ADD_CUP',
-            data: id
+            data: { id: id }
         });
     },
 
     addFreeCup(id) {
         AppDispatcher.handleAction({
             actionType: 'ADD_FREECUP',
-            data: id
+            data: { id: id }
         });
     },
 
@@ -44,10 +44,10 @@ var RegularActions = {
         });
     },
 
-    updateSugar(id, sugarCount) {
+    updateSugar(id, sugar) {
         AppDispatcher.handleAction({
             actionType: 'UPDATE_SUGAR',
-            data: { id: id, sugarCount: sugarCount }
+            data: { id: id, sugar: sugar }
         });
     },
 

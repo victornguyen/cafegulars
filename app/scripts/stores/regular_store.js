@@ -18,79 +18,119 @@ if ( localStorage[LOCALSTORAGE_KEY] ) {
 }
 
 
-// TODO: use module for this?
-let _generateId = function () {
-    // https://gist.github.com/gordonbrander/2230317
+/**
+ * Generate a "unique" id for a person
+ * https://gist.github.com/gordonbrander/2230317
+ * @return {String}
+ */
+function generateId() {
     return '_' + Math.random().toString(36).substr(2, 9);
-};
+}
 
-let _addPerson = function(person) {
+
+/**
+ * Get a person by id
+ * @param  {String} id
+ * @return {Object}
+ */
+function getPerson(id) {
+    let index = _.findIndex(_store.peeps, { id: id });
+    return _store.peeps[index];
+}
+
+
+/**
+ * Create a person
+ * @param  {Object} person An object containing person data from AddRegular
+ */
+function create(person) {
+    person.id           = generateId();
     person.dateAdded    = new Date().toISOString();
-    person.id           = _generateId();
     _store.peeps.unshift(person);
-    _saveStore();
-};
+}
 
-let _removePerson = function(id) {
+
+/**
+ * Update a person
+ * @param  {String} id
+ * @param  {Object} updates An object literal with new data to merge in
+ */
+function update(id, updates) {
+    console.log('update!!', id, updates);
+    _.merge(getPerson(id), updates);
+}
+
+/**
+ * Delete a person
+ * @param  {String} id
+ */
+function remove(id) {
     _.remove(_store.peeps, person => person.id === id);
-    _saveStore();
+}
+
+
+/**
+ * Increment counter and purchased coffee count for a person
+ * @param {String} id
+ */
+function addCup(id) {
+    let person = getPerson(id);
+    update(id, {
+        coffees: {
+            count: person.coffees.count + 1,
+            purchased: person.coffees.purchased + 1
+        }
+    });
 };
 
-let _addCup = function(id) {
-    let personIndex = _.findIndex(_store.peeps, { id: id });
-    _store.peeps[personIndex].coffees.count++;
-    _store.peeps[personIndex].coffees.purchased++;
-    _saveStore();
+
+/**
+ * Increment free coffee count and reset counter for a person
+ * @param {String} id
+ */
+function addFreeCup(id) {
+    let person = getPerson(id);
+    update(id, {
+        coffees: {
+            count: 0,
+            free: person.coffees.free + 1
+        }
+    });
 };
 
-let _addFreeCup = function(id) {
-    let personIndex = _.findIndex(_store.peeps, { id: id });
-    _store.peeps[personIndex].coffees.count = 0;
-    _store.peeps[personIndex].coffees.free++;
-    _saveStore();
-};
 
-let _updateName = function(data) {
-    let personIndex = _.findIndex(_store.peeps, { id: data.id });
-    _store.peeps[personIndex].name = data.name;
-    _saveStore();
-};
-
-let _updateOrder = function(data) {
-    let personIndex = _.findIndex(_store.peeps, { id: data.id });
-    _store.peeps[personIndex].order.type = data.order;
-    _saveStore();
-};
-
-let _updateSugar = function(data) {
-    let personIndex = _.findIndex(_store.peeps, { id: data.id });
-    _store.peeps[personIndex].order.sugar = data.sugarCount;
-    _saveStore();
-};
-
-let _updateStrength = function(data) {
-    let personIndex = _.findIndex(_store.peeps, { id: data.id });
-    _store.peeps[personIndex].order.strength = data.strength;
-    _saveStore();
-};
-
-let _saveStore = function() {
+/**
+ * Save peeps to localStorage
+ */
+function saveStore() {
     localStorage[LOCALSTORAGE_KEY] = JSON.stringify(_store.peeps);
 };
 
+
 let RegularStore = _.assign({}, EventEmitter.prototype, {
+    /**
+     * @param {Function} callback
+     */
     addChangeListener(callback) {
         this.on(CHANGE_EVENT, callback);
     },
 
+    /**
+     * @param  {Function} callback
+     */
     removeChangeListener(callback) {
         this.removeListener(CHANGE_EVENT, callback);
     },
 
     emitChange() {
+        saveStore();
         this.emit(CHANGE_EVENT);
     },
 
+    /**
+     * Return all Regulars
+     * @return {Array}
+     */
     getPeeps() {
         return _store.peeps;
     }
@@ -98,47 +138,62 @@ let RegularStore = _.assign({}, EventEmitter.prototype, {
 
 
 AppDispatcher.register(payload => {
-    let action = payload.action;
+    let actionType  = payload.action.actionType;
+    let data        = payload.action.data;
 
-    switch (action.actionType) {
+    switch (actionType) {
 
         case 'ADD_PERSON':
-            _addPerson(action.data);
+            create(data.person);
             RegularStore.emitChange();
             break;
 
         case 'REMOVE_PERSON':
-            _removePerson(action.data);
+            remove(data.id);
             RegularStore.emitChange();
             break;
 
         case 'ADD_CUP':
-            _addCup(action.data)
+            addCup(data.id);
             RegularStore.emitChange();
             break;
 
         case 'ADD_FREECUP':
-            _addFreeCup(action.data)
+            addFreeCup(data.id)
             RegularStore.emitChange();
             break;
 
         case 'UPDATE_NAME':
-            _updateName(action.data)
+            update(data.id, {
+                name: data.name
+            });
             RegularStore.emitChange();
             break;
 
         case 'UPDATE_ORDER':
-            _updateOrder(action.data)
+            update(data.id, {
+                order: {
+                    type: data.order
+                }
+            });
             RegularStore.emitChange();
             break;
 
         case 'UPDATE_SUGAR':
-            _updateSugar(action.data)
+            update(data.id, {
+                order: {
+                    sugar: data.sugar
+                }
+            });
             RegularStore.emitChange();
             break;
 
         case 'UPDATE_STRENGTH':
-            _updateStrength(action.data)
+            update(data.id, {
+                order: {
+                    strength: data.strength
+                }
+            });
             RegularStore.emitChange();
             break;
 
