@@ -36,7 +36,7 @@ class App extends React.Component {
         this._setAddPersonVisibility     = this._setAddPersonVisibility.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         RegularStore.addChangeListener(this._onChange);
     }
 
