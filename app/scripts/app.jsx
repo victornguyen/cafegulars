@@ -24,8 +24,7 @@ class App extends React.Component {
             newPersonId:        null
         };
 
-        this._onStoreChange                   = this._onStoreChange.bind(this);
-        this._updatePerson               = this._updatePerson.bind(this);
+        this._onStoreChange              = this._onStoreChange.bind(this);
         this._setAddPersonVisibility     = this._setAddPersonVisibility.bind(this);
     }
 
@@ -45,17 +44,6 @@ class App extends React.Component {
         this.setState({
             peeps: RegularStore.getPeeps()
         });
-    }
-
-    _updatePerson(id, fn) {
-        let newPeeps = this.state.peeps.map(person => {
-            if (person.id === id) {
-                fn.call(null, person);
-            }
-            return person;
-        });
-
-        this.setState({ peeps: newPeeps });
     }
 
     _setAddPersonVisibility(value) {
