@@ -41,7 +41,6 @@ class App extends React.Component {
 
     componentDidUpdate() {
         this.state.newPersonId = null;
-        // localStorage.cafegulars = JSON.stringify(this.state);
     }
 
     componentWillUnmount() {

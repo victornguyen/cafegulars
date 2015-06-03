@@ -6,14 +6,16 @@ var _               = require('lodash');
 
 const MOCK_DATA     = require('../peeps.json');
 
+const LOCALSTORAGE_KEY = 'cafegulars';
+
 var _store = {
     peeps: MOCK_DATA
 };
 
-// if ( localStorage['cafegulars'] ) {
-//     let _storedPeeps = JSON.parse( localStorage['cafegulars'] ).peeps;
-//     _store.peeps = _storedPeeps && _storedPeeps.length ? _storedPeeps : MOCK_DATA;
-// }
+if ( localStorage[LOCALSTORAGE_KEY] ) {
+    let _storedPeeps = JSON.parse( localStorage[LOCALSTORAGE_KEY] );
+    _store.peeps = _storedPeeps && _storedPeeps.length ? _storedPeeps : MOCK_DATA;
+}
 
 
 // TODO: use module for this?
@@ -26,10 +28,16 @@ var _addPerson = function(person) {
     person.dateAdded    = new Date().toISOString();
     person.id           = _generateId();
     _store.peeps.unshift(person);
+    _saveStoreToLocalStorage();
 };
 
 var _removePerson = function(id) {
     _.remove(_store.peeps, person => person.id === id);
+    _saveStoreToLocalStorage();
+};
+
+var _saveStoreToLocalStorage = function() {
+    localStorage[LOCALSTORAGE_KEY] = JSON.stringify(_store.peeps);
 };
 
 var RegularStore = _.assign({}, EventEmitter.prototype, {
