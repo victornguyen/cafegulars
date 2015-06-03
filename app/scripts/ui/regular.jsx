@@ -23,7 +23,7 @@ class Regular extends React.Component {
         this._updateName            = this._updateName.bind(this);
         this._updateSugar           = this._updateSugar.bind(this);
         this._updateStrength        = this._updateStrength.bind(this);
-        this._updateOrderType       = this._updateOrderType.bind(this);
+        this._updateOrder           = this._updateOrder.bind(this);
         this._handleRemovePerson    = this._handleRemovePerson.bind(this);
         this._addCup                = this._addCup.bind(this);
         this._addFreeCup            = this._addFreeCup.bind(this);
@@ -60,7 +60,7 @@ class Regular extends React.Component {
         RegularActions.updateStrength(this.props.person.id, strength);
     }
 
-    _updateOrderType(order) {
+    _updateOrder(order) {
         RegularActions.updateOrder(this.props.person.id, order);
     }
 
@@ -80,13 +80,10 @@ class Regular extends React.Component {
 
         // TODO: hmm, is there a better way of doing this
         let counterProps = {
-            id:                 this.props.person.id,
-            freeCount:          this.props.freeCount,
-
             count:              this.props.person.coffees.count,
+            freeCount:          this.props.freeCount,
             addCup:             this._addCup,
             addFreeCup:         this._addFreeCup,
-
             hasFreeCoffee:      this.state.hasFreeCoffee
         };
 
@@ -95,7 +92,7 @@ class Regular extends React.Component {
 
                 <div className="panel-body">
                     <RegularName name={this.props.person.name} updateName={this._updateName} />
-                    <RegularOrder order={this.props.person.order.type} updateOrder={this._updateOrderType} />
+                    <RegularOrder order={this.props.person.order.type} updateOrder={this._updateOrder} />
                     <RegularSugar count={this.props.person.order.sugar} updateSugar={this._updateSugar} />
                     <RegularStrength strength={this.props.person.order.strength} updateStrength={this._updateStrength} />
                     <RegularCounter {...counterProps} />

@@ -18,23 +18,24 @@ class AddRegular extends React.Component {
         this.state = {
             canSubmit: false,
             hasFreeCoffee: false,
-            person: {
-                id: null,
-                name: '',
-                order: {
-                    type: null,
-                    sugar: 0,
-                    strength: 'Normal',
-                    notes: ''
-                },
-                coffees: {
-                    count: 0,
-                    purchased: 0,
-                    free: 0
-                },
-                lastVisited: null,
-                dateAdded: null
-            }
+        };
+
+        this.state.person = {
+            id: null,
+            name: '',
+            order: {
+                type: null,
+                sugar: 0,
+                strength: 'Normal',
+                notes: ''
+            },
+            coffees: {
+                count: 0,
+                purchased: 0,
+                free: 0
+            },
+            lastVisited: null,
+            dateAdded: null
         };
 
         this._close                 = this._close.bind(this);
@@ -63,7 +64,7 @@ class AddRegular extends React.Component {
     }
 
     _addCup() {
-        let count       = this.state.person.coffees.count + 1;
+        let count = this.state.person.coffees.count + 1;
         this.setState({
             person: update(this.state.person, {
                 coffees: {
@@ -132,7 +133,6 @@ class AddRegular extends React.Component {
 
     render() {
         let counterProps = {
-            id:                 this.state.person.id,
             count:              this.state.person.coffees.count,
             freeCount:          this.props.freeCount,
             addCup:             this._addCup,

@@ -51,11 +51,8 @@ class RegularCounter extends React.Component {
 RegularCounter.propTypes = {
     count:          React.PropTypes.number.isRequired,
     freeCount:      React.PropTypes.number.isRequired,
-
     addCup:         React.PropTypes.func.isRequired,
-    removeCup:      React.PropTypes.func,
     addFreeCup:     React.PropTypes.func.isRequired,
-
     hasFreeCoffee:  React.PropTypes.bool.isRequired
 };
 
