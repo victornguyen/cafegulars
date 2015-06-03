@@ -70,7 +70,7 @@ class AddRegular extends React.Component {
     _addCup() {
         let count = this.state.person.coffees.count + 1;
         this.setState({
-            person: React.addons.update(this.state.person, {
+            person: update(this.state.person, {
                 coffees: {
                     count:      { $set: count },
                     purchased:  { $set: count }
@@ -81,7 +81,7 @@ class AddRegular extends React.Component {
 
     _resetCount() {
         this.setState({
-            person: React.addons.update(this.state.person, {
+            person: update(this.state.person, {
                 coffees: {
                     count:      { $set: 0 },
                     purchased:  { $set: 0 }
@@ -100,7 +100,7 @@ class AddRegular extends React.Component {
 
     _updateOrder(order) {
         this.setState({
-            person: React.addons.update(this.state.person, {
+            person: update(this.state.person, {
                 order: {
                     type: { $set: order }
                 }
