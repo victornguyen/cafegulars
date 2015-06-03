@@ -6,6 +6,7 @@ let _               = require('lodash');
 
 const MOCK_DATA         = require('../peeps.json');
 const LOCALSTORAGE_KEY  = 'cafegulars';
+const CHANGE_EVENT      = 'change';
 
 let _store = {
     peeps: MOCK_DATA
@@ -78,12 +79,16 @@ let _saveStore = function() {
 };
 
 let RegularStore = _.assign({}, EventEmitter.prototype, {
-    addChangeListener(fn) {
-        this.on('change', fn);
+    addChangeListener(callback) {
+        this.on(CHANGE_EVENT, callback);
     },
 
-    removeChangeListener(fn) {
-        this.removeListener('change', fn);
+    removeChangeListener(callback) {
+        this.removeListener(CHANGE_EVENT, callback);
+    },
+
+    emitChange() {
+        this.emit(CHANGE_EVENT);
     },
 
     getPeeps() {
@@ -99,42 +104,42 @@ AppDispatcher.register(payload => {
 
         case 'ADD_PERSON':
             _addPerson(action.data);
-            RegularStore.emit('change');
+            RegularStore.emitChange();
             break;
 
         case 'REMOVE_PERSON':
             _removePerson(action.data);
-            RegularStore.emit('change');
+            RegularStore.emitChange();
             break;
 
         case 'ADD_CUP':
             _addCup(action.data)
-            RegularStore.emit('change');
+            RegularStore.emitChange();
             break;
 
         case 'ADD_FREECUP':
             _addFreeCup(action.data)
-            RegularStore.emit('change');
+            RegularStore.emitChange();
             break;
 
         case 'UPDATE_NAME':
             _updateName(action.data)
-            RegularStore.emit('change');
+            RegularStore.emitChange();
             break;
 
         case 'UPDATE_ORDER':
             _updateOrder(action.data)
-            RegularStore.emit('change');
+            RegularStore.emitChange();
             break;
 
         case 'UPDATE_SUGAR':
             _updateSugar(action.data)
-            RegularStore.emit('change');
+            RegularStore.emitChange();
             break;
 
         case 'UPDATE_STRENGTH':
             _updateStrength(action.data)
-            RegularStore.emit('change');
+            RegularStore.emitChange();
             break;
 
         default:
