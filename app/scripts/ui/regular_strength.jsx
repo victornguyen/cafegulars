@@ -9,10 +9,10 @@ class RegularStrength extends React.Component {
 
     constructor(props) {
         super(props);
-        this._updateStrength = this._updateStrength.bind(this);
+        this._handleStrengthUpdate = this._handleStrengthUpdate.bind(this);
     }
 
-    _updateStrength() {
+    _handleStrengthUpdate() {
         var index = _.indexOf(STRENGTHS, this.props.strength) + 1;
 
         if (index >= STRENGTHS.length) {
@@ -24,7 +24,7 @@ class RegularStrength extends React.Component {
 
     render() {
         return (
-            <button className="regular-sugar pull-left" onClick={this._updateStrength}>
+            <button className="regular-sugar pull-left" onClick={this._handleStrengthUpdate}>
                 <div className="regular-strength__type">
                     {this.props.strength}
                 </div>

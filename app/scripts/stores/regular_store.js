@@ -48,6 +48,12 @@ var _updateSugar = function(data) {
     _saveStore();
 };
 
+var _updateStrength = function(data) {
+    var personIndex = _.findIndex(_store.peeps, { id: data.id });
+    _store.peeps[personIndex].order.strength = data.strength;
+    _saveStore();
+};
+
 var _saveStore = function() {
     localStorage[LOCALSTORAGE_KEY] = JSON.stringify(_store.peeps);
 };
@@ -89,6 +95,11 @@ AppDispatcher.register(payload => {
 
         case 'UPDATE_SUGAR':
             _updateSugar(action.data)
+            RegularStore.emit('change');
+            break;
+
+        case 'UPDATE_STRENGTH':
+            _updateStrength(action.data)
             RegularStore.emit('change');
             break;
 

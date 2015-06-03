@@ -47,7 +47,7 @@ class Regular extends React.Component {
     }
 
     _updateStrength(strength) {
-        this.props.updateStrength(this.props.person.id, strength);
+        RegularActions.updateStrength(this.props.person.id, strength);
     }
 
     _updateOrderType(newOrder) {

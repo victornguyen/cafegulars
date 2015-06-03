@@ -118,9 +118,9 @@ class AddRegular extends React.Component {
         });
     }
 
-    _updateStrength(id, strength) {
+    _updateStrength(strength) {
         this.setState({
-            person: React.addons.update(this.state.person, {
+            person: update(this.state.person, {
                 order: {
                     strength: { $set: strength }
                 }
@@ -198,8 +198,7 @@ AddRegular.propTypes = {
     addFreeCup:             React.PropTypes.func.isRequired,
 
     // update methods
-    updateOrderType:        React.PropTypes.func.isRequired,
-    updateStrength:         React.PropTypes.func.isRequired
+    updateOrderType:        React.PropTypes.func.isRequired
 };
 
 module.exports = AddRegular;

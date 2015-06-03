@@ -28,6 +28,13 @@ var RegularActions = {
             actionType: 'UPDATE_SUGAR',
             data: { id: id, sugarCount: sugarCount }
         });
+    },
+
+    updateStrength(id, strength) {
+        AppDispatcher.handleAction({
+            actionType: 'UPDATE_STRENGTH',
+            data: { id: id, strength: strength }
+        });
     }
 
 }
