@@ -1,38 +1,39 @@
-var AppDispatcher   = require('../dispatcher/dispatcher');
+var AppDispatcher       = require('../dispatcher/dispatcher');
+var RegularConstants    = require('../constants/regular_constants');
 
 var RegularActions = {
 
     addPerson(person) {
         AppDispatcher.dispatch({
-            actionType: 'ADD_PERSON',
+            actionType: RegularConstants.ADD_PERSON,
             person: person
         });
     },
 
     removePerson(id) {
         AppDispatcher.dispatch({
-            actionType: 'REMOVE_PERSON',
+            actionType: RegularConstants.REMOVE_PERSON,
             id: id
         });
     },
 
     addCup(id) {
         AppDispatcher.dispatch({
-            actionType: 'ADD_CUP',
+            actionType: RegularConstants.ADD_CUP,
             id: id
         });
     },
 
     addFreeCup(id) {
         AppDispatcher.dispatch({
-            actionType: 'ADD_FREECUP',
+            actionType: RegularConstants.ADD_FREECUP,
             id: id
         });
     },
 
     updateName(id, name) {
         AppDispatcher.dispatch({
-            actionType: 'UPDATE_NAME',
+            actionType: RegularConstants.UPDATE_NAME,
             id: id,
             name: name
         });
@@ -40,7 +41,7 @@ var RegularActions = {
 
     updateOrder(id, order) {
         AppDispatcher.dispatch({
-            actionType: 'UPDATE_ORDER',
+            actionType: RegularConstants.UPDATE_ORDER,
             id: id,
             order: order
         });
@@ -48,7 +49,7 @@ var RegularActions = {
 
     updateSugar(id, sugar) {
         AppDispatcher.dispatch({
-            actionType: 'UPDATE_SUGAR',
+            actionType: RegularConstants.UPDATE_SUGAR,
             id: id,
             sugar: sugar
         });
@@ -56,7 +57,7 @@ var RegularActions = {
 
     updateStrength(id, strength) {
         AppDispatcher.dispatch({
-            actionType: 'UPDATE_STRENGTH',
+            actionType: RegularConstants.UPDATE_STRENGTH,
             id: id,
             strength: strength
         });

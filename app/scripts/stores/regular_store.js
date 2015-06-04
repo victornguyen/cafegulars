@@ -1,8 +1,9 @@
 'use strict';
 
-let AppDispatcher   = require('../dispatcher/dispatcher');
-let EventEmitter    = require('events');
-let _               = require('lodash');
+let AppDispatcher       = require('../dispatcher/dispatcher');
+let RegularConstants    = require('../constants/regular_constants');
+let EventEmitter        = require('events');
+let _                   = require('lodash');
 
 const MOCK_DATA         = require('../peeps.json');
 const LOCALSTORAGE_KEY  = 'cafegulars';
@@ -141,34 +142,34 @@ AppDispatcher.register(action => {
 
     switch (action.actionType) {
 
-        case 'ADD_PERSON':
+        case RegularConstants.ADD_PERSON:
             create(action.person);
             RegularStore.emitChange();
             break;
 
-        case 'REMOVE_PERSON':
+        case RegularConstants.REMOVE_PERSON:
             remove(action.id);
             RegularStore.emitChange();
             break;
 
-        case 'ADD_CUP':
+        case RegularConstants.ADD_CUP:
             addCup(action.id);
             RegularStore.emitChange();
             break;
 
-        case 'ADD_FREECUP':
+        case RegularConstants.ADD_FREECUP:
             addFreeCup(action.id)
             RegularStore.emitChange();
             break;
 
-        case 'UPDATE_NAME':
+        case RegularConstants.UPDATE_NAME:
             update(action.id, {
                 name: action.name
             });
             RegularStore.emitChange();
             break;
 
-        case 'UPDATE_ORDER':
+        case RegularConstants.UPDATE_ORDER:
             update(action.id, {
                 order: {
                     type: action.order
@@ -177,7 +178,7 @@ AppDispatcher.register(action => {
             RegularStore.emitChange();
             break;
 
-        case 'UPDATE_SUGAR':
+        case RegularConstants.UPDATE_SUGAR:
             update(action.id, {
                 order: {
                     sugar: action.sugar
@@ -186,7 +187,7 @@ AppDispatcher.register(action => {
             RegularStore.emitChange();
             break;
 
-        case 'UPDATE_STRENGTH':
+        case RegularConstants.UPDATE_STRENGTH:
             update(action.id, {
                 order: {
                     strength: action.strength
