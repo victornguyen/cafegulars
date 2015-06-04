@@ -137,61 +137,59 @@ let RegularStore = _.assign({}, EventEmitter.prototype, {
 });
 
 
-AppDispatcher.register(payload => {
-    let actionType  = payload.action.actionType;
-    let data        = payload.action.data;
+AppDispatcher.register(action => {
 
-    switch (actionType) {
+    switch (action.actionType) {
 
         case 'ADD_PERSON':
-            create(data.person);
+            create(action.person);
             RegularStore.emitChange();
             break;
 
         case 'REMOVE_PERSON':
-            remove(data.id);
+            remove(action.id);
             RegularStore.emitChange();
             break;
 
         case 'ADD_CUP':
-            addCup(data.id);
+            addCup(action.id);
             RegularStore.emitChange();
             break;
 
         case 'ADD_FREECUP':
-            addFreeCup(data.id)
+            addFreeCup(action.id)
             RegularStore.emitChange();
             break;
 
         case 'UPDATE_NAME':
-            update(data.id, {
-                name: data.name
+            update(action.id, {
+                name: action.name
             });
             RegularStore.emitChange();
             break;
 
         case 'UPDATE_ORDER':
-            update(data.id, {
+            update(action.id, {
                 order: {
-                    type: data.order
+                    type: action.order
                 }
             });
             RegularStore.emitChange();
             break;
 
         case 'UPDATE_SUGAR':
-            update(data.id, {
+            update(action.id, {
                 order: {
-                    sugar: data.sugar
+                    sugar: action.sugar
                 }
             });
             RegularStore.emitChange();
             break;
 
         case 'UPDATE_STRENGTH':
-            update(data.id, {
+            update(action.id, {
                 order: {
-                    strength: data.strength
+                    strength: action.strength
                 }
             });
             RegularStore.emitChange();

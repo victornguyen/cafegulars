@@ -3,58 +3,62 @@ var AppDispatcher   = require('../dispatcher/dispatcher');
 var RegularActions = {
 
     addPerson(person) {
-        AppDispatcher.handleAction({
+        AppDispatcher.dispatch({
             actionType: 'ADD_PERSON',
-            data: { person: person }
+            person: person
         });
     },
 
     removePerson(id) {
-        AppDispatcher.handleAction({
+        AppDispatcher.dispatch({
             actionType: 'REMOVE_PERSON',
-            data: { id: id }
+            id: id
         });
     },
 
     addCup(id) {
-        AppDispatcher.handleAction({
+        AppDispatcher.dispatch({
             actionType: 'ADD_CUP',
-            data: { id: id }
+            id: id
         });
     },
 
     addFreeCup(id) {
-        AppDispatcher.handleAction({
+        AppDispatcher.dispatch({
             actionType: 'ADD_FREECUP',
-            data: { id: id }
+            id: id
         });
     },
 
     updateName(id, name) {
-        AppDispatcher.handleAction({
+        AppDispatcher.dispatch({
             actionType: 'UPDATE_NAME',
-            data: { id: id, name: name }
+            id: id,
+            name: name
         });
     },
 
     updateOrder(id, order) {
-        AppDispatcher.handleAction({
+        AppDispatcher.dispatch({
             actionType: 'UPDATE_ORDER',
-            data: { id: id, order: order }
+            id: id,
+            order: order
         });
     },
 
     updateSugar(id, sugar) {
-        AppDispatcher.handleAction({
+        AppDispatcher.dispatch({
             actionType: 'UPDATE_SUGAR',
-            data: { id: id, sugar: sugar }
+            id: id,
+            sugar: sugar
         });
     },
 
     updateStrength(id, strength) {
-        AppDispatcher.handleAction({
+        AppDispatcher.dispatch({
             actionType: 'UPDATE_STRENGTH',
-            data: { id: id, strength: strength }
+            id: id,
+            strength: strength
         });
     }
 
