@@ -5,17 +5,13 @@ let RegularConstants    = require('../constants/regular_constants');
 let EventEmitter        = require('events');
 let _                   = require('lodash');
 
-const MOCK_DATA         = require('../peeps.json');
 const LOCALSTORAGE_KEY  = 'cafegulars';
 const CHANGE_EVENT      = 'change';
 
-let _store = {
-    peeps: MOCK_DATA
-};
+let peeps = [];
 
 if ( localStorage[LOCALSTORAGE_KEY] ) {
-    let _storedPeeps = JSON.parse( localStorage[LOCALSTORAGE_KEY] );
-    _store.peeps = _storedPeeps && _storedPeeps.length ? _storedPeeps : MOCK_DATA;
+    peeps = JSON.parse( localStorage[LOCALSTORAGE_KEY] );
 }
 
 
@@ -35,8 +31,8 @@ function generateId() {
  * @return {Object}
  */
 function getPerson(id) {
-    let index = _.findIndex(_store.peeps, { id: id });
-    return _store.peeps[index];
+    let index = _.findIndex(peeps, { id: id });
+    return peeps[index];
 }
 
 
@@ -47,7 +43,7 @@ function getPerson(id) {
 function create(person) {
     person.id           = generateId();
     person.dateAdded    = new Date().toISOString();
-    _store.peeps.unshift(person);
+    peeps.unshift(person);
 }
 
 
@@ -57,7 +53,6 @@ function create(person) {
  * @param  {Object} updates An object literal with new data to merge in
  */
 function update(id, updates) {
-    console.log('update!!', id, updates);
     _.merge(getPerson(id), updates);
 }
 
@@ -66,7 +61,7 @@ function update(id, updates) {
  * @param  {String} id
  */
 function remove(id) {
-    _.remove(_store.peeps, person => person.id === id);
+    _.remove(peeps, person => person.id === id);
 }
 
 
@@ -104,7 +99,7 @@ function addFreeCup(id) {
  * Save peeps to localStorage
  */
 function saveStore() {
-    localStorage[LOCALSTORAGE_KEY] = JSON.stringify(_store.peeps);
+    localStorage[LOCALSTORAGE_KEY] = JSON.stringify(peeps);
 };
 
 
@@ -133,7 +128,7 @@ let RegularStore = _.assign({}, EventEmitter.prototype, {
      * @return {Array}
      */
     getPeeps() {
-        return _store.peeps;
+        return peeps;
     }
 });
 
