@@ -1,32 +1,30 @@
 'use strict';
 
-let React               = require('react'),
-    moment              = require('moment'),
-    classNames          = require('classnames'),
-    RegularName         = require('./regular_name.jsx'),
-    RegularOrder        = require('./regular_order.jsx'),
-    RegularSugar        = require('./regular_sugar.jsx'),
-    RegularStrength     = require('./regular_strength.jsx'),
-    RegularCounter      = require('./regular_counter.jsx'),
-    RegularActions      = require('../actions/regular_actions');
+import React, { Component, PropTypes } from 'react';
+import moment from 'moment';
+import classNames from 'classnames';
 
-class Regular extends React.Component {
+import RegularName from './regular_name.jsx';
+import RegularOrder from './regular_order.jsx';
+import RegularSugar from './regular_sugar.jsx';
+import RegularStrength from './regular_strength.jsx';
+import RegularCounter from './regular_counter.jsx';
+import RegularActions from '../actions/regular_actions';
+
+
+export default class Regular extends Component {
+
+    static propTypes = {
+        person:             PropTypes.object.isRequired,
+        newPersonId:        PropTypes.string,
+        freeCount:          PropTypes.number.isRequired
+    }
 
     constructor(props) {
         super(props);
-
         this.state = {
             hasFreeCoffee: this._getsFreeCoffee(this.props.person.coffees.count)
         };
-
-        this._getsFreeCoffee        = this._getsFreeCoffee.bind(this);
-        this._updateName            = this._updateName.bind(this);
-        this._updateSugar           = this._updateSugar.bind(this);
-        this._updateStrength        = this._updateStrength.bind(this);
-        this._updateOrder           = this._updateOrder.bind(this);
-        this._handleRemovePerson    = this._handleRemovePerson.bind(this);
-        this._addCup                = this._addCup.bind(this);
-        this._addFreeCup            = this._addFreeCup.bind(this);
     }
 
     componentWillReceiveProps(newProps) {
@@ -36,35 +34,35 @@ class Regular extends React.Component {
     }
 
     // TODO: this needs to live somewhere where AddRegular and Regular can access, Container component?
-    _getsFreeCoffee(count) {
+    _getsFreeCoffee = (count) => {
         return count === this.props.freeCount;
     }
 
-    _addCup() {
+    _addCup = () => {
         RegularActions.addCup(this.props.person.id);
     }
 
-    _addFreeCup() {
+    _addFreeCup = () => {
         RegularActions.addFreeCup(this.props.person.id);
     }
 
-    _updateName(name) {
+    _updateName = (name) => {
         RegularActions.updateName(this.props.person.id, name);
     }
 
-    _updateSugar(newCount) {
+    _updateSugar = (newCount) => {
         RegularActions.updateSugar(this.props.person.id, newCount);
     }
 
-    _updateStrength(strength) {
+    _updateStrength = (strength) => {
         RegularActions.updateStrength(this.props.person.id, strength);
     }
 
-    _updateOrder(order) {
+    _updateOrder = (order) => {
         RegularActions.updateOrder(this.props.person.id, order);
     }
 
-    _handleRemovePerson() {
+    _handleRemovePerson = () => {
         RegularActions.removePerson(this.props.person.id);
     }
 
@@ -114,14 +112,3 @@ class Regular extends React.Component {
     }
 
 }
-
-Regular.propTypes = {
-    // person props
-    person:             React.PropTypes.object.isRequired,
-    newPersonId:        React.PropTypes.string,
-
-    // cup methods
-    freeCount:          React.PropTypes.number.isRequired
-};
-
-module.exports = Regular;
