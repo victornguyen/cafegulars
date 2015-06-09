@@ -34,13 +34,17 @@
     "gulp-filter": "~2.0.2",
     "classnames": "~1.2.1",
     "react-select": "~0.4.9",
-    "babelify": "~6.1.2"
+    "babelify": "~6.1.2",
+    "eslint": "~0.22.1",
+    "babel-eslint": "~3.1.14",
+    "eslint-plugin-react": "~2.5.0"
   },
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint app/scripts"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
