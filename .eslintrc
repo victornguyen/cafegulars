@@ -7,6 +7,12 @@
     // in CommonJS
     "node": true
   },
+  "plugins": [
+    "react"
+  ],
+  "ecmaFeatures": {
+    "jsx": true
+  },
   // To give you an idea how to override rule options:
   "rules": {
     "quotes": [2, "single"],
@@ -14,7 +20,7 @@
     "no-mixed-requires": [0],
     "no-underscore-dangle": [0],
     "no-multi-spaces": 0,
-    // "key-spacing": [2, { "align": "value" }],
+    "key-spacing": 0,
 
     "react/jsx-no-undef": 1,
     "react/jsx-uses-react": 1,
@@ -25,11 +31,5 @@
     "react/no-unknown-property": 1,
     "react/prop-types": 1,
     "react/react-in-jsx-scope": 2
-  },
-  "plugins": [
-    "react"
-  ],
-  "ecmaFeatures": {
-    "jsx": true
   }
 }
