@@ -8,6 +8,7 @@
     border-radius: 50%;
     border: 1px solid transparent;
     user-select: none;
+    outline: none; // TODO: do this better
 
     &:hover,
     &:focus {
