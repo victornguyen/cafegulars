@@ -1,59 +1,53 @@
 'use strict';
 
-var React = require('react');
+import React, { Component, PropTypes } from 'react';
+import { hasFreeCoffee, coffeesTillFree } from '../utils/regular_utils';
 
-class RegularCounter extends React.Component {
+export default class RegularCounter extends Component {
+    static propTypes = {
+        count:          PropTypes.number.isRequired,
+        addCup:         PropTypes.func.isRequired,
+        addFreeCup:     PropTypes.func.isRequired
+    }
 
     constructor(props) {
         super(props);
-        this._handleAddCup      = this._handleAddCup.bind(this);
-        this._handleAddFreeCup  = this._handleAddFreeCup.bind(this);
     }
 
-    _handleAddCup() {
+    _handleAddCup = () => {
         this.props.addCup();
     }
 
-    _handleAddFreeCup() {
+    _handleAddFreeCup = () => {
         this.props.addFreeCup();
     }
 
     render() {
-        let remainingCups = this.props.freeCount - this.props.count;
+        let coffeesLeft = coffeesTillFree(this.props.count);
         let actions;
 
-        if (this.props.hasFreeCoffee) {
+        if ( hasFreeCoffee(this.props.count) ) {
             actions = (
                 <button className="regular-counter" onClick={this._handleAddFreeCup}>
                     FREE COFFEE!!!!!
                 </button>
-            )
+            );
         }
         else {
             actions = (
                 <button className="regular-counter" onClick={this._handleAddCup}>
                     <div className="regular-counter__count">
-                        {remainingCups}
+                        {coffeesLeft}
                     </div>
-                    { remainingCups < 2 ? 'coffee' : 'coffees' } to go!
+                    { coffeesLeft < 2 ? 'coffee' : 'coffees' } to go!
                 </button>
-            )
+            );
         }
 
         return (
             <div className="pull-left">
                 {actions}
             </div>
-        )
+        );
     }
 }
-
-RegularCounter.propTypes = {
-    count:          React.PropTypes.number.isRequired,
-    freeCount:      React.PropTypes.number.isRequired,
-    addCup:         React.PropTypes.func.isRequired,
-    addFreeCup:     React.PropTypes.func.isRequired,
-    hasFreeCoffee:  React.PropTypes.bool.isRequired
-};
-
-module.exports = RegularCounter;
