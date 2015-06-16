@@ -77,7 +77,7 @@ function addCup(id) {
             purchased: person.coffees.purchased + 1
         }
     });
-};
+}
 
 
 /**
@@ -92,7 +92,7 @@ function addFreeCup(id) {
             free: person.coffees.free + 1
         }
     });
-};
+}
 
 
 /**
@@ -100,7 +100,7 @@ function addFreeCup(id) {
  */
 function saveStore() {
     localStorage[LOCALSTORAGE_KEY] = JSON.stringify(peeps);
-};
+}
 
 
 let RegularStore = _.assign({}, EventEmitter.prototype, {
@@ -153,7 +153,7 @@ AppDispatcher.register(action => {
             break;
 
         case RegularConstants.ADD_FREECUP:
-            addFreeCup(action.id)
+            addFreeCup(action.id);
             RegularStore.emitChange();
             break;
 

@@ -1,7 +1,6 @@
 'use strict';
 
 let React               = require('react/addons'),
-    _                   = require('lodash'),
     RegularName         = require('./regular_name.jsx'),
     RegularOrder        = require('./regular_order.jsx'),
     RegularSugar        = require('./regular_sugar.jsx'),
@@ -17,7 +16,7 @@ class AddRegular extends React.Component {
 
         this.state = {
             canSubmit: false,
-            hasFreeCoffee: false,
+            hasFreeCoffee: false
         };
 
         this.state.person = {
@@ -164,7 +163,7 @@ class AddRegular extends React.Component {
 
             </div>
 
-        )
+        );
     }
 
 }
