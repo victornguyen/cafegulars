@@ -30,7 +30,7 @@ export default class Regular extends Component {
     componentWillReceiveProps(newProps) {
         this.setState({
             hasFreeCoffee: this._getsFreeCoffee(newProps.person.coffees.count)
-        })
+        });
     }
 
     // TODO: this needs to live somewhere where AddRegular and Regular can access, Container component?
@@ -67,8 +67,6 @@ export default class Regular extends Component {
     }
 
     render() {
-        let remainingCups = this.props.freeCount - this.props.person.coffees.count;
-
         let regularClasses = classNames({
             'regular panel':                true,
             'regular--free':                this.state.hasFreeCoffee,
@@ -108,7 +106,7 @@ export default class Regular extends Component {
                 </div>
 
             </div>
-        )
+        );
     }
 
 }

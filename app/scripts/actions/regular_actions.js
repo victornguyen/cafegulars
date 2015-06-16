@@ -1,3 +1,5 @@
+'use strict';
+
 var AppDispatcher       = require('../dispatcher/dispatcher');
 var RegularConstants    = require('../constants/regular_constants');
 
@@ -63,6 +65,6 @@ var RegularActions = {
         });
     }
 
-}
+};
 
 module.exports = RegularActions;

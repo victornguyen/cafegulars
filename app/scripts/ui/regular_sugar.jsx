@@ -1,7 +1,6 @@
 'use strict';
 
 let React           = require('react');
-let RegularActions  = require('../actions/regular_actions');
 
 class RegularSugar extends React.Component {
 
@@ -20,7 +19,7 @@ class RegularSugar extends React.Component {
             sugar = [];
 
         if (i === 0) {
-            sugar.push("No Sugar");
+            sugar.push('No Sugar');
         }
         else {
             while(i--) {
@@ -39,7 +38,7 @@ class RegularSugar extends React.Component {
                     {sugar}
                 </div>
             </button>
-        )
+        );
     }
 }
 
