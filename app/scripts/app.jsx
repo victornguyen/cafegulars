@@ -1,9 +1,9 @@
 'use strict';
 
 let React           = window.React = require('react'),
-    Header          = require('./ui/header.jsx'),
-    AddRegular      = require('./ui/add_regular.jsx'),
-    RegularList     = require('./ui/regular_list.jsx'),
+    Header          = require('./components/header.jsx'),
+    AddRegular      = require('./components/add_regular.jsx'),
+    RegularList     = require('./components/regular_list.jsx'),
     RegularStore    = require('./stores/regular_store');
 
 
