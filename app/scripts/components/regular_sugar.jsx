@@ -1,6 +1,9 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import { getMaxSugar } from '../stores/settings_store';
+
+const MAX_SUGAR = getMaxSugar();
 
 export default class RegularSugar extends Component {
     static propTypes = {
@@ -13,7 +16,7 @@ export default class RegularSugar extends Component {
     }
 
     _handleSugarUpdate = () => {
-        var count = (this.props.count + 1 > 5) ? 0 : this.props.count + 1;
+        let count = (this.props.count + 1 > MAX_SUGAR) ? 0 : this.props.count + 1;
         this.props.updateSugar(count);
     }
 
