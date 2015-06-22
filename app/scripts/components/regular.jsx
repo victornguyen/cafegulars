@@ -8,11 +8,8 @@ import RegularActions from '../actions/regular_actions';
 import { hasFreeCoffee } from '../utils/regular_utils';
 
 export default class Regular extends Component {
-
     static propTypes = {
-        person:             PropTypes.object.isRequired,
-        newPersonId:        PropTypes.string,
-        freeCount:          PropTypes.number.isRequired
+        person: PropTypes.object.isRequired
     }
 
     constructor(props) {
@@ -34,10 +31,8 @@ export default class Regular extends Component {
 
     render() {
         let regularClasses = classNames({
-            'regular panel':                true,
-            'regular--free':                this.state.hasFreeCoffee,
-            'panel-default':                this.props.newPersonId !== this.props.person.id,
-            'regular--new panel-success':   this.props.newPersonId === this.props.person.id
+            'regular panel panel-default':  true,
+            'regular--free':                this.state.hasFreeCoffee
         });
 
         return (
@@ -58,5 +53,4 @@ export default class Regular extends Component {
             </div>
         );
     }
-
 }

@@ -5,9 +5,7 @@ import Regular from './regular.jsx';
 
 export default class RegularList extends Component {
     static propTypes = {
-        peeps:          PropTypes.array.isRequired,
-        freeCount:      PropTypes.number.isRequired,
-        newPersonId:    PropTypes.string
+        peeps: PropTypes.array.isRequired
     }
 
     constructor(props) {
@@ -28,7 +26,7 @@ export default class RegularList extends Component {
     renderList() {
         return this.props.peeps.map(person => {
             return (
-                <Regular {...this.props} key={person.id} person={person} />
+                <Regular key={person.id} person={person} />
             );
         });
     }

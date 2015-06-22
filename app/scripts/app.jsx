@@ -1,62 +1,42 @@
 'use strict';
 
-let React           = window.React = require('react'),
-    Header          = require('./components/header.jsx'),
-    AddRegular      = require('./components/add_regular.jsx'),
-    RegularList     = require('./components/regular_list.jsx'),
-    RegularStore    = require('./stores/regular_store');
+import React, { Component } from 'react';
+import Header from './components/header.jsx';
+import AddRegular from './components/add_regular.jsx';
+import RegularList from './components/regular_list.jsx';
+import RegularStore from './stores/regular_store';
 
-
-class App extends React.Component {
-
+export default class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             peeps:              RegularStore.getPeeps(),
-
-            // TODO: to settings store
-            freeCount:          8,
-            maxSugar:           5,
-
-            // doesn't need to be in a store...
-            addPersonIsVisible: false,
-            newPersonId:        null
+            addPersonIsVisible: false
         };
-
-        this._onStoreChange              = this._onStoreChange.bind(this);
-        this._setAddPersonVisibility     = this._setAddPersonVisibility.bind(this);
     }
 
     componentWillMount() {
         RegularStore.addChangeListener(this._onStoreChange);
     }
 
-    componentDidUpdate() {
-        this.state.newPersonId = null;
-    }
-
     componentWillUnmount() {
         RegularStore.removeChangeListener(this._onStoreChange);
     }
 
-    _onStoreChange() {
+    _onStoreChange = () => {
         this.setState({
             peeps: RegularStore.getPeeps()
         });
     }
 
-    _setAddPersonVisibility(value) {
-        this.setState({ addPersonIsVisible: value });
+    _setAddPersonVisibility = (value) => {
+        this.setState({
+            addPersonIsVisible: value
+        });
     }
 
     render() {
-        let listProps = {
-            peeps:              this.state.peeps,
-            freeCount:          this.state.freeCount,
-            newPersonId:        this.state.newPersonId
-        };
-
         return (
             <div className="container">
                 <Header
@@ -66,15 +46,12 @@ class App extends React.Component {
                 {
                     this.state.addPersonIsVisible &&
                     <AddRegular
-                        {...listProps}
+                        peeps={this.state.peeps}
                         setAddPersonVisibility={this._setAddPersonVisibility}
                     />
                 }
-                <RegularList {...listProps} />
+                <RegularList peeps={this.state.peeps} />
             </div>
         );
     }
 }
-
-
-React.render(<App />, document.getElementById('app'));
