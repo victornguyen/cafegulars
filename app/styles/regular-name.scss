@@ -6,6 +6,7 @@
     background: transparent;
     border: 0;
     border-bottom: 1px solid transparent;
+    outline: none; // TODO: do this better
     transition: all 0.1s ease;
 
     &:focus,

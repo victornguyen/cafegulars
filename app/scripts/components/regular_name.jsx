@@ -1,15 +1,19 @@
 'use strict';
 
-var React = require('react');
+import React, { Component, PropTypes } from 'react';
 
-class RegularName extends React.Component {
+export default class RegularName extends Component {
+    static propTypes = {
+        name:               PropTypes.string.isRequired,
+        updateName:         PropTypes.func.isRequired,
+
+        // Optional AddRegular props
+        focusOnMount:       PropTypes.bool,
+        setSubmitStatus:    PropTypes.func
+    }
 
     constructor(props) {
         super(props);
-
-        this._handleKeyDown     = this._handleKeyDown.bind(this);
-        this._handleChange      = this._handleChange.bind(this);
-        this._handleBlur        = this._handleBlur.bind(this);
     }
 
     componentDidMount() {
@@ -18,10 +22,10 @@ class RegularName extends React.Component {
         }
     }
 
-    _handleKeyDown(e) {
+    _handleKeyDown = (e) => {
         let field = React.findDOMNode(this.refs.field);
 
-        if (e.key === "Enter") {
+        if (e.key === 'Enter') {
             field.blur();
         }
         else if (e.key === 'Escape') {
@@ -30,20 +34,21 @@ class RegularName extends React.Component {
         }
     }
 
-    _handleChange(e) {
+    _handleChange = () => {
         // TODO: this method only available when in addMode.. make this better
-        if (this.props.updateSubmitStatus) {
+        if (this.props.setSubmitStatus) {
             let field = React.findDOMNode(this.refs.field);
-            this.props.updateSubmitStatus( field.value !== '' );
+            this.props.setSubmitStatus( field.value !== '' );
         }
     }
 
-    _handleBlur(e) {
+    _handleBlur = (e) => {
         let newName = e.currentTarget.value;
 
         // restore previous name if new name is empty
         if (newName === '') {
             e.currentTarget.value = this.props.name;
+            this.props.setSubmitStatus( this.props.name !== '' );
             return;
         }
 
@@ -66,17 +71,6 @@ class RegularName extends React.Component {
                     onBlur={this._handleBlur}
                 />
             </h3>
-        )
+        );
     }
 }
-
-RegularName.propTypes = {
-    name:               React.PropTypes.string.isRequired,
-    updateName:         React.PropTypes.func.isRequired,
-
-    // AddRegular methods
-    focusOnMount:       React.PropTypes.bool,
-    updateSubmitStatus: React.PropTypes.func
-};
-
-module.exports = RegularName;
