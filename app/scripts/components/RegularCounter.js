@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { hasFreeCoffee, coffeesTillFree } from '../utils/regular_utils';
+import { hasFreeCoffee, coffeesTillFree } from '../utils/RegularUtils';
 
 export default class RegularCounter extends Component {
     static propTypes = {

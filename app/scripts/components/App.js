@@ -1,10 +1,10 @@
 'use strict';
 
 import React, { Component } from 'react';
-import Header from './components/header.jsx';
-import AddRegular from './components/add_regular.jsx';
-import RegularList from './components/regular_list.jsx';
-import RegularStore from './stores/regular_store';
+import Header from './Header';
+import AddRegular from './AddRegular';
+import RegularList from './RegularList';
+import RegularStore from '../stores/RegularStore';
 
 export default class App extends Component {
     constructor(props) {

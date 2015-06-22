@@ -3,11 +3,11 @@
 import React, { Component, PropTypes } from 'react';
 import { assign, merge } from 'lodash';
 
-import RegularName from './regular_name.jsx';
-import RegularOrder from './regular_order.jsx';
-import RegularSugar from './regular_sugar.jsx';
-import RegularStrength from './regular_strength.jsx';
-import RegularCounter from './regular_counter.jsx';
+import RegularName from './RegularName';
+import RegularOrder from './RegularOrder';
+import RegularSugar from './RegularSugar';
+import RegularStrength from './RegularStrength';
+import RegularCounter from './RegularCounter';
 
 export default class RegularInfoNew extends Component {
     static propTypes = {

@@ -1,6 +1,6 @@
 'use strict';
 
 import React from 'react';
-import App from './app.jsx';
+import App from './components/App';
 
 React.render(<App />, document.getElementById('app'));

@@ -1,8 +1,8 @@
 'use strict';
 
-import React, { Component, PropTypes } from 'react/addons';
-import RegularInfoNew from './regular_info_new.jsx';
-import RegularActions from '../actions/regular_actions';
+import React, { Component, PropTypes } from 'react';
+import RegularInfoNew from './RegularInfoNew';
+import RegularActions from '../actions/RegularActions';
 
 export default class AddRegular extends Component {
     static propTypes = {

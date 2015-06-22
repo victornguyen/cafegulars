@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { getMaxSugar } from '../stores/settings_store';
+import { getMaxSugar } from '../stores/SettingsStore';
 
 const MAX_SUGAR = getMaxSugar();
 

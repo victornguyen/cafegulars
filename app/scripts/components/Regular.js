@@ -3,9 +3,9 @@
 import React, { Component, PropTypes } from 'react';
 import moment from 'moment';
 import classNames from 'classnames';
-import RegularInfo from './regular_info.jsx';
-import RegularActions from '../actions/regular_actions';
-import { hasFreeCoffee } from '../utils/regular_utils';
+import RegularInfo from './RegularInfo';
+import RegularActions from '../actions/RegularActions';
+import { hasFreeCoffee } from '../utils/RegularUtils';
 
 export default class Regular extends Component {
     static propTypes = {

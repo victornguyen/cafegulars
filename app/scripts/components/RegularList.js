@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import Regular from './regular.jsx';
+import Regular from './Regular';
 
 export default class RegularList extends Component {
     static propTypes = {

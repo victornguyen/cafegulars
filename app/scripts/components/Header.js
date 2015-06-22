@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import Timer from './timer.jsx';
+import Timer from './Timer';
 
 export default class Header extends Component {
     static propTypes = {

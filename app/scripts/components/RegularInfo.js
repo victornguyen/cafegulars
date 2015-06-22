@@ -2,13 +2,13 @@
 
 import React, { Component, PropTypes } from 'react';
 
-import RegularName from './regular_name.jsx';
-import RegularOrder from './regular_order.jsx';
-import RegularSugar from './regular_sugar.jsx';
-import RegularStrength from './regular_strength.jsx';
-import RegularCounter from './regular_counter.jsx';
+import RegularName from './RegularName';
+import RegularOrder from './RegularOrder';
+import RegularSugar from './RegularSugar';
+import RegularStrength from './RegularStrength';
+import RegularCounter from './RegularCounter';
 
-import RegularActions from '../actions/regular_actions';
+import RegularActions from '../actions/RegularActions';
 
 
 export default class RegularInfo extends Component {
