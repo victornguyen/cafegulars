@@ -1,16 +1,18 @@
 'use strict';
 
-var React = require('react'),
-    Select = require('react-select');
+import React, { Component, PropTypes } from 'react';
+import Select from 'react-select';
 
 const COFFEE_TYPES = require('../coffee_types.json');
 
-
-class RegularOrder extends React.Component {
+export default class RegularOrder extends Component {
+    static propTypes = {
+        order:          PropTypes.string,
+        updateOrder:    PropTypes.func.isRequired
+    }
 
     constructor(props) {
         super(props);
-        this._handleOrderUpdate = this._handleOrderUpdate.bind(this);
     }
 
     componentWillMount() {
@@ -19,11 +21,11 @@ class RegularOrder extends React.Component {
             return {
                 value: type,
                 label: type
-            }
+            };
         });
     }
 
-    _handleOrderUpdate(newOrder) {
+    _handleOrderUpdate = (newOrder) => {
         this.props.updateOrder(newOrder);
     }
 
@@ -39,14 +41,6 @@ class RegularOrder extends React.Component {
                     placeholder="Select a coffee type..."
                 />
             </div>
-        )
+        );
     }
-
 }
-
-RegularOrder.propTypes = {
-    order:          React.PropTypes.string,
-    updateOrder:    React.PropTypes.func.isRequired
-};
-
-module.exports = RegularOrder;

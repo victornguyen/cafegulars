@@ -1,15 +1,18 @@
 'use strict';
 
-let React           = require('react');
+import React, { Component, PropTypes } from 'react';
 
-class RegularSugar extends React.Component {
+export default class RegularSugar extends Component {
+    static propTypes = {
+        count:          PropTypes.number.isRequired,
+        updateSugar:    PropTypes.func.isRequired
+    }
 
     constructor(props) {
         super(props);
-        this._handleSugarUpdate = this._handleSugarUpdate.bind(this);
     }
 
-    _handleSugarUpdate() {
+    _handleSugarUpdate = () => {
         var count = (this.props.count + 1 > 5) ? 0 : this.props.count + 1;
         this.props.updateSugar(count);
     }
@@ -41,10 +44,3 @@ class RegularSugar extends React.Component {
         );
     }
 }
-
-RegularSugar.propTypes = {
-    count:          React.PropTypes.number.isRequired,
-    updateSugar:    React.PropTypes.func.isRequired
-};
-
-module.exports = RegularSugar;

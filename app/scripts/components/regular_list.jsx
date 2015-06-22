@@ -1,9 +1,14 @@
 'use strict';
 
-let React   = require('react'),
-    Regular = require('./regular.jsx');
+import React, { Component, PropTypes } from 'react';
+import Regular from './regular.jsx';
 
-class RegularList extends React.Component {
+export default class RegularList extends Component {
+    static propTypes = {
+        peeps:          PropTypes.array.isRequired,
+        freeCount:      PropTypes.number.isRequired,
+        newPersonId:    PropTypes.string
+    }
 
     constructor(props) {
         super(props);
@@ -17,22 +22,14 @@ class RegularList extends React.Component {
                     { this.renderList() }
                 </div>
             </div>
-        )
+        );
     }
 
     renderList() {
         return this.props.peeps.map(person => {
             return (
-                <Regular key={person.id} person={person} {...this.props} />
-            )
+                <Regular {...this.props} key={person.id} person={person} />
+            );
         });
     }
 }
-
-RegularList.propTypes = {
-    peeps:              React.PropTypes.array.isRequired,
-    freeCount:          React.PropTypes.number.isRequired,
-    newPersonId:        React.PropTypes.string
-};
-
-module.exports = RegularList;

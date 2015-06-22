@@ -1,10 +1,14 @@
 'use strict';
 
-let React       = require('react'),
-    classNames  = require('classnames'),
-    Timer       = require('./timer.jsx');
+import React, { Component, PropTypes } from 'react';
+import classNames from 'classnames';
+import Timer from './timer.jsx';
 
-class Header extends React.Component {
+export default class Header extends Component {
+    static propTypes = {
+        addPersonIsVisible:     PropTypes.bool.isRequired,
+        setAddPersonVisibility: PropTypes.func.isRequired
+    }
 
     constructor(props) {
         super(props);
@@ -39,13 +43,6 @@ class Header extends React.Component {
                     <Timer />
                 </h1>
             </div>
-        )
+        );
     }
 }
-
-Header.propTypes = {
-    addPersonIsVisible:     React.PropTypes.bool.isRequired,
-    setAddPersonVisibility: React.PropTypes.func.isRequired
-};
-
-module.exports = Header;

@@ -1,17 +1,14 @@
 'use strict';
 
-var React = require('react');
+import React, { Component } from 'react';
 
-class Timer extends React.Component {
-
+export default class Timer extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             secondsElapsed: 0
         };
-
-        this._tick = this._tick.bind(this);
     }
 
     componentDidMount() {
@@ -22,7 +19,7 @@ class Timer extends React.Component {
         clearInterval(this.interval);
     }
 
-    _tick() {
+    _tick = () => {
         this.setState({
             secondsElapsed: this.state.secondsElapsed + 1
         });
@@ -39,5 +36,3 @@ class Timer extends React.Component {
         );
     }
 }
-
-module.exports = Timer;

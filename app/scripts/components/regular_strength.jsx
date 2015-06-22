@@ -1,11 +1,19 @@
 'use strict';
 
-var React   = require('react'),
-    _       = require('lodash');
+import React, { Component, PropTypes } from 'react';
+import _ from 'lodash';
 
 const STRENGTHS = require('../coffee_strengths');
 
-class RegularStrength extends React.Component {
+export default class RegularStrength extends Component {
+    static propTypes = {
+        strength:       PropTypes.string,
+        updateStrength: PropTypes.func.isRequired
+    }
+
+    static defaultProps = {
+        strength: 'Normal'
+    }
 
     constructor(props) {
         super(props);
@@ -29,18 +37,6 @@ class RegularStrength extends React.Component {
                     {this.props.strength}
                 </div>
             </button>
-        )
+        );
     }
-
 }
-
-RegularStrength.propTypes = {
-    strength:       React.PropTypes.string,
-    updateStrength: React.PropTypes.func.isRequired
-};
-
-RegularStrength.defaultProps = {
-    strength:       'Normal'
-};
-
-module.exports = RegularStrength;
