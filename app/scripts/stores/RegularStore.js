@@ -8,6 +8,24 @@ let _                   = require('lodash');
 const LOCALSTORAGE_KEY  = 'cafegulars';
 const CHANGE_EVENT      = 'change';
 
+const NEW_PERSON_OBJECT = {
+    id: null,
+    name: '',
+    order: {
+        type: null,
+        sugar: 0,
+        strength: 'Normal',
+        notes: ''
+    },
+    coffees: {
+        count: 0,
+        purchased: 0,
+        free: 0
+    },
+    lastVisited: null,
+    dateAdded: null
+};
+
 let peeps = [];
 
 if ( localStorage[LOCALSTORAGE_KEY] ) {
@@ -129,6 +147,14 @@ let RegularStore = _.assign({}, EventEmitter.prototype, {
      */
     getPeeps() {
         return peeps;
+    },
+
+    /**
+     * Returns copy of NEW_PERSON_OBJECT
+     * @return {Object}
+     */
+    getNewPerson() {
+        return _.cloneDeep(NEW_PERSON_OBJECT);
     }
 });
 

@@ -3,6 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import RegularInfoNew from './RegularInfoNew';
 import RegularActions from '../actions/RegularActions';
+import RegularStore from '../stores/RegularStore';
 
 export default class AddRegular extends Component {
     static propTypes = {
@@ -11,27 +12,9 @@ export default class AddRegular extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
-            canSubmit: false
-        };
-
-        this.state.person = {
-            id: null,
-            name: '',
-            order: {
-                type: null,
-                sugar: 0,
-                strength: 'Normal',
-                notes: ''
-            },
-            coffees: {
-                count: 0,
-                purchased: 0,
-                free: 0
-            },
-            lastVisited: null,
-            dateAdded: null
+            canSubmit:  false,
+            person:     RegularStore.getNewPerson()
         };
     }
 
