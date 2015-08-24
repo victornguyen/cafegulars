@@ -36,12 +36,15 @@
     "eslint": "~0.22.1",
     "babel-eslint": "~3.1.14",
     "eslint-plugin-react": "~2.5.0",
-    "react-webcam": "latest"
+    "react-webcam": "latest",
+    "babel-loader": "~5.3.2"
   },
   "engines": {
     "node": ">=0.10.0"
   },
   "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base dist",
     "test": "jest",
     "lint": "eslint app/scripts"
   },
@@ -69,5 +72,10 @@
   },
   "browserify-shim": {
     "jquery": "$"
+  },
+  "dependencies": {
+    "path": "~0.11.14",
+    "webpack-dev-server": "~1.10.1",
+    "webpack": "~1.11.0"
   }
 }
