@@ -1,6 +1,6 @@
-$icon-font-path: "../fonts/";
+$icon-font-path: "~bootstrap-sass-official/assets/fonts/bootstrap/";
 
-@import "bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "~bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 
 @import "regular";
 @import "regular-name";
