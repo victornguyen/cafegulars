@@ -7,10 +7,20 @@ module.exports = {
     filename: 'index.js'
   },
   module: {
-    loaders: [{
-      test: /\.(js|jsx)$/,
-      loader: 'babel',
-      query: {stage: 0}
-    }]
+    loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel',
+        query: {stage: 0}
+      },
+      {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style!css!sass'
+      }
+    ]
   }
 };
