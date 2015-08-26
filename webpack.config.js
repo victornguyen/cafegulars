@@ -23,7 +23,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css?sourceMap!sass?sourceMap')
+        loader: ExtractTextPlugin.extract([
+          'css?sourceMap',
+          'autoprefixer?browsers=last 2 version',
+          'sass?sourceMap'
+        ].join('!'))
       },
 
       { test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
