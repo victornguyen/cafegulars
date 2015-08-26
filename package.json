@@ -45,9 +45,9 @@
   },
   "scripts": {
     "build": "webpack --progress --colors --profile",
-    "dev": "webpack-dev-server --devtool source-map --progress --colors --hot --content-base public",
     "test": "jest",
-    "lint": "eslint app/scripts"
+    "lint": "eslint app/scripts",
+    "start": "node server.js"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/preprocessor.js",
@@ -85,6 +85,7 @@
     "file-loader": "~0.8.4",
     "expose-loader": "~0.7.0",
     "extract-text-webpack-plugin": "~0.8.2",
-    "autoprefixer-loader": "~2.0.0"
+    "autoprefixer-loader": "~2.0.0",
+    "react-hot-loader": "~1.2.9"
   }
 }

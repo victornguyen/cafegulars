@@ -3,19 +3,23 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'app/scripts/index.js'),
+  entry: [
+    'webpack-dev-server/client?http://0.0.0.0:3000',
+    'webpack/hot/only-dev-server',
+    path.resolve(__dirname, 'app/scripts/index.js')
+  ],
   output: {
     path: path.resolve(__dirname, 'public/scripts/'),
     publicPath: '/scripts/',
     filename: 'index.js'
   },
+  devtool: 'source-map',
   module: {
     loaders: [
       {
         test: /\.(js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel',
-        query: {stage: 0}
+        loaders: ['react-hot', 'babel?stage=0']
       },
       {
         test: /\.json$/,
@@ -38,6 +42,9 @@ module.exports = {
       { test: require.resolve('react'), loader: 'expose?React' }
     ]
   },
+  devServer: {
+    contentBase: './public/'
+  },
   resolve: {
     root: [
       // why bower_components are in resolve.root not resolve.moduleDependencies
@@ -50,6 +57,8 @@ module.exports = {
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
     ),
     // extract inline css into separate 'styles.css'
-    new ExtractTextPlugin('styles.css')
+    new ExtractTextPlugin('styles.css'),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
   ]
 };
