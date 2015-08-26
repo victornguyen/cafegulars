@@ -36,6 +36,8 @@ module.exports = {
   },
   resolve: {
     root: [
+      // why bower_components are in resolve.root not resolve.moduleDependencies
+      // https://github.com/webpack/webpack/issues/472
       path.join(__dirname, 'app/bower_components')
     ]
   },
