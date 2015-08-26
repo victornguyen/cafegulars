@@ -44,7 +44,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --progress --colors --profile",
     "dev": "webpack-dev-server --devtool source-map --progress --colors --hot --content-base public",
     "test": "jest",
     "lint": "eslint app/scripts"
