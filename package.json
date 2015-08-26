@@ -45,7 +45,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base public",
+    "dev": "webpack-dev-server --devtool source-map --progress --colors --hot --content-base public",
     "test": "jest",
     "lint": "eslint app/scripts"
   },
