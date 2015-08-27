@@ -39,7 +39,7 @@ export default class Header extends Component {
                 </ul>
 
                 <h1 className="text-muted">
-                    Cafegulars
+                    Cafegulars ☕️
                     <Timer />
                 </h1>
             </div>
