@@ -10,7 +10,8 @@
     "classnames": "~1.2.1",
     "react-select": "~0.6.5",
     "eslint": "~0.22.1",
-    "bootstrap-sass": "~3.3.5"
+    "bootstrap-sass": "~3.3.5",
+    "progress": "~1.1.8"
   },
   "engines": {
     "node": ">=0.10.0"
