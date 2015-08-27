@@ -1,19 +1,19 @@
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: [
     'webpack-dev-server/client?http://0.0.0.0:3000',
     'webpack/hot/only-dev-server',
-    path.resolve(__dirname, 'app/scripts/index.js')
+    path.join(__dirname, 'app/scripts/index.js')
   ],
   output: {
-    path: path.resolve(__dirname, 'public/scripts/'),
-    publicPath: '/scripts/',
-    filename: 'index.js'
+    path: path.join(__dirname, 'public/'),
+    publicPath: '/',
+    filename: 'app.js'
   },
-  devtool: 'source-map',
   module: {
     loaders: [
       {
@@ -45,10 +45,19 @@ module.exports = {
   devServer: {
     contentBase: './public/'
   },
+  devtool: 'source-map',
   plugins: [
     // extract inline css into separate 'styles.css'
     new ExtractTextPlugin('styles.css'),
+
+    // generate index.html
+    new HtmlWebpackPlugin({
+      title: 'Cafegulars',
+      hash: true
+    }),
+
     new webpack.HotModuleReplacementPlugin(),
+
     new webpack.NoErrorsPlugin()
   ]
 };
