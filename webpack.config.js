@@ -18,7 +18,7 @@ module.exports = {
     loaders: [
       {
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         loaders: ['react-hot', 'babel?stage=0']
       },
       {
@@ -45,17 +45,7 @@ module.exports = {
   devServer: {
     contentBase: './public/'
   },
-  resolve: {
-    root: [
-      // why bower_components are in resolve.root not resolve.moduleDependencies
-      // https://github.com/webpack/webpack/issues/472
-      path.join(__dirname, 'app/bower_components')
-    ]
-  },
   plugins: [
-    new webpack.ResolverPlugin(
-      new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
-    ),
     // extract inline css into separate 'styles.css'
     new ExtractTextPlugin('styles.css'),
     new webpack.HotModuleReplacementPlugin(),
