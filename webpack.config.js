@@ -33,13 +33,14 @@ module.exports = {
           'sass?sourceMap'
         ].join('!'))
       },
-
-      { test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
-
-      { test: require.resolve('react'), loader: 'expose?React' }
+      {
+        test: /\.(otf|eot|svg|ttf|woff|woff2)$/,
+        loader: 'url?limit=10000'
+      },
+      {
+        test: require.resolve('react'),
+        loader: 'expose?React'
+      }
     ]
   },
   devServer: {
@@ -47,10 +48,8 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
-    // extract inline css into separate 'styles.css'
     new ExtractTextPlugin('styles.css'),
 
-    // generate index.html
     new HtmlWebpackPlugin({
       title: 'Cafegulars',
       hash: true
