@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
 
-import COFFEE_TYPES from 'data/coffee_types.json';
+import COFFEE_TYPES from 'data/coffee_types';
 
 import 'react-select/dist/default.css';
 import 'styles/regular-order';
