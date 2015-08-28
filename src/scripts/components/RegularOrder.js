@@ -5,7 +5,7 @@ import Select from 'react-select';
 
 import COFFEE_TYPES from 'data/coffee_types.json';
 
-import 'styles/vendor/react-select';
+import 'react-select/dist/default.css';
 import 'styles/regular-order';
 
 class RegularOrder extends Component {
