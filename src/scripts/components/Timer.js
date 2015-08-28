@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 
-export default class Timer extends Component {
+class Timer extends Component {
     constructor(props) {
         super(props);
 
@@ -36,3 +36,5 @@ export default class Timer extends Component {
         );
     }
 }
+
+export default Timer;

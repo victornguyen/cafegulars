@@ -1,6 +1,6 @@
 'use strict';
 
-import { getFreeThreshold } from '../stores/SettingsStore';
+import { getFreeThreshold } from 'stores/SettingsStore';
 
 export function hasFreeCoffee(count) {
     return count === getFreeThreshold();

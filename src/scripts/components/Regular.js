@@ -1,13 +1,13 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import moment from 'moment';
-import classNames from 'classnames';
-import RegularInfo from './RegularInfo';
-import RegularActions from '../actions/RegularActions';
-import { hasFreeCoffee } from '../utils/RegularUtils';
+import moment              from 'moment';
+import classNames          from 'classnames';
+import RegularInfo         from 'components/RegularInfo';
+import RegularActions      from 'actions/RegularActions';
+import { hasFreeCoffee }   from 'utils/RegularUtils';
 
-export default class Regular extends Component {
+class Regular extends Component {
     static propTypes = {
         person: PropTypes.object.isRequired
     }
@@ -54,3 +54,5 @@ export default class Regular extends Component {
         );
     }
 }
+
+export default Regular;

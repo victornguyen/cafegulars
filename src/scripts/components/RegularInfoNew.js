@@ -1,15 +1,15 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { assign, merge } from 'lodash';
+import { assign, merge }               from 'lodash';
 
-import RegularName from './RegularName';
-import RegularOrder from './RegularOrder';
-import RegularSugar from './RegularSugar';
-import RegularStrength from './RegularStrength';
-import RegularCounter from './RegularCounter';
+import RegularName       from 'components/RegularName';
+import RegularOrder      from 'components/RegularOrder';
+import RegularSugar      from 'components/RegularSugar';
+import RegularStrength   from 'components/RegularStrength';
+import RegularCounter    from 'components/RegularCounter';
 
-export default class RegularInfoNew extends Component {
+class RegularInfoNew extends Component {
     static propTypes = {
         person:             PropTypes.object.isRequired,
         updatePerson:       PropTypes.func.isRequired,
@@ -92,3 +92,5 @@ export default class RegularInfoNew extends Component {
         );
     }
 }
+
+export default RegularInfoNew;

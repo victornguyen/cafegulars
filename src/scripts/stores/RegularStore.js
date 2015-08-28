@@ -1,9 +1,9 @@
 'use strict';
 
-let AppDispatcher       = require('../dispatcher/dispatcher');
-let RegularConstants    = require('../constants/regular_constants');
-let EventEmitter        = require('events');
-let _                   = require('lodash');
+import AppDispatcher      from 'dispatcher/dispatcher';
+import RegularConstants   from 'constants/regular_constants';
+import EventEmitter       from 'events';
+import _                  from 'lodash';
 
 const LOCALSTORAGE_KEY  = 'cafegulars';
 const CHANGE_EVENT      = 'change';

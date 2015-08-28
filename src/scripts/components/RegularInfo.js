@@ -2,16 +2,14 @@
 
 import React, { Component, PropTypes } from 'react';
 
-import RegularName from './RegularName';
-import RegularOrder from './RegularOrder';
-import RegularSugar from './RegularSugar';
-import RegularStrength from './RegularStrength';
-import RegularCounter from './RegularCounter';
+import RegularName       from 'components/RegularName';
+import RegularOrder      from 'components/RegularOrder';
+import RegularSugar      from 'components/RegularSugar';
+import RegularStrength   from 'components/RegularStrength';
+import RegularCounter    from 'components/RegularCounter';
+import RegularActions    from 'actions/RegularActions';
 
-import RegularActions from '../actions/RegularActions';
-
-
-export default class RegularInfo extends Component {
+class RegularInfo extends Component {
     static propTypes = {
         person: PropTypes.object.isRequired
     }
@@ -57,3 +55,5 @@ export default class RegularInfo extends Component {
         );
     }
 }
+
+export default RegularInfo;

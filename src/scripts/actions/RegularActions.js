@@ -1,9 +1,9 @@
 'use strict';
 
-var AppDispatcher       = require('../dispatcher/dispatcher');
-var RegularConstants    = require('../constants/regular_constants');
+import AppDispatcher      from 'dispatcher/dispatcher';
+import RegularConstants   from 'constants/regular_constants';
 
-var RegularActions = {
+const RegularActions = {
 
     addPerson(person) {
         AppDispatcher.dispatch({

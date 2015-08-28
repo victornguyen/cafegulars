@@ -1,11 +1,11 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import RegularInfoNew from './RegularInfoNew';
-import RegularActions from '../actions/RegularActions';
-import RegularStore from '../stores/RegularStore';
+import RegularInfoNew   from 'components/RegularInfoNew';
+import RegularActions   from 'actions/RegularActions';
+import RegularStore     from 'stores/RegularStore';
 
-export default class AddRegular extends Component {
+class AddRegular extends Component {
     static propTypes = {
         setAddPersonVisibility: PropTypes.func.isRequired
     }
@@ -61,3 +61,5 @@ export default class AddRegular extends Component {
         );
     }
 }
+
+export default AddRegular;

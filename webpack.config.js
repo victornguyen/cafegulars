@@ -4,6 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  devtool: 'source-map',
   entry: [
     'webpack-dev-server/client?http://0.0.0.0:3000',
     'webpack/hot/only-dev-server',
@@ -43,10 +44,13 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: ['', '.js', '.scss', '.json'],
+    modulesDirectories: ['node_modules', 'src', 'scripts']
+  },
   devServer: {
     contentBase: './public/'
   },
-  devtool: 'source-map',
   plugins: [
     new ExtractTextPlugin('styles.css'),
 

@@ -1,11 +1,11 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import _ from 'lodash';
+import { indexOf } from 'lodash';
 
-const STRENGTHS = require('../coffee_strengths');
+import STRENGTHS from 'data/coffee_strengths';
 
-export default class RegularStrength extends Component {
+class RegularStrength extends Component {
     static propTypes = {
         strength:       PropTypes.string,
         updateStrength: PropTypes.func.isRequired
@@ -21,7 +21,7 @@ export default class RegularStrength extends Component {
     }
 
     _handleStrengthUpdate() {
-        var index = _.indexOf(STRENGTHS, this.props.strength) + 1;
+        var index = indexOf(STRENGTHS, this.props.strength) + 1;
 
         if (index >= STRENGTHS.length) {
             index = 0;
@@ -40,3 +40,5 @@ export default class RegularStrength extends Component {
         );
     }
 }
+
+export default RegularStrength;

@@ -2,9 +2,9 @@
 
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
-import Timer from './Timer';
+import Timer      from 'components/Timer';
 
-export default class Header extends Component {
+class Header extends Component {
     static propTypes = {
         addPersonIsVisible:     PropTypes.bool.isRequired,
         setAddPersonVisibility: PropTypes.func.isRequired
@@ -46,3 +46,5 @@ export default class Header extends Component {
         );
     }
 }
+
+export default Header;

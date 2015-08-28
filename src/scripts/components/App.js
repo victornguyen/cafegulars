@@ -1,12 +1,12 @@
 'use strict';
 
 import React, { Component } from 'react';
-import Header from './Header';
-import AddRegular from './AddRegular';
-import RegularList from './RegularList';
-import RegularStore from '../stores/RegularStore';
+import Header         from 'components/Header';
+import AddRegular     from 'components/AddRegular';
+import RegularList    from 'components/RegularList';
+import RegularStore   from 'stores/RegularStore';
 
-export default class App extends Component {
+class App extends Component {
     constructor(props) {
         super(props);
 
@@ -55,3 +55,5 @@ export default class App extends Component {
         );
     }
 }
+
+export default App;

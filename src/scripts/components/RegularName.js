@@ -2,7 +2,7 @@
 
 import React, { Component, PropTypes } from 'react';
 
-export default class RegularName extends Component {
+class RegularName extends Component {
     static propTypes = {
         name:               PropTypes.string.isRequired,
         updateName:         PropTypes.func.isRequired,
@@ -74,3 +74,5 @@ export default class RegularName extends Component {
         );
     }
 }
+
+export default RegularName;

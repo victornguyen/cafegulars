@@ -1,11 +1,11 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { getMaxSugar } from '../stores/SettingsStore';
+import { getMaxSugar } from 'stores/SettingsStore';
 
 const MAX_SUGAR = getMaxSugar();
 
-export default class RegularSugar extends Component {
+class RegularSugar extends Component {
     static propTypes = {
         count:          PropTypes.number.isRequired,
         updateSugar:    PropTypes.func.isRequired
@@ -47,3 +47,5 @@ export default class RegularSugar extends Component {
         );
     }
 }
+
+export default RegularSugar;

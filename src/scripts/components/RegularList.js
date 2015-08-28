@@ -1,9 +1,9 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import Regular from './Regular';
+import Regular from 'components/Regular';
 
-export default class RegularList extends Component {
+class RegularList extends Component {
     static propTypes = {
         peeps: PropTypes.array.isRequired
     }
@@ -31,3 +31,5 @@ export default class RegularList extends Component {
         });
     }
 }
+
+export default RegularList;

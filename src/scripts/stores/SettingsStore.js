@@ -1,11 +1,11 @@
 'use strict';
 
-import EventEmitter from 'events';
-import _ from 'lodash';
+import EventEmitter   from 'events';
+import _              from 'lodash';
 
-const CHANGE_EVENT      = 'settingschange';
-const FREE_THRESHOLD    = 8;
-const MAX_SUGAR         = 5;
+const CHANGE_EVENT    = 'settingschange';
+const FREE_THRESHOLD  = 8;
+const MAX_SUGAR       = 5;
 
 let SettingsStore = _.assign({}, EventEmitter.prototype, {
     /**

@@ -3,9 +3,9 @@
 import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
 
-const COFFEE_TYPES = require('../coffee_types.json');
+import COFFEE_TYPES from 'data/coffee_types.json';
 
-export default class RegularOrder extends Component {
+class RegularOrder extends Component {
     static propTypes = {
         order:          PropTypes.string,
         updateOrder:    PropTypes.func.isRequired
@@ -44,3 +44,5 @@ export default class RegularOrder extends Component {
         );
     }
 }
+
+export default RegularOrder;

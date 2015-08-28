@@ -3,7 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import { hasFreeCoffee, coffeesTillFree } from '../utils/RegularUtils';
 
-export default class RegularCounter extends Component {
+class RegularCounter extends Component {
     static propTypes = {
         count:          PropTypes.number.isRequired,
         addCup:         PropTypes.func.isRequired,
@@ -51,3 +51,5 @@ export default class RegularCounter extends Component {
         );
     }
 }
+
+export default RegularCounter;
