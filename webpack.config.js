@@ -45,7 +45,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.scss', '.json'],
+    extensions: ['', '.js', '.json', '.scss'],
     modulesDirectories: ['node_modules', 'src', 'scripts']
   },
   devServer: {

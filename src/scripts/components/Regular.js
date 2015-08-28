@@ -7,6 +7,8 @@ import RegularInfo         from 'components/RegularInfo';
 import RegularActions      from 'actions/RegularActions';
 import { hasFreeCoffee }   from 'utils/RegularUtils';
 
+import 'styles/regular';
+
 class Regular extends Component {
     static propTypes = {
         person: PropTypes.object.isRequired

@@ -5,6 +5,9 @@ import RegularInfoNew   from 'components/RegularInfoNew';
 import RegularActions   from 'actions/RegularActions';
 import RegularStore     from 'stores/RegularStore';
 
+// TODO: revise Regular and AddRegular components and styles...
+import 'styles/regular';
+
 class AddRegular extends Component {
     static propTypes = {
         setAddPersonVisibility: PropTypes.func.isRequired

@@ -3,6 +3,8 @@
 import React, { Component, PropTypes } from 'react';
 import { getMaxSugar } from 'stores/SettingsStore';
 
+import 'styles/regular-sugar';
+
 const MAX_SUGAR = getMaxSugar();
 
 class RegularSugar extends Component {

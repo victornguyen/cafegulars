@@ -2,6 +2,8 @@
 
 import React, { Component, PropTypes } from 'react';
 
+import 'styles/regular-name';
+
 class RegularName extends Component {
     static propTypes = {
         name:               PropTypes.string.isRequired,

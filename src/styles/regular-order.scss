@@ -1,15 +1,10 @@
-@import "vendor/react-select";
-
 .regular-order__select {
     width: 12em;
 }
 
-// TODO: figure out how to override vendor styles without having fight
-// specificity wars, but keeping it scoped to this component...
 .Select-control {
     border-color: transparent;
     &:hover {
         border-color: #d9d9d9 #cccccc #b3b3b3;
     }
 }
-

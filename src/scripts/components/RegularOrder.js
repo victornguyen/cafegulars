@@ -5,6 +5,9 @@ import Select from 'react-select';
 
 import COFFEE_TYPES from 'data/coffee_types.json';
 
+import 'styles/vendor/react-select';
+import 'styles/regular-order';
+
 class RegularOrder extends Component {
     static propTypes = {
         order:          PropTypes.string,
