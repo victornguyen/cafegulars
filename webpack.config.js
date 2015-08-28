@@ -1,10 +1,8 @@
-var webpack = require('webpack');
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack             = require('webpack');
+var path                = require('path');
+var HtmlWebpackPlugin   = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: 'source-map',
   entry: [
     'webpack-dev-server/client?http://0.0.0.0:3000',
     'webpack/hot/only-dev-server',
@@ -28,11 +26,12 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract([
-          'css?sourceMap',
+        loader: [
+          'style',
+          'css',
           'autoprefixer?browsers=last 2 version',
-          'sass?sourceMap'
-        ].join('!'))
+          'sass'
+        ].join('!')
       },
       {
         test: /\.(otf|eot|svg|ttf|woff|woff2)$/,
@@ -52,8 +51,6 @@ module.exports = {
     contentBase: './public/'
   },
   plugins: [
-    new ExtractTextPlugin('styles.css'),
-
     new HtmlWebpackPlugin({
       title: 'Cafegulars',
       hash: true
