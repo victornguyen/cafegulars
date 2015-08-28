@@ -18,6 +18,7 @@
   },
   "scripts": {
     "build": "webpack --progress --colors --profile",
+    "clean": "rm -rf public/*",
     "lint": "eslint src/scripts",
     "start": "node server.js"
   },
