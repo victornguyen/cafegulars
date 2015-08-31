@@ -21,7 +21,7 @@ class RegularList extends Component {
             configs[regular.id] = {
                 height: { val: 250, config: presets.gentle },
                 marginBottom: { val: 10, config: presets.gentle },
-                person: regular
+                person: { val: regular, config: [] }
             };
         });
         return configs;
@@ -33,7 +33,7 @@ class RegularList extends Component {
         return {
             height: { val: 0, config: presets.gentle },
             marginBottom: { val: 0, config: presets.gentle },
-            person: regular
+            person: { val: regular, config: [] }
         };
     }
 
@@ -43,7 +43,7 @@ class RegularList extends Component {
         return {
             height: { val: 0, config: [170, 21] },
             marginBottom: { val: 0, config: [170, 21] },
-            person: outgoingValue.person
+            person: { val: outgoingValue.person.val, config: [] }
         };
     }
 
@@ -52,7 +52,7 @@ class RegularList extends Component {
             <div className="regulars_list">
                 {
                     Object.keys(currentValue).map(key => {
-                        console.log(key, currentValue[key].person.coffees);
+                        console.log(key, currentValue[key].person.val.coffees);
                         let style = {
                             height: currentValue[key].height.val,
                             marginBottom: currentValue[key].marginBottom.val
@@ -60,7 +60,7 @@ class RegularList extends Component {
                         return (
                             <Regular
                                 key={key}
-                                person={currentValue[key].person}
+                                person={currentValue[key].person.val}
                                 style={style}
                             />
                         );
