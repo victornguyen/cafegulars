@@ -21,7 +21,7 @@ class RegularList extends Component {
             configs[regular.id] = {
                 height: { val: 250, config: presets.gentle },
                 opacity: { val: 1, config: presets.gentle },
-                data: { person: regular, config: [] }
+                person: regular
             };
         });
         return configs;
@@ -29,10 +29,11 @@ class RegularList extends Component {
 
     willEnter(key) {
         console.log('willEnter():', arguments);
+        const regular = _.find(this.props.peeps, {id:key});
         return {
             height: {val: 0, config: presets.gentle},
             opacity: {val: 0, config: presets.gentle },
-            data: { person: _.find(this.props.peeps, {id:key}), config: [] }
+            person: regular
         };
     }
 
@@ -42,7 +43,7 @@ class RegularList extends Component {
         return {
             height: { val: 0, config: presets.gentle },
             opacity: { val: 0, config: presets.gentle },
-            data: outgoingValue.data
+            person: outgoingValue.person
         };
     }
 
@@ -51,6 +52,7 @@ class RegularList extends Component {
             <div className="regulars_list">
                 {
                     Object.keys(currentValue).map(key => {
+                        console.log(key, currentValue[key].person.coffees);
                         let style = {
                             height: currentValue[key].height.val,
                             opacity: currentValue[key].opacity.val
@@ -58,7 +60,7 @@ class RegularList extends Component {
                         return (
                             <Regular
                                 key={key}
-                                person={currentValue[key].data.person}
+                                person={currentValue[key].person}
                                 style={style}
                             />
                         );
