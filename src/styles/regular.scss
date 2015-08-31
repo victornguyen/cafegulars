@@ -2,6 +2,8 @@
     position: relative;
     margin: 0 0 10px 0;
     overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 2px 0px;
+    border: 0;
 
     .panel-footer {
         position: absolute;
@@ -20,4 +22,8 @@
 
 .regular--select-open {
   overflow: visible;
+}
+
+.regular__panel {
+    position: relative;
 }

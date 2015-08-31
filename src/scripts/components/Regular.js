@@ -60,7 +60,6 @@ class Regular extends Component {
                          &nbsp;&nbsp;&nbsp;&nbsp;
                     </span>
                 </div>
-
             </div>
         );
     }
