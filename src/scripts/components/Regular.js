@@ -11,7 +11,8 @@ import 'styles/regular';
 
 class Regular extends Component {
     static propTypes = {
-        person: PropTypes.object.isRequired
+        person: PropTypes.object.isRequired,
+        style: PropTypes.object
     }
 
     constructor(props) {
@@ -38,7 +39,7 @@ class Regular extends Component {
         });
 
         return (
-            <div className={regularClasses}>
+            <div className={regularClasses} style={this.props.style}>
                 <RegularInfo person={this.props.person} />
 
                 <div className="panel-footer">
