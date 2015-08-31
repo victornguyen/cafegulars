@@ -20,7 +20,7 @@ class RegularList extends Component {
         peeps.forEach(regular => {
             configs[regular.id] = {
                 height: { val: 250, config: presets.gentle },
-                opacity: { val: 1, config: [] },
+                opacity: { val: 1, config: presets.gentle },
                 data: { person: regular, config: [] }
             };
         });
@@ -31,7 +31,7 @@ class RegularList extends Component {
         console.log('willEnter():', arguments);
         return {
             height: {val: 0, config: presets.gentle},
-            opacity: {val: 0, config: [] },
+            opacity: {val: 0, config: presets.gentle },
             data: { person: _.find(this.props.peeps, {id:key}), config: [] }
         };
     }
@@ -41,7 +41,7 @@ class RegularList extends Component {
         // the key with this value is truly killed when the values reaches destination
         return {
             height: { val: 0, config: presets.gentle },
-            opacity: { val: 0, config: [] },
+            opacity: { val: 0, config: presets.gentle },
             data: outgoingValue.data
         };
     }

@@ -1,7 +1,7 @@
 .regular {
     position: relative;
     margin: 0 0 10px 0;
-    // overflow: hidden;
+    overflow: hidden;
 
     .panel-footer {
         position: absolute;
@@ -19,5 +19,5 @@
 }
 
 .regular--select-open {
-  overflow: hidden;
+  overflow: visible;
 }

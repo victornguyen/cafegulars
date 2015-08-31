@@ -47,7 +47,7 @@ class RegularInfo extends Component {
         return (
             <div className="panel-body">
                 <RegularName name={person.name} updateName={this._updateName} />
-                <RegularOrder order={person.order.type} updateOrder={this._updateOrder} />
+                <RegularOrder order={person.order.type} updateOrder={this._updateOrder} toggleSelectState={this.props.toggleSelectState} />
                 <RegularSugar count={person.order.sugar} updateSugar={this._updateSugar} />
                 <RegularStrength strength={person.order.strength} updateStrength={this._updateStrength} />
                 <RegularCounter count={person.coffees.count} addCup={this._addCup} addFreeCup={this._addFreeCup} />

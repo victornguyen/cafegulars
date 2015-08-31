@@ -10,8 +10,9 @@ import 'styles/regular-order';
 
 class RegularOrder extends Component {
     static propTypes = {
-        order:          PropTypes.string,
-        updateOrder:    PropTypes.func.isRequired
+        order:              PropTypes.string,
+        updateOrder:        PropTypes.func.isRequired,
+        toggleSelectState:  React.PropTypes.func
     }
 
     constructor(props) {
@@ -41,6 +42,8 @@ class RegularOrder extends Component {
                     clearable={false}
                     options={this.options}
                     onChange={this._handleOrderUpdate}
+                    onFocus={this.props.toggleSelectState}
+                    onBlur={this.props.toggleSelectState}
                     placeholder="Select a coffee type..."
                 />
             </div>

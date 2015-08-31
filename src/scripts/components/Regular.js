@@ -18,7 +18,8 @@ class Regular extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            hasFreeCoffee: hasFreeCoffee(this.props.person.coffees.count)
+            hasFreeCoffee: hasFreeCoffee(this.props.person.coffees.count),
+            isSelectOpen: false
         };
     }
 
@@ -32,15 +33,22 @@ class Regular extends Component {
         RegularActions.removePerson(this.props.person.id);
     }
 
+    _toggleSelectState = () => {
+        this.setState({
+            isSelectOpen: !this.state.isSelectOpen
+        });
+    }
+
     render() {
         let regularClasses = classNames({
             'regular panel panel-default':  true,
-            'regular--free':                this.state.hasFreeCoffee
+            'regular--free':                this.state.hasFreeCoffee,
+            'regular--select-open':         this.state.isSelectOpen
         });
 
         return (
             <div className={regularClasses} style={this.props.style}>
-                <RegularInfo person={this.props.person} />
+                <RegularInfo person={this.props.person} toggleSelectState={this._toggleSelectState} />
 
                 <div className="panel-footer">
                     <button type="button" className="btn btn-primary btn-xs" onClick={this._handleRemovePerson}>Remove</button>
