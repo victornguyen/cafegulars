@@ -58,10 +58,8 @@ function getPerson(id) {
  * Create a person
  * @param  {Object} person An object containing person data from AddRegular
  */
-function create(person) {
-    person.id           = generateId();
-    person.dateAdded    = new Date().toISOString();
-    peeps.unshift(person);
+function create() {
+    peeps.unshift( generatePerson() );
 }
 
 
@@ -112,6 +110,17 @@ function addFreeCup(id) {
     });
 }
 
+/**
+ * Returns copy of NEW_PERSON_OBJECT
+ * @return {Object}
+ */
+function generatePerson() {
+    var person = _.cloneDeep(NEW_PERSON_OBJECT);
+    person.id = generateId();
+    person.dateAdded = new Date().toISOString();
+    return person;
+}
+
 
 /**
  * Save peeps to localStorage
@@ -147,14 +156,6 @@ let RegularStore = _.assign({}, EventEmitter.prototype, {
      */
     getPeeps() {
         return peeps;
-    },
-
-    /**
-     * Returns copy of NEW_PERSON_OBJECT
-     * @return {Object}
-     */
-    getNewPerson() {
-        return _.cloneDeep(NEW_PERSON_OBJECT);
     }
 });
 
@@ -164,7 +165,7 @@ AppDispatcher.register(action => {
     switch (action.actionType) {
 
         case RegularConstants.ADD_PERSON:
-            create(action.person);
+            create();
             RegularStore.emitChange();
             break;
 

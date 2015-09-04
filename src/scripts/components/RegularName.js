@@ -9,9 +9,8 @@ class RegularName extends Component {
         name:               PropTypes.string.isRequired,
         updateName:         PropTypes.func.isRequired,
 
-        // Optional AddRegular props
-        focusOnMount:       PropTypes.bool,
-        setSubmitStatus:    PropTypes.func
+        // TODO: repurpose this for when new person is added
+        focusOnMount:       PropTypes.bool
     }
 
     constructor(props) {
@@ -36,24 +35,8 @@ class RegularName extends Component {
         }
     }
 
-    _handleChange = () => {
-        // TODO: this method only available when in addMode.. make this better
-        if (this.props.setSubmitStatus) {
-            let field = React.findDOMNode(this.refs.field);
-            this.props.setSubmitStatus( field.value !== '' );
-        }
-    }
-
     _handleBlur = (e) => {
         let newName = e.currentTarget.value;
-
-        // restore previous name if new name is empty
-        if (newName === '') {
-            e.currentTarget.value = this.props.name;
-            this.props.setSubmitStatus( this.props.name !== '' );
-            return;
-        }
-
         if (newName !== this.props.name) {
             this.props.updateName(newName);
         }
@@ -69,7 +52,6 @@ class RegularName extends Component {
                     placeholder="Name"
                     defaultValue={this.props.name}
                     onKeyDown={this._handleKeyDown}
-                    onChange={this._handleChange}
                     onBlur={this._handleBlur}
                 />
             </h3>
