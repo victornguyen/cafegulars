@@ -10,5 +10,6 @@ module.exports = keyMirror({
     UPDATE_NAME:        null,
     UPDATE_ORDER:       null,
     UPDATE_SUGAR:       null,
-    UPDATE_STRENGTH:    null
+    UPDATE_STRENGTH:    null,
+    MARK_ADDED:         null
 });

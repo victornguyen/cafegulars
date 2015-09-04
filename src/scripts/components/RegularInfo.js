@@ -26,10 +26,6 @@ class RegularInfo extends Component {
         RegularActions.addFreeCup(this.props.person.id);
     }
 
-    _updateName = (name) => {
-        RegularActions.updateName(this.props.person.id, name);
-    }
-
     _updateSugar = (newCount) => {
         RegularActions.updateSugar(this.props.person.id, newCount);
     }
@@ -46,7 +42,7 @@ class RegularInfo extends Component {
         let person = this.props.person;
         return (
             <div className="panel-body">
-                <RegularName name={person.name} updateName={this._updateName} />
+                <RegularName person={person} />
                 <RegularOrder order={person.order.type} updateOrder={this._updateOrder} toggleSelectState={this.props.toggleSelectState} />
                 <RegularSugar count={person.order.sugar} updateSugar={this._updateSugar} />
                 <RegularStrength strength={person.order.strength} updateStrength={this._updateStrength} />
