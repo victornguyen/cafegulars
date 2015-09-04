@@ -5,7 +5,7 @@ import RegularConstants   from 'constants/regular_constants';
 
 const RegularActions = {
 
-    addPerson(person) {
+    addPerson() {
         AppDispatcher.dispatch({
             actionType: RegularConstants.ADD_PERSON
         });
