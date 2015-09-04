@@ -23,7 +23,8 @@ const NEW_PERSON_OBJECT = {
         free: 0
     },
     lastVisited: null,
-    dateAdded: null
+    dateAdded: null,
+    justAdded: true
 };
 
 let peeps = [];
@@ -214,6 +215,13 @@ AppDispatcher.register(action => {
                 order: {
                     strength: action.strength
                 }
+            });
+            RegularStore.emitChange();
+            break;
+
+        case RegularConstants.MARK_ADDED:
+            update(action.id, {
+                justAdded: false
             });
             RegularStore.emitChange();
             break;

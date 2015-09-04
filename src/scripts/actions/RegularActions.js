@@ -62,6 +62,13 @@ const RegularActions = {
             id: id,
             strength: strength
         });
+    },
+
+    markAsAdded(id) {
+        AppDispatcher.dispatch({
+            actionType: RegularConstants.MARK_ADDED,
+            id: id
+        });
     }
 
 };

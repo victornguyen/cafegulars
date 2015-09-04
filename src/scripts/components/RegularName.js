@@ -1,16 +1,13 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import RegularActions    from 'actions/RegularActions';
 
 import 'styles/regular-name';
 
 class RegularName extends Component {
     static propTypes = {
-        name:               PropTypes.string.isRequired,
-        updateName:         PropTypes.func.isRequired,
-
-        // TODO: repurpose this for when new person is added
-        focusOnMount:       PropTypes.bool
+        person:         PropTypes.object.isRequired
     }
 
     constructor(props) {
@@ -18,7 +15,7 @@ class RegularName extends Component {
     }
 
     componentDidMount() {
-        if (this.props.focusOnMount) {
+        if (this.props.person.justAdded) {
             React.findDOMNode(this.refs.field).focus();
         }
     }
@@ -30,15 +27,19 @@ class RegularName extends Component {
             field.blur();
         }
         else if (e.key === 'Escape') {
-            field.value = this.props.name;
+            field.value = this.props.person.name;
             field.blur();
         }
     }
 
     _handleBlur = (e) => {
         let newName = e.currentTarget.value;
-        if (newName !== this.props.name) {
-            this.props.updateName(newName);
+        if (newName !== this.props.person.name) {
+            RegularActions.updateName(this.props.person.id, newName);
+        }
+
+        if (this.props.person.justAdded) {
+            RegularActions.markAsAdded(this.props.person.id);
         }
     }
 
@@ -50,7 +51,7 @@ class RegularName extends Component {
                     ref="field"
                     type="text"
                     placeholder="Name"
-                    defaultValue={this.props.name}
+                    defaultValue={this.props.person.name}
                     onKeyDown={this._handleKeyDown}
                     onBlur={this._handleBlur}
                 />
