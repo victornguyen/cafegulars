@@ -14,6 +14,10 @@ class Header extends Component {
         RegularActions.addPerson();
     }
 
+    _handleClearList() {
+        RegularActions.clearList();
+    }
+
     render() {
         return (
             <div className="header">
@@ -23,6 +27,13 @@ class Header extends Component {
                             className="btn btn-primary"
                             onClick={this._handleAddPerson}>
                             Add Person
+                        </button>
+                    </li>
+                    <li>
+                        <button
+                            className="btn btn-default"
+                            onClick={this._handleClearList}>
+                            Clear List
                         </button>
                     </li>
                     <li>

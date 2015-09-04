@@ -69,6 +69,12 @@ const RegularActions = {
             actionType: RegularConstants.MARK_ADDED,
             id: id
         });
+    },
+
+    clearList() {
+        AppDispatcher.dispatch({
+            actionType: RegularConstants.CLEAR_LIST
+        });
     }
 
 };

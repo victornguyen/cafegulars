@@ -81,6 +81,13 @@ function remove(id) {
     _.remove(peeps, person => person.id === id);
 }
 
+/**
+ * Clears list
+ */
+function clear() {
+    peeps = [];
+}
+
 
 /**
  * Increment counter and purchased coffee count for a person
@@ -223,6 +230,11 @@ AppDispatcher.register(action => {
             update(action.id, {
                 justAdded: false
             });
+            RegularStore.emitChange();
+            break;
+
+        case RegularConstants.CLEAR_LIST:
+            clear();
             RegularStore.emitChange();
             break;
 
