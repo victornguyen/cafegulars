@@ -7,8 +7,7 @@ const RegularActions = {
 
     addPerson(person) {
         AppDispatcher.dispatch({
-            actionType: RegularConstants.ADD_PERSON,
-            person: person
+            actionType: RegularConstants.ADD_PERSON
         });
     },
 
