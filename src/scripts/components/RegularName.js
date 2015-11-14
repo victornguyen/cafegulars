@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import ReactDOM          from 'react-dom';
 import RegularActions    from 'actions/RegularActions';
 
 import 'styles/regular-name';
@@ -16,12 +17,12 @@ class RegularName extends Component {
 
     componentDidMount() {
         if (this.props.person.justAdded) {
-            React.findDOMNode(this.refs.field).focus();
+            ReactDOM.findDOMNode(this.refs.field).focus();
         }
     }
 
     _handleKeyDown = (e) => {
-        let field = React.findDOMNode(this.refs.field);
+        let field = ReactDOM.findDOMNode(this.refs.field);
 
         if (e.key === 'Enter') {
             field.blur();
