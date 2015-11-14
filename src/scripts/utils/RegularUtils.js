@@ -1,11 +1,11 @@
 'use strict';
 
-import { getFreeThreshold } from 'stores/SettingsStore';
+import Settings from 'stores/SettingsStore';
 
 export function hasFreeCoffee(count) {
-    return count === getFreeThreshold();
+    return count === Settings.getFreeThreshold();
 }
 
 export function coffeesTillFree(count) {
-    return getFreeThreshold() - count;
+    return Settings.getFreeThreshold() - count;
 }

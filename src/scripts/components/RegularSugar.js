@@ -1,11 +1,11 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
-import { getMaxSugar } from 'stores/SettingsStore';
+import Settings from 'stores/SettingsStore';
 
 import 'styles/regular-sugar';
 
-const MAX_SUGAR = getMaxSugar();
+const MAX_SUGAR = Settings.getMaxSugar();
 
 class RegularSugar extends Component {
     static propTypes = {
