@@ -54,7 +54,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Cafegulars',
-      hash: true
+      hash: true,
+      template: 'src/index.html',
+      inject: 'body'
     }),
 
     new webpack.HotModuleReplacementPlugin(),

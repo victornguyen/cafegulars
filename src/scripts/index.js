@@ -10,4 +10,4 @@ import App from 'components/App';
 import 'styles/vendor/bootstrap';
 import 'styles/base';
 
-ReactDOM.render(<App />, document.body);
+ReactDOM.render(<App />, document.getElementById('app'));
