@@ -12,7 +12,7 @@ const NEW_PERSON_OBJECT = {
     id: null,
     name: '',
     order: {
-        type: null,
+        type: '',
         sugar: 0,
         strength: 'Normal',
         notes: ''
