@@ -39,6 +39,7 @@ class RegularOrder extends Component {
                     className="regular-order__select"
                     value={this.props.order || this.options[0]}
                     clearable={false}
+                    simpleValue={true}
                     options={this.options}
                     onChange={this._handleOrderUpdate}
                     placeholder="Select a coffee type..."
