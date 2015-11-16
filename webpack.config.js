@@ -3,7 +3,7 @@ var path                = require('path');
 var HtmlWebpackPlugin   = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'inline-source-map',
   entry: [
     'webpack-dev-server/client?http://0.0.0.0:3000',
     'webpack/hot/only-dev-server',
