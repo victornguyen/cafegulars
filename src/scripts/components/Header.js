@@ -2,22 +2,8 @@
 
 import React, { Component } from 'react';
 import Timer           from 'components/Timer';
-import RegularActions  from 'actions/RegularActions';
 
 class Header extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    _handleAddPerson() {
-        RegularActions.addPerson();
-    }
-
-    _handleClearList() {
-        RegularActions.clearList();
-    }
-
     render() {
         return (
             <div className="header">
@@ -25,14 +11,14 @@ class Header extends Component {
                     <li>
                         <button
                             className="btn btn-primary"
-                            onClick={this._handleAddPerson}>
+                            onClick={this.props.addRegular}>
                             Add Person
                         </button>
                     </li>
                     <li>
                         <button
                             className="btn btn-default"
-                            onClick={this._handleClearList}>
+                            onClick={this.props.clearRegulars}>
                             Clear List
                         </button>
                     </li>

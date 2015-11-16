@@ -1,0 +1,3 @@
+export const ADD_REGULAR = 'ADD_REGULAR';
+export const REMOVE_REGULAR = 'REMOVE_REGULAR';
+export const CLEAR_REGULARS = 'CLEAR_REGULARS';

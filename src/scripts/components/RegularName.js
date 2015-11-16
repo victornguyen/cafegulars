@@ -8,7 +8,7 @@ import 'styles/regular-name';
 
 class RegularName extends Component {
     static propTypes = {
-        person:         PropTypes.object.isRequired
+        regular: PropTypes.object.isRequired
     }
 
     constructor(props) {
@@ -16,7 +16,7 @@ class RegularName extends Component {
     }
 
     componentDidMount() {
-        if (this.props.person.justAdded) {
+        if (this.props.regular.justAdded) {
             ReactDOM.findDOMNode(this.refs.field).focus();
         }
     }
@@ -28,19 +28,19 @@ class RegularName extends Component {
             field.blur();
         }
         else if (e.key === 'Escape') {
-            field.value = this.props.person.name;
+            field.value = this.props.regular.name;
             field.blur();
         }
     }
 
     _handleBlur = (e) => {
         let newName = e.currentTarget.value;
-        if (newName !== this.props.person.name) {
-            RegularActions.updateName(this.props.person.id, newName);
+        if (newName !== this.props.regular.name) {
+            RegularActions.updateName(this.props.regular.id, newName);
         }
 
-        if (this.props.person.justAdded) {
-            RegularActions.markAsAdded(this.props.person.id);
+        if (this.props.regular.justAdded) {
+            RegularActions.markAsAdded(this.props.regular.id);
         }
     }
 
@@ -52,7 +52,7 @@ class RegularName extends Component {
                     ref="field"
                     type="text"
                     placeholder="Name"
-                    defaultValue={this.props.person.name}
+                    defaultValue={this.props.regular.name}
                     onKeyDown={this._handleKeyDown}
                     onBlur={this._handleBlur}
                 />

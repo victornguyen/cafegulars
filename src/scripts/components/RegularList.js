@@ -2,16 +2,9 @@
 
 import React, { Component, PropTypes } from 'react';
 import Regular from 'components/Regular';
+import { addRegular } from 'actions/RegularsActions';
 
 class RegularList extends Component {
-    static propTypes = {
-        peeps: PropTypes.array.isRequired
-    }
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div>
@@ -24,9 +17,9 @@ class RegularList extends Component {
     }
 
     renderList() {
-        return this.props.peeps.map(person => {
+        return this.props.regulars.map(regular => {
             return (
-                <Regular key={person.id} person={person} />
+                <Regular key={regular.id} regular={regular} onRemove={this.props.onRemove} />
             );
         });
     }

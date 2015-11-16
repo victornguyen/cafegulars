@@ -4,50 +4,48 @@ import React, { Component, PropTypes } from 'react';
 import moment              from 'moment';
 import classNames          from 'classnames';
 import RegularInfo         from 'components/RegularInfo';
-import RegularActions      from 'actions/RegularActions';
 import { hasFreeCoffee }   from 'utils/RegularUtils';
 
 import 'styles/regular';
 
 class Regular extends Component {
     static propTypes = {
-        person: PropTypes.object.isRequired
+        regular: PropTypes.object.isRequired,
+        onRemove: PropTypes.func.isRequired
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            hasFreeCoffee: hasFreeCoffee(this.props.person.coffees.count)
+            hasFreeCoffee: hasFreeCoffee(this.props.regular.count)
         };
     }
 
     componentWillReceiveProps(newProps) {
         this.setState({
-            hasFreeCoffee: hasFreeCoffee(newProps.person.coffees.count)
+            hasFreeCoffee: hasFreeCoffee(newProps.regular.count)
         });
-    }
-
-    _handleRemovePerson = () => {
-        RegularActions.removePerson(this.props.person.id);
     }
 
     render() {
         let regularClasses = classNames({
-            'regular panel panel-default':  true,
-            'regular--free':                this.state.hasFreeCoffee
+            'regular panel panel-default': true,
+            'regular--free': this.state.hasFreeCoffee
         });
+
+        const { regular, onRemove } = this.props;
 
         return (
             <div className={regularClasses}>
-                <RegularInfo person={this.props.person} />
+                <RegularInfo regular={regular} />
 
                 <div className="panel-footer">
-                    <button type="button" className="btn btn-primary btn-xs" onClick={this._handleRemovePerson}>Remove</button>
+                    <button type="button" className="btn btn-primary btn-xs" onClick={() => onRemove(regular.id)}>Remove</button>
                     <span className="small pull-right">
-                         Added { moment(this.props.person.dateAdded).fromNow() }
+                         Added { moment(regular.dateAdded).fromNow() }
                     </span>
                     <span className="small pull-right">
-                         Coffees purchased: {this.props.person.coffees.purchased}
+                         Coffees purchased: {regular.purchased}
                          &nbsp;&nbsp;&nbsp;&nbsp;
                     </span>
                 </div>

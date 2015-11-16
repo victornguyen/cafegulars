@@ -11,7 +11,7 @@ import RegularActions    from 'actions/RegularActions';
 
 class RegularInfo extends Component {
     static propTypes = {
-        person: PropTypes.object.isRequired
+        regular: PropTypes.object.isRequired
     }
 
     constructor(props) {
@@ -19,34 +19,34 @@ class RegularInfo extends Component {
     }
 
     _addCup = () => {
-        RegularActions.addCup(this.props.person.id);
+        RegularActions.addCup(this.props.regular.id);
     }
 
     _addFreeCup = () => {
-        RegularActions.addFreeCup(this.props.person.id);
+        RegularActions.addFreeCup(this.props.regular.id);
     }
 
     _updateSugar = (newCount) => {
-        RegularActions.updateSugar(this.props.person.id, newCount);
+        RegularActions.updateSugar(this.props.regular.id, newCount);
     }
 
     _updateStrength = (strength) => {
-        RegularActions.updateStrength(this.props.person.id, strength);
+        RegularActions.updateStrength(this.props.regular.id, strength);
     }
 
     _updateOrder = (order) => {
-        RegularActions.updateOrder(this.props.person.id, order);
+        RegularActions.updateOrder(this.props.regular.id, order);
     }
 
     render() {
-        let person = this.props.person;
+        let regular = this.props.regular;
         return (
             <div className="panel-body">
-                <RegularName person={person} />
-                <RegularOrder order={person.order.type} updateOrder={this._updateOrder} toggleSelectState={this.props.toggleSelectState} />
-                <RegularSugar count={person.order.sugar} updateSugar={this._updateSugar} />
-                <RegularStrength strength={person.order.strength} updateStrength={this._updateStrength} />
-                <RegularCounter count={person.coffees.count} addCup={this._addCup} addFreeCup={this._addFreeCup} />
+                <RegularName regular={regular} />
+                <RegularOrder order={regular.type} updateOrder={this._updateOrder} toggleSelectState={this.props.toggleSelectState} />
+                <RegularSugar count={regular.sugar} updateSugar={this._updateSugar} />
+                <RegularStrength strength={regular.strength} updateStrength={this._updateStrength} />
+                <RegularCounter count={regular.count} addCup={this._addCup} addFreeCup={this._addFreeCup} />
             </div>
         );
     }

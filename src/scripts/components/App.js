@@ -1,41 +1,43 @@
 'use strict';
 
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 import Header         from 'components/Header';
 import RegularList    from 'components/RegularList';
-import RegularStore   from 'stores/RegularStore';
+
+import * as regularActionCreators from 'actions/RegularsActions';
+
+import { addRegular, removeRegular, clearRegulars } from 'actions/RegularsActions';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            peeps: RegularStore.getPeeps()
-        };
-    }
-
-    componentWillMount() {
-        RegularStore.addChangeListener(this._onStoreChange);
-    }
-
-    componentWillUnmount() {
-        RegularStore.removeChangeListener(this._onStoreChange);
-    }
-
-    _onStoreChange = () => {
-        this.setState({
-            peeps: RegularStore.getPeeps()
-        });
-    }
-
     render() {
+        const { actions, regulars } = this.props;
         return (
-            <div className="container">
-                <Header />
-                <RegularList peeps={this.state.peeps} />
+            <div>
+                <Header {...actions} />
+                <RegularList
+                    regulars={regulars}
+                    onRemove={(id) => actions.removeRegular(id)}
+                />
             </div>
         );
     }
 }
 
-export default App;
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(regularActionCreators, dispatch)
+    };
+}
+
+// Which props do we want to inject, given the global state?
+// Note: use https://github.com/faassen/reselect for better performance.
+function mapStateToProps(state) {
+    return {
+        regulars: state.regulars
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
