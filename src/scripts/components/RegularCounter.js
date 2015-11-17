@@ -16,28 +16,20 @@ class RegularCounter extends Component {
         super(props);
     }
 
-    _handleAddCup = () => {
-        this.props.addCup();
-    }
-
-    _handleAddFreeCup = () => {
-        this.props.addFreeCup();
-    }
-
     render() {
         let coffeesLeft = coffeesTillFree(this.props.count);
         let actions;
 
         if ( hasFreeCoffee(this.props.count) ) {
             actions = (
-                <button className="regular-counter" onClick={this._handleAddFreeCup}>
+                <button className="regular-counter" onClick={this.props.addFreeCup}>
                     FREE COFFEE!!!!!
                 </button>
             );
         }
         else {
             actions = (
-                <button className="regular-counter" onClick={this._handleAddCup}>
+                <button className="regular-counter" onClick={this.props.addCup}>
                     <div className="regular-counter__count">
                         {coffeesLeft}
                     </div>

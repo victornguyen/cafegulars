@@ -37,7 +37,7 @@ class Regular extends Component {
         });
 
         const { regular, actions } = this.props;
-        const { updateName, markAsAdded, updateOrder } = actions;
+        const { updateName, markAsAdded, updateOrder, updateSugar, updateStrength, addCup, addFreeCup } = actions;
         const id = regular.id;
 
         return (
@@ -53,9 +53,19 @@ class Regular extends Component {
                         order={regular.order}
                         updateOrder={order => updateOrder(id, order)}
                     />
-                    <RegularSugar count={regular.sugar} updateSugar={this._updateSugar} />
-                    <RegularStrength strength={regular.strength} updateStrength={this._updateStrength} />
-                    <RegularCounter count={regular.count} addCup={this._addCup} addFreeCup={this._addFreeCup} />
+                    <RegularSugar
+                        count={regular.sugar}
+                        updateSugar={sugar => updateSugar(id, sugar)}
+                    />
+                    <RegularStrength
+                        strength={regular.strength}
+                        updateStrength={strength => updateStrength(id, strength)}
+                    />
+                    <RegularCounter
+                        count={regular.count}
+                        addCup={() => addCup(id)}
+                        addFreeCup={() => addFreeCup(id)}
+                    />
                 </RegularInfo>
 
                 <div className="panel-footer">

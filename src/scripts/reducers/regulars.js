@@ -1,4 +1,4 @@
-import { filter } from 'lodash';
+import { filter, find, cloneDeep, assign, map } from 'lodash';
 import * as types from 'constants/ActionTypes';
 import initialState from 'data/peeps';
 
@@ -16,10 +16,14 @@ function createRegular(id) {
     }
 }
 
+function getRegular(state, id) {
+    return cloneDeep( find(state, regular => regular.id === id) );
+}
+
 function updateRegular(state, id, updates) {
-    return state.map(regular =>
+    return map(state, regular =>
         regular.id === id ?
-            Object.assign({}, regular, updates) :
+            assign({}, regular, updates) :
             regular
     );
 }
@@ -40,6 +44,25 @@ export default function regulars(state = initialState, action) {
 
     case types.UPDATE_ORDER:
         return updateRegular(state, action.id, { order: action.order });
+
+    case types.UPDATE_SUGAR:
+        return updateRegular(state, action.id, { sugar: action.sugar });
+
+    case types.UPDATE_STRENGTH:
+        return updateRegular(state, action.id, { strength: action.strength });
+
+    case types.ADD_CUP:
+        const regular = getRegular(state, action.id);
+        return updateRegular(state, action.id, {
+            count: regular.count + 1,
+            purchased: regular.purchased + 1
+        });
+
+    case types.ADD_FREECUP:
+        return updateRegular(state, action.id, {
+            count: 0,
+            free: getRegular(state, action.id).free + 1
+        });
 
     case types.MARK_AS_ADDED:
         return updateRegular(state, action.id, { justAdded: false });

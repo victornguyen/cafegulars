@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component, PropTypes } from 'react';
+import { times } from 'lodash';
 import Settings from 'stores/SettingsStore';
 
 import 'styles/regular-sugar';
@@ -17,36 +18,30 @@ class RegularSugar extends Component {
         super(props);
     }
 
-    _handleSugarUpdate = () => {
-        let count = (this.props.count + 1 > MAX_SUGAR) ? 0 : this.props.count + 1;
+    handleClick = () => {
+        // TODO: should this happen here? or in Action Creator? or in Reducer?
+        const count = (this.props.count + 1 > MAX_SUGAR) ? 0 : this.props.count + 1;
         this.props.updateSugar(count);
     }
 
     render() {
-        let i     = this.props.count,
-            sugar = [];
-
-        if (i === 0) {
-            sugar.push('No Sugar');
-        }
-        else {
-            while(i--) {
-                sugar.push(
-                    <span className="regular-sugar__icon glyphicon glyphicon-tint" aria-hidden="true" key={i}></span>
-                );
-            }
-        }
-
         return (
-            <button className="regular-sugar pull-left" onClick={this._handleSugarUpdate}>
+            <button className="regular-sugar pull-left" onClick={this.handleClick}>
                 <div className="regular-sugar__count">
                     {this.props.count}
                 </div>
                 <div className="regular-sugar__icons">
-                    {sugar}
+                    {this.renderSugarIcons(this.props.count)}
                 </div>
             </button>
         );
+    }
+
+    renderSugarIcons(count) {
+        if (count === 0) {
+            return 'No Sugar';
+        }
+        return times(count, n => <span className="regular-sugar__icon glyphicon glyphicon-tint" aria-hidden="true" key={n}></span>);
     }
 }
 

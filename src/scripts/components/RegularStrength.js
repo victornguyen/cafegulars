@@ -17,22 +17,18 @@ class RegularStrength extends Component {
 
     constructor(props) {
         super(props);
-        this._handleStrengthUpdate = this._handleStrengthUpdate.bind(this);
     }
 
-    _handleStrengthUpdate() {
-        var index = indexOf(STRENGTHS, this.props.strength) + 1;
-
-        if (index >= STRENGTHS.length) {
-            index = 0;
-        }
+    handleClick = () => {
+        let index = indexOf(STRENGTHS, this.props.strength) + 1;
+        index = (index >= STRENGTHS.length) ? 0 : index;
 
         this.props.updateStrength( STRENGTHS[index] );
     }
 
     render() {
         return (
-            <button className="regular-sugar pull-left" onClick={this._handleStrengthUpdate}>
+            <button className="regular-sugar pull-left" onClick={this.handleClick}>
                 <div className="regular-strength__type">
                     {this.props.strength}
                 </div>
