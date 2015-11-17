@@ -1,15 +1,9 @@
 'use strict';
 
-import React, { Component } from 'react';
-
-class RegularInfo extends Component {
-    render() {
-        return (
-            <div className="panel-body">
-                {this.props.children}
-            </div>
-        );
-    }
-}
+const RegularInfo = ({ children }) => (
+    <div className="panel-body">
+        {children}
+    </div>
+);
 
 export default RegularInfo;
