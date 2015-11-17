@@ -17,6 +17,10 @@ export function updateName(id, name) {
     return { type: types.UPDATE_NAME, id, name };
 }
 
+export function updateOrder(id, order) {
+    return { type: types.UPDATE_ORDER, id, order };
+}
+
 export function markAsAdded(id) {
     return { type: types.MARK_AS_ADDED, id };
 }

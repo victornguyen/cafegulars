@@ -38,6 +38,9 @@ export default function regulars(state = initialState, action) {
     case types.UPDATE_NAME:
         return updateRegular(state, action.id, { name: action.name });
 
+    case types.UPDATE_ORDER:
+        return updateRegular(state, action.id, { order: action.order });
+
     case types.MARK_AS_ADDED:
         return updateRegular(state, action.id, { justAdded: false });
 

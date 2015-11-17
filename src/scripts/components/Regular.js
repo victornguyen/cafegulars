@@ -37,7 +37,7 @@ class Regular extends Component {
         });
 
         const { regular, actions } = this.props;
-        const { updateName, markAsAdded } = actions;
+        const { updateName, markAsAdded, updateOrder } = actions;
         const id = regular.id;
 
         return (
@@ -49,7 +49,10 @@ class Regular extends Component {
                         markAsAdded={() => markAsAdded(id)}
                         justAdded={regular.justAdded}
                     />
-                    <RegularOrder order={regular.type} updateOrder={this._updateOrder} toggleSelectState={this.props.toggleSelectState} />
+                    <RegularOrder
+                        order={regular.order}
+                        updateOrder={order => updateOrder(id, order)}
+                    />
                     <RegularSugar count={regular.sugar} updateSugar={this._updateSugar} />
                     <RegularStrength strength={regular.strength} updateStrength={this._updateStrength} />
                     <RegularCounter count={regular.count} addCup={this._addCup} addFreeCup={this._addFreeCup} />

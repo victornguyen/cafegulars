@@ -2,4 +2,5 @@ export const ADD_REGULAR = 'ADD_REGULAR';
 export const REMOVE_REGULAR = 'REMOVE_REGULAR';
 export const CLEAR_REGULARS = 'CLEAR_REGULARS';
 export const UPDATE_NAME = 'UPDATE_NAME';
+export const UPDATE_ORDER = 'UPDATE_ORDER';
 export const MARK_AS_ADDED = 'MARK_AS_ADDED';

@@ -28,7 +28,7 @@ class RegularOrder extends Component {
         });
     }
 
-    _handleOrderUpdate = (newOrder) => {
+    handleChange = (newOrder) => {
         this.props.updateOrder(newOrder);
     }
 
@@ -41,7 +41,7 @@ class RegularOrder extends Component {
                     clearable={false}
                     simpleValue={true}
                     options={this.options}
-                    onChange={this._handleOrderUpdate}
+                    onChange={this.handleChange}
                     placeholder="Select a coffee type..."
                 />
             </div>
