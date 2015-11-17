@@ -2,11 +2,9 @@
 
 import React, { Component, PropTypes } from 'react';
 import { times } from 'lodash';
-import Settings from 'stores/SettingsStore';
+import { MAX_SUGAR } from 'constants/Settings';
 
 import 'styles/regular-sugar';
-
-const MAX_SUGAR = Settings.getMaxSugar();
 
 class RegularSugar extends Component {
     static propTypes = {
