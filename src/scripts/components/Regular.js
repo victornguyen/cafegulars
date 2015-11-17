@@ -17,27 +17,13 @@ class Regular extends Component {
         regular: PropTypes.object.isRequired
     }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            hasFreeCoffee: hasFreeCoffee(this.props.regular.count)
-        };
-    }
-
-    componentWillReceiveProps(newProps) {
-        this.setState({
-            hasFreeCoffee: hasFreeCoffee(newProps.regular.count)
-        });
-    }
-
     render() {
-        const regularClasses = classNames({
-            'regular panel panel-default': true,
-            'regular--free': this.state.hasFreeCoffee
-        });
-
         const { regular, actions } = this.props;
         const id = regular.id;
+        const regularClasses = classNames(
+            'regular panel panel-default',
+            { 'regular--free': hasFreeCoffee(regular.count) }
+        );
 
         return (
             <div className={regularClasses}>
