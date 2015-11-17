@@ -62,8 +62,9 @@ class Regular extends Component {
                     />
                     <RegularCounter
                         count={regular.count}
-                        addCup={() => actions.addCup(id)}
-                        addFreeCup={() => actions.addFreeCup(id)}
+                        free={regular.free}
+                        addCup={count => actions.addCup(id, count)}
+                        addFreeCup={count => actions.addFreeCup(id, count)}
                     />
                 </RegularInfo>
 

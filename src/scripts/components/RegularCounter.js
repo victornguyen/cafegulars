@@ -8,6 +8,7 @@ import 'styles/regular-counter';
 class RegularCounter extends Component {
     static propTypes = {
         count:          PropTypes.number.isRequired,
+        free:           PropTypes.number.isRequired,
         addCup:         PropTypes.func.isRequired,
         addFreeCup:     PropTypes.func.isRequired
     }
@@ -16,20 +17,28 @@ class RegularCounter extends Component {
         super(props);
     }
 
+    handleCupClick = () => {
+        this.props.addCup(this.props.count + 1);
+    }
+
+    handleFreeClick = () => {
+        this.props.addFreeCup(this.props.free + 1);
+    }
+
     render() {
         let coffeesLeft = coffeesTillFree(this.props.count);
         let actions;
 
         if ( hasFreeCoffee(this.props.count) ) {
             actions = (
-                <button className="regular-counter" onClick={this.props.addFreeCup}>
+                <button className="regular-counter" onClick={this.handleFreeClick}>
                     FREE COFFEE!!!!!
                 </button>
             );
         }
         else {
             actions = (
-                <button className="regular-counter" onClick={this.props.addCup}>
+                <button className="regular-counter" onClick={this.handleCupClick}>
                     <div className="regular-counter__count">
                         {coffeesLeft}
                     </div>

@@ -29,12 +29,12 @@ export function updateStrength(id, strength) {
     return { type: types.UPDATE_STRENGTH, id, strength };
 }
 
-export function addCup(id) {
-    return { type: types.ADD_CUP, id };
+export function addCup(id, count) {
+    return { type: types.ADD_CUP, id, count };
 }
 
-export function addFreeCup(id) {
-    return { type: types.ADD_FREECUP, id };
+export function addFreeCup(id, free) {
+    return { type: types.ADD_FREECUP, id, free };
 }
 
 export function markAsAdded(id) {
