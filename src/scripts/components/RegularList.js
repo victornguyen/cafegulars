@@ -17,9 +17,10 @@ class RegularList extends Component {
     }
 
     renderList() {
-        return this.props.regulars.map(regular => {
+        const { regulars, actions } = this.props;
+        return regulars.map(regular => {
             return (
-                <Regular key={regular.id} regular={regular} onRemove={this.props.onRemove} />
+                <Regular key={regular.id} regular={regular} actions={actions} />
             );
         });
     }

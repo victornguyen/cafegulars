@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 
-import { ADD_REGULAR, REMOVE_REGULAR, CLEAR_REGULARS } from 'constants/ActionTypes';
+import * as types from 'constants/ActionTypes';
 
 const initialState = [
     {
@@ -11,7 +11,8 @@ const initialState = [
         strength: 'Normal',
         count: 0,
         purchased: 0,
-        free: 0
+        free: 0,
+        justAdded: false
     },
     {
         id: 2,
@@ -21,7 +22,8 @@ const initialState = [
         strength: 'Normal',
         count: 0,
         purchased: 0,
-        free: 0
+        free: 0,
+        justAdded: false
     },
     {
         id: 3,
@@ -31,7 +33,8 @@ const initialState = [
         strength: 'Normal',
         count: 0,
         purchased: 0,
-        free: 0
+        free: 0,
+        justAdded: false
     }
 ]
 
@@ -44,20 +47,35 @@ function createRegular(id) {
       strength: 'Normal',
       count: 0,
       purchased: 0,
-      free: 0
+      free: 0,
+      justAdded: true
     }
+}
+
+function updateRegular(state, id, updates) {
+    return state.map(regular =>
+        regular.id === id ?
+            Object.assign({}, regular, updates) :
+            regular
+    );
 }
 
 export default function regulars(state = initialState, action) {
   switch (action.type) {
-    case ADD_REGULAR:
+    case types.ADD_REGULAR:
         return [...state, createRegular(action.id)];
 
-    case REMOVE_REGULAR:
+    case types.REMOVE_REGULAR:
         return state.filter(r => r.id !== action.id);
 
-    case CLEAR_REGULARS:
+    case types.CLEAR_REGULARS:
         return [];
+
+    case types.UPDATE_NAME:
+        return updateRegular(state, action.id, { name: action.name });
+
+    case types.MARK_AS_ADDED:
+        return updateRegular(state, action.id, { justAdded: false });
 
     default:
         return state;

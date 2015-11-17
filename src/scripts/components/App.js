@@ -9,18 +9,13 @@ import RegularList    from 'components/RegularList';
 
 import * as regularActionCreators from 'actions/RegularsActions';
 
-import { addRegular, removeRegular, clearRegulars } from 'actions/RegularsActions';
-
 class App extends Component {
     render() {
         const { actions, regulars } = this.props;
         return (
             <div>
                 <Header {...actions} />
-                <RegularList
-                    regulars={regulars}
-                    onRemove={(id) => actions.removeRegular(id)}
-                />
+                <RegularList regulars={regulars} actions={actions} />
             </div>
         );
     }
@@ -40,4 +35,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App);

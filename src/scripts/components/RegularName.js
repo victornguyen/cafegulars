@@ -2,13 +2,15 @@
 
 import React, { Component, PropTypes } from 'react';
 import ReactDOM          from 'react-dom';
-import RegularActions    from 'actions/RegularActions';
 
 import 'styles/regular-name';
 
 class RegularName extends Component {
     static propTypes = {
-        regular: PropTypes.object.isRequired
+        name:        PropTypes.string.isRequired,
+        justAdded:   PropTypes.bool.isRequired,
+        updateName:  PropTypes.func.isRequired,
+        markAsAdded: PropTypes.func.isRequired
     }
 
     constructor(props) {
@@ -16,35 +18,36 @@ class RegularName extends Component {
     }
 
     componentDidMount() {
-        if (this.props.regular.justAdded) {
-            ReactDOM.findDOMNode(this.refs.field).focus();
+        if (this.props.justAdded) {
+            this.refs.field.focus();
         }
     }
 
-    _handleKeyDown = (e) => {
-        let field = ReactDOM.findDOMNode(this.refs.field);
+    handleKeyDown = (e) => {
+        let field = this.refs.field;
 
         if (e.key === 'Enter') {
             field.blur();
         }
         else if (e.key === 'Escape') {
-            field.value = this.props.regular.name;
+            field.value = this.props.name;
             field.blur();
         }
     }
 
-    _handleBlur = (e) => {
-        let newName = e.currentTarget.value;
-        if (newName !== this.props.regular.name) {
-            RegularActions.updateName(this.props.regular.id, newName);
+    handleBlur = (e) => {
+        const newName = e.currentTarget.value;
+        if (newName !== this.props.name) {
+            this.props.updateName(newName);
         }
 
-        if (this.props.regular.justAdded) {
-            RegularActions.markAsAdded(this.props.regular.id);
+        if (this.props.justAdded) {
+            this.props.markAsAdded();
         }
     }
 
     render() {
+        // TODO: change to controlled component so time travel works?
         return (
             <h3 className="regular-name">
                 <input
@@ -52,9 +55,9 @@ class RegularName extends Component {
                     ref="field"
                     type="text"
                     placeholder="Name"
-                    defaultValue={this.props.regular.name}
-                    onKeyDown={this._handleKeyDown}
-                    onBlur={this._handleBlur}
+                    defaultValue={this.props.name}
+                    onKeyDown={this.handleKeyDown}
+                    onBlur={this.handleBlur}
                 />
             </h3>
         );
