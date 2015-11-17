@@ -30,7 +30,7 @@ export default function regulars(state = initialState, action) {
         return [...state, createRegular(action.id)];
 
     case types.REMOVE_REGULAR:
-        return state.filter(r => r.id !== action.id);
+        return filter(state, r => r.id !== action.id);
 
     case types.CLEAR_REGULARS:
         return [];
