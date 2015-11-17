@@ -37,7 +37,6 @@ class Regular extends Component {
         });
 
         const { regular, actions } = this.props;
-        const { updateName, markAsAdded, updateOrder, updateSugar, updateStrength, addCup, addFreeCup } = actions;
         const id = regular.id;
 
         return (
@@ -45,31 +44,37 @@ class Regular extends Component {
                 <RegularInfo>
                     <RegularName
                         name={regular.name}
-                        updateName={name => updateName(id, name)}
-                        markAsAdded={() => markAsAdded(id)}
+                        updateName={name => actions.updateName(id, name)}
+                        markAsAdded={() => actions.markAsAdded(id)}
                         justAdded={regular.justAdded}
                     />
                     <RegularOrder
                         order={regular.order}
-                        updateOrder={order => updateOrder(id, order)}
+                        updateOrder={order => actions.updateOrder(id, order)}
                     />
                     <RegularSugar
                         count={regular.sugar}
-                        updateSugar={sugar => updateSugar(id, sugar)}
+                        updateSugar={sugar => actions.updateSugar(id, sugar)}
                     />
                     <RegularStrength
                         strength={regular.strength}
-                        updateStrength={strength => updateStrength(id, strength)}
+                        updateStrength={strength => actions.updateStrength(id, strength)}
                     />
                     <RegularCounter
                         count={regular.count}
-                        addCup={() => addCup(id)}
-                        addFreeCup={() => addFreeCup(id)}
+                        addCup={() => actions.addCup(id)}
+                        addFreeCup={() => actions.addFreeCup(id)}
                     />
                 </RegularInfo>
 
                 <div className="panel-footer">
-                    <button type="button" className="btn btn-primary btn-xs" onClick={() => onRemove(regular.id)}>Remove</button>
+                    <button
+                        type="button"
+                        className="btn btn-primary btn-xs"
+                        onClick={() => actions.removeRegular(id)}
+                    >
+                        Remove
+                    </button>
                     <span className="small pull-right">
                          Added { moment(regular.dateAdded).fromNow() }
                     </span>
