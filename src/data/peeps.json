@@ -1,38 +1,35 @@
 [
     {
         "id": "1",
-        "name": "Vic",
-        "time": null,
-        "lastVisited": null,
-        "coffees": {
-            "count": 7,
-            "purchased": 7,
-            "free": 0,
-        },
-        "order": {
-            "type": "Long Black",
-            "sugar": 0,
-            "strength": "Normal",
-            "notes": "With 3/4 water. So medium black?"
-        },
-        "lastVisited": null,
-        "dateAdded": null
+        "name": "Reggie Jackson",
+        "order": "",
+        "sugar": 0,
+        "strength": "Weak",
+        "count": 1,
+        "purchased": 1,
+        "free": 0,
+        "justAdded": false
     },
     {
         "id": "2",
-        "name": "New Customer Lars",
-        "coffees": {
-            "count": 0,
-            "purchased": 0,
-            "free": 0,
-        },
-        "order": {
-            "type": "Espresso Martini",
-            "sugar": 3,
-            "strength": "Strong",
-            "notes": ""
-        },
-        "lastVisited": null,
-        "dateAdded": null
+        "name": "Stephen Curry",
+        "order": "",
+        "sugar": 0,
+        "strength": "Strong",
+        "count": 0,
+        "purchased": 24,
+        "free": 0,
+        "justAdded": false
+    },
+    {
+        "id": "3",
+        "name": "Steve Nash",
+        "order": "",
+        "sugar": 0,
+        "strength": "Normal",
+        "count": 0,
+        "purchased": 13,
+        "free": 0,
+        "justAdded": false
     }
 ]

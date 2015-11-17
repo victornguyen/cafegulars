@@ -1,42 +1,6 @@
 import { filter } from 'lodash';
-
 import * as types from 'constants/ActionTypes';
-
-const initialState = [
-    {
-        id: 1,
-        name: 'Reggie Jackson',
-        order: '',
-        sugar: 0,
-        strength: 'Normal',
-        count: 0,
-        purchased: 0,
-        free: 0,
-        justAdded: false
-    },
-    {
-        id: 2,
-        name: 'Stephen Curry',
-        order: '',
-        sugar: 0,
-        strength: 'Normal',
-        count: 0,
-        purchased: 0,
-        free: 0,
-        justAdded: false
-    },
-    {
-        id: 3,
-        name: 'Steve Nash',
-        order: '',
-        sugar: 0,
-        strength: 'Normal',
-        count: 0,
-        purchased: 0,
-        free: 0,
-        justAdded: false
-    }
-]
+import initialState from 'data/peeps';
 
 function createRegular(id) {
     return {
