@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import regulars from 'reducers/regulars';
 
-const cafegularsApp = combineReducers({
+const rootReducer = combineReducers({
     regulars
 });
 
-export default cafegularsApp;
+export default rootReducer;
