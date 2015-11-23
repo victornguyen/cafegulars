@@ -3,10 +3,9 @@ var path                = require('path');
 var HtmlWebpackPlugin   = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: [
-    'webpack-dev-server/client?http://0.0.0.0:3000',
-    'webpack/hot/only-dev-server',
+    'webpack-hot-middleware/client',
     path.join(__dirname, 'src/scripts/index.js')
   ],
   output: {
@@ -48,9 +47,6 @@ module.exports = {
     extensions: ['', '.js', '.json', '.scss'],
     modulesDirectories: ['node_modules', 'src', 'scripts']
   },
-  devServer: {
-    contentBase: './public/'
-  },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Cafegulars',
@@ -58,6 +54,8 @@ module.exports = {
       template: 'src/index.html',
       inject: 'body'
     }),
+
+    new webpack.optimize.OccurenceOrderPlugin(),
 
     new webpack.HotModuleReplacementPlugin(),
 
