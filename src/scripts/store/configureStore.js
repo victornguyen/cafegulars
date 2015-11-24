@@ -10,16 +10,11 @@ export default function configureStore(initialState) {
   const store = finalCreateStore(rootReducer, initialState);
 
   if (module.hot) {
-    // TODO: figure out why this isn't working when hot loading reducers.
-    //   Type error: reducer is not a function
-    // nextRootReducer here is an es6 module object (not a reducer fn),
-    // could that be it?
-    //
     // Enable Webpack hot module replacement for reducers
-    // module.hot.accept('../reducers', () => {
-    //   const nextRootReducer = require('../reducers');
-    //   store.replaceReducer(nextRootReducer);
-    // })
+    module.hot.accept('../reducers', () => {
+      const nextRootReducer = require('../reducers');
+      store.replaceReducer(nextRootReducer);
+    });
   }
 
   return store;
