@@ -27,7 +27,7 @@ function updateRegular(state, id, updates) {
 export default function regulars(state = initialState, action) {
   switch (action.type) {
     case types.ADD_REGULAR:
-        return [...state, createRegular(action.id)];
+        return [createRegular(action.id), ...state];
 
     case types.REMOVE_REGULAR:
         return filter(state, r => r.id !== action.id);
