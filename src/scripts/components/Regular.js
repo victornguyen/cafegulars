@@ -14,7 +14,8 @@ import 'styles/regular';
 
 class Regular extends Component {
     static propTypes = {
-        regular: PropTypes.object.isRequired
+        regular: PropTypes.object.isRequired,
+        actions: PropTypes.object.isRequired
     }
 
     render() {

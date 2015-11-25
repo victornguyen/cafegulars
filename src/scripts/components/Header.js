@@ -1,9 +1,14 @@
 'use strict';
 
-import React, { Component } from 'react';
-import Timer           from 'components/Timer';
+import React, { Component, PropTypes } from 'react';
+import Timer from 'components/Timer';
 
 class Header extends Component {
+    static propTypes = {
+        addRegular: PropTypes.func.isRequired,
+        clearRegulars: PropTypes.func.isRequired
+    }
+
     render() {
         return (
             <div className="header">

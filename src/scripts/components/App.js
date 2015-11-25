@@ -1,15 +1,20 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Header         from 'components/Header';
-import RegularList    from 'components/RegularList';
+import Header from 'components/Header';
+import RegularList from 'components/RegularList';
 
 import * as regularActionCreators from 'actions/RegularsActions';
 
 class App extends Component {
+    static propTypes = {
+        regulars: PropTypes.array.isRequired,
+        actions: PropTypes.object.isRequired
+    }
+
     render() {
         const { actions, regulars } = this.props;
         return (

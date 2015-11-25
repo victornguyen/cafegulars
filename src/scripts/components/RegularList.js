@@ -5,6 +5,11 @@ import Regular from 'components/Regular';
 import { addRegular } from 'actions/RegularsActions';
 
 class RegularList extends Component {
+    static propTypes = {
+        regulars: PropTypes.array.isRequired,
+        actions: PropTypes.object.isRequired
+    }
+
     render() {
         return (
             <div>
