@@ -1,6 +1,6 @@
 import { filter, assign, map } from 'lodash';
 import * as types from 'constants/ActionTypes';
-import initialState from 'data/peeps';
+import storage from 'redux-storage';
 
 function createRegular(id) {
     return {
@@ -24,7 +24,7 @@ function updateRegular(state, id, updates) {
     );
 }
 
-export default function regulars(state = initialState, action) {
+export default function regulars(state = [], action) {
   switch (action.type) {
     case types.ADD_REGULAR:
         return [createRegular(action.id), ...state];
@@ -61,6 +61,9 @@ export default function regulars(state = initialState, action) {
 
     case types.MARK_AS_ADDED:
         return updateRegular(state, action.id, { justAdded: false });
+
+    case storage.LOAD:
+        return action.payload.regulars;
 
     default:
         return state;

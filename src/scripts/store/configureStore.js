@@ -1,13 +1,21 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import { devTools } from 'redux-devtools';
+import storage from 'redux-storage';
+import createEngine from 'redux-storage/engines/localStorage';
 import rootReducer from 'reducers';
 
 export default function configureStore(initialState) {
+  const engine = createEngine('cafegulars');
+  const reduxStorage = storage.createMiddleware(engine);
+  const load = storage.createLoader(engine);
+
   const finalCreateStore = compose(
+    applyMiddleware(reduxStorage),
     devTools()
   )(createStore);
 
   const store = finalCreateStore(rootReducer, initialState);
+  load(store);
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
