@@ -1,5 +1,5 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import { devTools } from 'redux-devtools';
+import DevTools from 'containers/DevTools';
 import storage from 'redux-storage';
 import createEngine from 'redux-storage/engines/localStorage';
 import rootReducer from 'reducers';
@@ -11,7 +11,7 @@ export default function configureStore(initialState) {
 
   const finalCreateStore = compose(
     applyMiddleware(reduxStorage),
-    devTools()
+    DevTools.instrument()
   )(createStore);
 
   const store = finalCreateStore(rootReducer, initialState);
