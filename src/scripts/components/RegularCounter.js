@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { Component, PropTypes } from 'react';
 import { hasFreeCoffee, coffeesTillFree } from '../utils/RegularUtils';
 

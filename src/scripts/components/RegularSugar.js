@@ -1,5 +1,3 @@
-'use strict';
-
 import React, { Component, PropTypes } from 'react';
 import { times } from 'lodash';
 import { MAX_SUGAR } from 'constants/Settings';

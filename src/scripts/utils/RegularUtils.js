@@ -1,5 +1,3 @@
-'use strict';
-
 import { FREE_THRESHOLD } from 'constants/Settings';
 
 export function hasFreeCoffee(count) {
