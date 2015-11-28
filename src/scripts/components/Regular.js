@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import moment              from 'moment';
 import classNames          from 'classnames';
 import RegularInfo         from 'components/RegularInfo';
 import RegularName         from 'components/RegularName';
@@ -7,6 +6,7 @@ import RegularOrder        from 'components/RegularOrder';
 import RegularSugar        from 'components/RegularSugar';
 import RegularStrength     from 'components/RegularStrength';
 import RegularCounter      from 'components/RegularCounter';
+import RegularFooter       from 'components/RegularFooter';
 import { hasFreeCoffee }   from 'utils/RegularUtils';
 import 'styles/regular';
 
@@ -53,23 +53,10 @@ class Regular extends Component {
                     />
                 </RegularInfo>
 
-                <div className="panel-footer">
-                    <button
-                        type="button"
-                        className="btn btn-primary btn-xs"
-                        onClick={() => actions.removeRegular(id)}
-                    >
-                        Remove
-                    </button>
-                    <span className="small pull-right">
-                         Added { moment(regular.dateAdded).fromNow() }
-                    </span>
-                    <span className="small pull-right">
-                         Coffees purchased: {regular.purchased}
-                         &nbsp;&nbsp;&nbsp;&nbsp;
-                    </span>
-                </div>
-
+                <RegularFooter
+                  regular={regular}
+                  removeRegular={() => actions.removeRegular(id)}
+                />
             </div>
         );
     }
