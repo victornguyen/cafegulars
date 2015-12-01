@@ -1,32 +1,26 @@
-import React, { Component, PropTypes } from 'react';
+import { PropTypes } from 'react';
 import Regular from 'components/Regular';
-import { addRegular } from 'actions/RegularsActions';
 
-class RegularList extends Component {
-    static propTypes = {
-        regulars: PropTypes.array.isRequired,
-        actions: PropTypes.object.isRequired
-    }
+const RegularList = ({ regulars, actions }) => (
+  <div>
+    <h3>Regulars</h3>
+    <div className="regulars_list">
+      {
+        regulars.map(regular =>
+          <Regular
+            key={regular.id}
+            regular={regular}
+            actions={actions}
+          />
+        )
+      }
+    </div>
+  </div>
+);
 
-    render() {
-        return (
-            <div>
-                <h3>Regulars</h3>
-                <div className="regulars_list">
-                    { this.renderList() }
-                </div>
-            </div>
-        );
-    }
-
-    renderList() {
-        const { regulars, actions } = this.props;
-        return regulars.map(regular => {
-            return (
-                <Regular key={regular.id} regular={regular} actions={actions} />
-            );
-        });
-    }
-}
+RegularList.propTypes = {
+  regulars: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
+};
 
 export default RegularList;

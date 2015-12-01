@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Timer from 'components/Timer';
+import { Link, IndexLink } from 'react-router';
 
 class Header extends Component {
     static propTypes = {
@@ -12,23 +13,30 @@ class Header extends Component {
             <div className="header">
                 <ul className="nav nav-pills pull-right">
                     <li>
-                        <button
-                            className="btn btn-primary"
-                            onClick={this.props.addRegular}>
-                            Add Person
-                        </button>
+                      <IndexLink to="/">Home</IndexLink>
                     </li>
                     <li>
-                        <button
+                        <a
+                            className="btn btn-default"
+                            onClick={this.props.addRegular}>
+                            Add Person
+                        </a>
+                    </li>
+                    <li>
+                        <a
                             className="btn btn-default"
                             onClick={this.props.clearRegulars}>
                             Clear List
-                        </button>
+                        </a>
                     </li>
                     <li>
-                        <button className="btn btn-default">
-                            Settings
-                        </button>
+                        <Link
+                          className="btn btn-default"
+                          activeClassName="btn-primary"
+                          to="/settings"
+                        >
+                          Settings
+                        </Link>
                     </li>
                 </ul>
 

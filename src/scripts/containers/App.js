@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Container from 'components/Container';
 import Header from 'components/Header';
-import RegularList from 'components/RegularList';
 import * as regularActionCreators from 'actions/RegularsActions';
 
 class App extends Component {
@@ -12,12 +12,12 @@ class App extends Component {
     }
 
     render() {
-        const { actions, regulars } = this.props;
+        const { actions, regulars, children } = this.props;
         return (
-            <div>
-                <Header {...actions} />
-                <RegularList regulars={regulars} actions={actions} />
-            </div>
+            <Container>
+              <Header {...actions} />
+              {children}
+            </Container>
         );
     }
 }
