@@ -12,7 +12,8 @@ function createRegular(id) {
       count: 0,
       purchased: 0,
       free: 0,
-      justAdded: true
+      justAdded: true,
+      dateAdded: Date.now()
     }
 }
 
