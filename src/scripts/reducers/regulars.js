@@ -64,7 +64,7 @@ export default function regulars(state = [], action) {
         return updateRegular(state, action.id, { justAdded: false });
 
     case storage.LOAD:
-        return action.payload.regulars;
+        return action.payload.regulars || [];
 
     default:
         return state;
