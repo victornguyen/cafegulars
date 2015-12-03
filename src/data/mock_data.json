@@ -1,0 +1,24 @@
+{
+  "regulars": [
+    {
+      "id": "fdsfdsfds",
+      "name": "Test Man",
+      "order": "",
+      "sugar": 1,
+      "strength": "Normal",
+      "count": 0,
+      "purchased": 0,
+      "free": 0
+    },
+    {
+      "id": "vbdiubuw",
+      "name": "Test Again",
+      "order": "",
+      "sugar": 0,
+      "strength": "Normal",
+      "count": 0,
+      "purchased": 0,
+      "free": 0
+    }
+  ]
+}

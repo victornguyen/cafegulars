@@ -7,6 +7,7 @@
     "babel-eslint": "^4.1.6",
     "babel-loader": "^5.1.4",
     "babel-plugin-react-transform": "^1.1.0",
+    "concurrently": "^1.0.0",
     "css-loader": "~0.22.0",
     "eslint": "~1.9.0",
     "eslint-plugin-react": "~3.8.0",
@@ -17,6 +18,7 @@
     "file-loader": "~0.8.4",
     "html-webpack-plugin": "~1.6.1",
     "json-loader": "~0.5.2",
+    "json-server": "^0.8.3",
     "progress": "~1.1.8",
     "react-transform-hmr": "^1.0.0",
     "redux-devtools": "^3.0.0-beta-3",
@@ -36,7 +38,9 @@
     "build": "webpack --progress --colors --profile",
     "clean": "rm -rf public/*",
     "lint": "eslint src/scripts",
-    "start": "node server.js"
+    "start": "concurrent --kill-others \"npm run app\" \"npm run api\"",
+    "app": "node server.js",
+    "api": "json-server -p 4000 src/data/mock_data.json"
   },
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
