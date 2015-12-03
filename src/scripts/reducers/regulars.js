@@ -1,4 +1,4 @@
-import { filter, assign, map } from 'lodash';
+import { filter, assign, map, find } from 'lodash';
 import * as types from 'constants/ActionTypes';
 import storage from 'redux-storage';
 
@@ -49,9 +49,10 @@ export default function regulars(state = [], action) {
         return updateRegular(state, action.id, { strength: action.strength });
 
     case types.ADD_CUP:
+        const purchased = find(state, { id: action.id }).purchased + 1;
         return updateRegular(state, action.id, {
             count: action.count,
-            purchased: action.count
+            purchased: purchased
         });
 
     case types.ADD_FREECUP:
